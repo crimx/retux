@@ -1,13 +1,13 @@
 {
   "name": "retux",
-  "description": "Minimalist typesafed(strong-typed) high-performance Redux Architecture.",
+  "description": "Minimalist type-safe(strongly-typed) high-performance Redux architecture.",
   "homepage": "https://github.com/crimx/retux/tree/master/packages/retux",
   "keywords": [
     "redux",
     "typescript",
     "action creator",
-    "typesafed",
-    "strong-typed"
+    "type-safe",
+    "strongly-typed"
   ],
   "version": "0.0.1",
   "files": [
