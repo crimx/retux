@@ -10,6 +10,12 @@
     "strong-typed"
   ],
   "version": "0.0.1",
+  "files": [
+    "lib/**/*",
+    "src/**/*",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "test": "jest",
     "build": "shx rm -rf lib && cross-env NODE_ENV=production tsc -p tsconfig.build.json"
