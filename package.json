@@ -1,50 +1,35 @@
 {
-  "name": "retux",
-  "version": "0.1.0",
-  "description": "Minimalist typesafed(strong-typed) high-performance Redux Architecture.",
-  "main": "dist/index.js",
-  "sideEffects": false,
-  "files": [
-    "dist/**/*",
-    "README.md",
-    "LICENSE"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "git@github.com:crimx/retux.git"
-  },
-  "keywords": [
-    "redux",
-    "typescript",
-    "action creator",
-    "typesafed",
-    "strong-typed"
-  ],
-  "author": "CRIMX<straybugs@gmail.com>",
+  "name": "root",
+  "private": true,
   "license": "MIT",
   "scripts": {
-    "commit": "git-cz",
-    "build:cjs": "yarn lint && shx rm -rf dist && cross-env NODE_ENV=production tsc -p tsconfig.json --outDir dist",
-    "lint": "eslint src/**",
+    "postinstall": "lerna bootstrap",
+    "lint": "eslint --no-eslintrc -c .eslintrc.js ./*.js ./packages/**/*.ts",
     "test": "jest",
-    "test:CI": "jest --coverage --coverageReporters=text-lcov | coveralls",
-    "release": "standard-version"
+    "build": "lerna run build",
+    "create-translator": "node scripts/create-translator",
+    "commit": "git-cz",
+    "release": "lerna version --conventional-commits",
+    "ship": "lerna run build && lerna publish from-package"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "optionalDependencies": {
-    "redux-observable": "1.x"
-  },
-  "peerDependencies": {
-    "typescript": ">=3.0.0"
+  "config": {
+    "commitizen": {
+      "path": "cz-conventional-changelog"
+    }
   },
   "devDependencies": {
     "@commitlint/cli": "^8.2.0",
     "@commitlint/config-conventional": "^8.2.0",
     "@types/jest": "^24.0.23",
+    "@types/node": "^12.12.18",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",
     "commitizen": "^4.0.3",
@@ -63,7 +48,9 @@
     "eslint-plugin-standard": "^4.0.1",
     "husky": "^3.1.0",
     "jest": "^24.9.0",
+    "lerna": "^3.19.0",
     "prettier": "^1.19.1",
+    "redux": "^4.0.4",
     "shx": "^0.3.2",
     "standard-version": "^7.0.1",
     "ts-jest": "^24.2.0",

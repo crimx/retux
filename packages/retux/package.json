@@ -1,0 +1,27 @@
+{
+  "name": "retux",
+  "description": "Minimalist typesafed(strong-typed) high-performance Redux Architecture.",
+  "homepage": "https://github.com/crimx/retux/tree/master/packages/retux",
+  "keywords": [
+    "redux",
+    "typescript",
+    "action creator",
+    "typesafed",
+    "strong-typed"
+  ],
+  "version": "0.0.1",
+  "scripts": {
+    "test": "jest",
+    "build": "shx rm -rf lib && cross-env NODE_ENV=production tsc -p tsconfig.build.json"
+  },
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "author": "CRIMX",
+  "license": "MIT",
+  "repository": "crimx/retux",
+  "bugs": "https://github.com/crimx/retux/issues/"
+}

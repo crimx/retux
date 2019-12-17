@@ -1,18 +1,16 @@
 {
   "compilerOptions": {
-    // Target latest version of ECMAScript.
-    "target": "esnext",
-    // Search under node_modules for non-relative imports.
-    "moduleResolution": "node",
-    // Enable strictest settings like strictNullChecks & noImplicitAny.
-    "strict": true,
-    // Import non-ES modules as default imports.
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
     "esModuleInterop": true,
+    "importHelpers": true,
+    "lib": ["esnext", "scripthost"],
+    "module": "commonjs",
+    "resolveJsonModule": true,
     "sourceMap": true,
-    "noImplicitAny": true,
-    "module": "esnext",
-    "jsx": "react",
-    "declaration": true
+    "strict": true,
+    "target": "esnext",
+    "types": ["jest", "node"]
   },
-  "include": ["src"]
+  "exclude": ["node_modules", "lib"]
 }
