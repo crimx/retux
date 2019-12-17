@@ -7,5 +7,8 @@
     "version": {
       "allowBranch": "release"
     }
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org"
   }
 }
