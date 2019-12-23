@@ -54,7 +54,7 @@ export function updateSession(newSession: SystemState): SystemActionTypes {
 }
 ```
 
-All these redundant codes just to get a proper type check.
+All these boilerplate codes just to get a proper type check.
 
 ### Problems of the react-redux-typescript-guide
 
@@ -97,9 +97,9 @@ And [then](https://redux.js.org/faq/reducers#how-do-i-share-state-between-two-re
 
 > Many users later want to try to share data between two reducers, but find that `combineReducers` does not allow them to do so. There are several approaches that can be used:
 
-Now you either go down the reducer-hell with `reduce-reducers` or move logic to middlewares which makes your codebase scattered.
+Now you either go down the reducer-hell with `reduce-reducers` or move logic to middlewares. If you move only the necessary logic to middlewares then your codebase will look scattered. Or if for consistency you move most of the logic to middlewares(a.k.a fat middleware) then the reducer is all boilerplate code.
 
-I will explain how to avoid this with Retux architecture below.
+I will explain how to address this with Retux architecture.
 
 ### You Might Not Need Action Creators
 
@@ -116,7 +116,7 @@ function addTodo(text) {
 }
 ```
 
-Action creators are needed in JavaScript because Redux relies on `string` to distinguish action types. But to JavaScript compiler, `ACTION1` and `ACTION2` are no different, they are all `string`. So if you mistype `ACTION1` as `ACTION2`(and you will, according to Murphy's Law), no compile-time error is yelled. But when the action is wrapped in a function whose name should you mistyped, the compiler can now correctly catch the error.
+Action creators are needed in JavaScript because Redux relies on `string` to distinguish action types. But to JavaScript compiler, `ACTION1` and `ACTION2` are no different, they are all `string`. So if you mistype `ACTION1` as `ACTION2`(and you will, according to Murphy's Law), no compile-time error is yelled. But when the action is wrapped in a function whose name should you mistyped, the compiler/linter can now correctly catch the error.
 
 This is not the case with TypeScript in which we can declare actual `ACTION1` and `ACTION2` types to get TypeScript compile-time errors.
 
