@@ -104,7 +104,9 @@ I will explain how to address this with Retux architecture.
 ### You Don't Need Boilerplate Action Creators
 
 > Action creators are exactly that—functions that create actions. It's easy to conflate the terms “action” and “action creator”, so do your best to use the proper term.
+>
 > ...
+>
 > This makes them portable and easy to test.
 
 ```javascript
@@ -118,7 +120,7 @@ function addTodo(text) {
 
 Boilerplate action creators are those who do nothing but simply return an action like the example above.
 
-Boilerplate action creators are needed in JavaScript because Redux relies on `string` to distinguish action types. But to JavaScript compiler, `ACTION1` and `ACTION2` are no different, they are all `string`. So if you mistype `ACTION1` as `ACTION2`(and you will, according to Murphy's Law), no compile-time error is yelled. But when the action is wrapped in a function whose name should you mistyped, the compiler/linter can now correctly catch the error.
+Boilerplate action creators are needed in JavaScript because Redux relies on `string` to distinguish action types. But to JavaScript compiler, `ACTION1` and `ACTION2` are no different - they are all `string`. So if you mistype `ACTION1` as `ACTION2`(and you will according to Murphy's Law), no compile-time error is yelled. But when the action is wrapped in a function whose name should you mistyped, the compiler/linter can now correctly catch the error.
 
 This is not the case with TypeScript in which we can declare actual `ACTION1` and `ACTION2` types to get TypeScript compile-time errors.
 
@@ -154,6 +156,8 @@ type ActionCatalog = CreateActionCatalog<{
 ```
 
 ActionCatalog defines all the actions of a module. Since it is a basic object type, it can be split and merged which offers great flexibility.
+
+ActionCatalog is the core of Retux. All other facilities are built surrounding ActionCatalog.
 
 ### ActionType
 
