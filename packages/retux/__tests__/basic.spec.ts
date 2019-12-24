@@ -24,7 +24,7 @@ describe('basic', () => {
       }
     }>
 
-    const counterActionCatalog: ActionHandlers<
+    const counterActionHandlers: ActionHandlers<
       CounterState,
       CounterActionCatalog
     > = {
@@ -36,7 +36,7 @@ describe('basic', () => {
       })
     }
 
-    const store = createStore(createReducer(initState, counterActionCatalog))
+    const store = createStore(createReducer(initState, counterActionHandlers))
 
     expect(store.getState()).toEqual({ count: 0 })
 
