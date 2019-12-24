@@ -1,5 +1,5 @@
 import { DefaultActionCatalog, ActionType } from './utils'
-export { ActionCatalog, ActionType } from './utils'
+export { CreateActionCatalog, ActionType } from './utils'
 
 /**
  * Get basic action types. ({ type, payload?, meta? })

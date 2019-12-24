@@ -1,4 +1,8 @@
-import { createReducer, ActionCatalog, ActionHandlers } from '../src/basic'
+import {
+  createReducer,
+  CreateActionCatalog,
+  ActionHandlers
+} from '../src/basic'
 import { createStore } from 'redux'
 
 describe('basic', () => {
@@ -9,7 +13,7 @@ describe('basic', () => {
 
     type CounterState = typeof initState
 
-    type CounterActionCatalog = ActionCatalog<{
+    type CounterActionCatalog = CreateActionCatalog<{
       INCREMENT: {
         // optional increment step
         payload?: number

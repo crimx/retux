@@ -6,4 +6,4 @@ export {
   ActionHandlers as FSAHandlers,
   createReducer as createFSAReducer
 } from './fsa'
-export { ActionCatalog, ActionType } from './utils'
+export { CreateActionCatalog, ActionType } from './utils'

@@ -16,7 +16,7 @@ export interface DefaultActionCatalog {
  * Index as action type.
  * Error type is added by `Action`.
  */
-export type ActionCatalog<C extends DefaultActionCatalog> = C
+export type CreateActionCatalog<C extends DefaultActionCatalog> = C
 
 /**
  * Extract action types from a ActionCatalog
