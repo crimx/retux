@@ -52,7 +52,7 @@ export type MapStateToProps<
  * @template OwnProps Props to the `connect` components
  */
 export type MapDispatchToProps<
-  Action extends { type: string },
+  Action extends {},
   TargetProps extends {},
   Dispatchers extends keyof TargetProps = never,
   OwnProps = {}
