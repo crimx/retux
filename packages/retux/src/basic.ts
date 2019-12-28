@@ -3,8 +3,8 @@ export { CreateActionCatalog, ActionType } from './utils'
 
 /**
  * Get basic action types. ({ type, payload?, meta? })
- * @param C ActionCatalog.
- * @param T Action type. If ignored a union of all action types will be used.
+ * @template C ActionCatalog.
+ * @template T Action type. If ignored a union of all action types will be used.
  */
 export type Action<
   C extends DefaultActionCatalog = {},
@@ -15,9 +15,9 @@ export type Action<
 
 /**
  * Get basic action handler type of a module.
- * @param S Module state.
- * @param C ActionCatalog.
- * @param T Action type.
+ * @template S Module state.
+ * @template C ActionCatalog.
+ * @template T Action type.
  */
 export type ActionHandler<
   S extends {},
@@ -27,8 +27,8 @@ export type ActionHandler<
 
 /**
  * Get all basic action handler types of a module.
- * @param S Module state.
- * @param C Module ActionCatalog.
+ * @template S Module state.
+ * @template C Module ActionCatalog.
  */
 export type ActionHandlers<S extends {}, C extends DefaultActionCatalog> = {
   [K in ActionType<C>]: ActionHandler<S, C, K>
