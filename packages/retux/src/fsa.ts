@@ -48,4 +48,4 @@ export type ActionHandlers<S extends {}, C extends DefaultActionCatalog> = {
 export const createReducer: <S extends {}, C extends DefaultActionCatalog>(
   initialState: S,
   handlers: ActionHandlers<S, C>
-) => (state: S, action: Action<C>) => S = createDefaultReducer
+) => (state: S | undefined, action: Action<C>) => S = createDefaultReducer
