@@ -1,4 +1,5 @@
-import { DefaultActionCatalog, ActionType } from './utils'
+import { DefaultActionCatalog, ActionType, DefaultActionHandler } from './utils'
+import { createDefaultReducer } from './create-reducer'
 export { CreateActionCatalog, ActionType } from './utils'
 
 /**
@@ -23,7 +24,7 @@ export type ActionHandler<
   S extends {},
   C extends DefaultActionCatalog,
   T extends ActionType<C>
-> = (state: Readonly<S>, action: Action<C, T>) => Readonly<S>
+> = DefaultActionHandler<S, Action<C, T>>
 
 /**
  * Get all basic action handler types of a module.
@@ -34,17 +35,7 @@ export type ActionHandlers<S extends {}, C extends DefaultActionCatalog> = {
   [K in ActionType<C>]: ActionHandler<S, C, K>
 }
 
-export const createReducer = <S extends {}, C extends DefaultActionCatalog>(
+export const createReducer: <S extends {}, C extends DefaultActionCatalog>(
   initialState: S,
   handlers: ActionHandlers<S, C>
-) =>
-  function reducer(state: S = initialState, action: Action<C>): S {
-    if (Object.prototype.hasOwnProperty.call(handlers, action.type)) {
-      return handlers[action.type](
-        state,
-        action as Action<C, typeof action.type>
-      )
-    } else {
-      return state
-    }
-  }
+) => (state: S, action: Action<C>) => S = createDefaultReducer
