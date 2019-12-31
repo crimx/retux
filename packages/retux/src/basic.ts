@@ -13,10 +13,7 @@ import { mergeUniqueObjects } from './merge-unique-objects'
  * @template C ActionCatalog.
  * @template T Action type. If ignored a union of all action types will be used.
  */
-export type Action<
-  C extends DefaultActionCatalog = {},
-  T extends keyof C = ActionType<C>
-> = T extends ActionType<C> // generate union
+export type Action<C, T extends keyof C = keyof C> = T extends ActionType<C> // generate union
   ? Readonly<{ type: T } & Pick<C[T], Extract<'payload' | 'meta', keyof C[T]>>>
   : never
 
@@ -26,18 +23,17 @@ export type Action<
  * @template C ActionCatalog.
  * @template T Action type.
  */
-export type ActionHandler<
-  S extends {},
-  C extends DefaultActionCatalog,
-  T extends keyof C
-> = DefaultActionHandler<S, Action<C, T>>
+export type ActionHandler<S, C, T extends keyof C> = DefaultActionHandler<
+  S,
+  Action<C, T>
+>
 
 /**
  * Get all basic action handler types of a module.
  * @template S Module state.
  * @template C Module ActionCatalog.
  */
-export type ActionHandlers<S extends {}, C extends DefaultActionCatalog> = {
+export type ActionHandlers<S, C> = {
   readonly [K in keyof C]: ActionHandler<S, C, K>
 }
 
@@ -92,10 +88,10 @@ export const mergeActionHandlers = mergeUniqueObjects as <
 /**
  * Create Redux compatible reducer.
  */
-export const createReducer: <S extends {}, C extends DefaultActionCatalog>(
+export const createReducer = createDefaultReducer as <S, C>(
   initialState: S,
   handlers: ActionHandlers<S, C>
-) => (state: S | undefined, action: Action<C>) => S = createDefaultReducer
+) => (state: S | undefined, action: Action<C>) => S
 
 /**
  * Generate Action Creators with signature:
@@ -108,7 +104,7 @@ export const createReducer: <S extends {}, C extends DefaultActionCatalog>(
  */
 export const createActionCreators = createDefaultActionCreators as <
   AH extends {},
-  C extends DefaultActionCatalog = GetActionCatalog<AH>,
+  C = GetActionCatalog<AH>,
   AC extends
     | { [T: string]: (...args: any[]) => Action<C> | Function | Promise<any> }
     | undefined = undefined
@@ -120,10 +116,13 @@ export const createActionCreators = createDefaultActionCreators as <
     ...args: Extract<'payload', keyof C[T]> extends never
       ? Extract<'meta', keyof C[T]> extends never
         ? []
-        : [undefined, C[T]['meta']]
+        : [undefined, C[T][Extract<'meta', keyof C[T]>]]
       : Extract<'meta', keyof C[T]> extends never
-      ? [C[T]['payload']]
-      : [C[T]['payload'], C[T]['meta']]
+      ? [C[T][Extract<'payload', keyof C[T]>]]
+      : [
+          C[T][Extract<'payload', keyof C[T]>],
+          C[T][Extract<'meta', keyof C[T]>]
+        ]
   ) => Action<C, T>
 } &
   (AC extends undefined ? {} : AC)

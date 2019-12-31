@@ -1,9 +1,4 @@
-import {
-  DefaultActionCatalog,
-  DefaultAction,
-  ActionType,
-  DefaultActionHandler
-} from './utils'
+import { DefaultAction, DefaultActionHandler } from './utils'
 
 /**
  * @template S State
@@ -12,10 +7,9 @@ import {
  * @template H Action handlers
  */
 export function createReducer<
-  S extends {},
-  C extends DefaultActionCatalog,
+  S,
   A extends DefaultAction,
-  H extends { [type in ActionType<C>]: DefaultActionHandler<S, A> }
+  H extends { [type: string]: DefaultActionHandler<S, A> }
 >(initialState: S, handlers: H): (state: S | undefined, action: A) => S {
   return function reducer(state = initialState, action) {
     if (Object.prototype.hasOwnProperty.call(handlers, action.type)) {

@@ -12,14 +12,13 @@ import { mergeUniqueObjects } from './merge-unique-objects'
  * @template C ActionCatalog.
  * @template T Action type. If ignored a union of all action types will be used.
  */
-export type ActionError<
-  C extends DefaultActionCatalog,
-  T extends keyof C = ActionType<C>
-> = Readonly<
+export type ActionError<C, T extends keyof C = ActionType<C>> = Readonly<
   {
     type: T
     error: true
-    payload: Extract<'error', keyof C[T]> extends never ? Error : C[T]['error']
+    payload: Extract<'error', keyof C[T]> extends never
+      ? Error
+      : C[T][Extract<'error', keyof C[T]>]
   } & Pick<C[T], Extract<'meta', keyof C[T]>>
 >
 
@@ -28,10 +27,9 @@ export type ActionError<
  * @template C ActionCatalog.
  * @template T Action type. If ignored a union of all action types will be used.
  */
-export type Action<
-  C extends DefaultActionCatalog,
-  T extends keyof C = ActionType<C>
-> = T extends ActionType<C>
+export type Action<C, T extends keyof C = ActionType<C>> = T extends ActionType<
+  C
+>
   ?
       | Readonly<
           // prettier-ignore
@@ -47,18 +45,17 @@ export type Action<
  * @template C ActionCatalog.
  * @template T Action type. If ignored a union of all action types will be used.
  */
-export type ActionHandler<
-  S extends {},
-  C extends DefaultActionCatalog,
-  T extends keyof C
-> = DefaultActionHandler<S, Action<C, T>>
+export type ActionHandler<S, C, T extends keyof C> = DefaultActionHandler<
+  S,
+  Action<C, T>
+>
 
 /**
  * Get all FSA compliant action handler types of a module.
  * @template S Module state.
  * @template C Module ActionCatalog.
  */
-export type ActionHandlers<S extends {}, C extends DefaultActionCatalog> = {
+export type ActionHandlers<S, C> = {
   readonly [K in keyof C]: ActionHandler<S, C, K>
 }
 
@@ -129,7 +126,7 @@ export const createReducer: <S extends {}, C extends DefaultActionCatalog>(
  */
 export const createActionCreators = createDefaultActionCreators as <
   AH extends {},
-  C extends DefaultActionCatalog = GetActionCatalog<AH>,
+  C = GetActionCatalog<AH>,
   AC extends
     | { [T: string]: (...args: any[]) => Action<C> | Function | Promise<any> }
     | undefined = undefined
@@ -145,18 +142,33 @@ export const createActionCreators = createDefaultActionCreators as <
             | [undefined, undefined, false]
             | [ActionError<C, T>['payload'], undefined, true]
         :
-            | [undefined, C[T]['meta']]
-            | [undefined, C[T]['meta'], false]
-            | [ActionError<C, T>['payload'], C[T]['meta'], true]
+            | [undefined, C[T][Extract<'meta', keyof C[T]>]]
+            | [undefined, C[T][Extract<'meta', keyof C[T]>], false]
+            | [
+                ActionError<C, T>['payload'],
+                C[T][Extract<'meta', keyof C[T]>],
+                true
+              ]
       : Extract<'meta', keyof C[T]> extends never
       ?
-          | [C[T]['payload']]
-          | [C[T]['payload'], undefined, false]
+          | [C[T][Extract<'payload', keyof C[T]>]]
+          | [C[T][Extract<'payload', keyof C[T]>], undefined, false]
           | [ActionError<C, T>['payload'], undefined, true]
       :
-          | [C[T]['payload'], C[T]['meta']]
-          | [C[T]['payload'], C[T]['meta'], false]
-          | [ActionError<C, T>['payload'], C[T]['meta'], true]
+          | [
+              C[T][Extract<'payload', keyof C[T]>],
+              C[T][Extract<'meta', keyof C[T]>]
+            ]
+          | [
+              C[T][Extract<'payload', keyof C[T]>],
+              C[T][Extract<'meta', keyof C[T]>],
+              false
+            ]
+          | [
+              ActionError<C, T>['payload'],
+              C[T][Extract<'meta', keyof C[T]>],
+              true
+            ]
   ) => Action<C, T>
 } &
   (AC extends undefined ? {} : AC)

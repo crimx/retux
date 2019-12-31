@@ -30,10 +30,7 @@ export type CreateActionCatalog<C extends DefaultActionCatalog> = C
  *
  * @template C ActionCatalog
  */
-export type ActionType<C extends DefaultActionCatalog> = Extract<
-  keyof C,
-  string
->
+export type ActionType<C> = Extract<keyof C, string>
 
 /**
  * Get action handler type of a module.
@@ -50,9 +47,6 @@ export type DefaultActionHandler<S extends {}, A extends DefaultAction> = (
  * @template S Module state.
  * @template C Module ActionCatalog.
  */
-export type DefaultActionHandlers<
-  S extends {},
-  C extends DefaultActionCatalog
-> = {
+export type DefaultActionHandlers<S extends {}, C> = {
   readonly [K in ActionType<C>]: DefaultActionHandler<S, DefaultAction>
 }
