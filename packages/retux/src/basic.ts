@@ -1,6 +1,5 @@
 import { DefaultActionCatalog, ActionType, DefaultActionHandler } from './utils'
-import { createDefaultReducer } from './create-reducer'
-export { CreateActionCatalog, ActionType } from './utils'
+import { createReducer as createDefaultReducer } from './create-reducer'
 
 /**
  * Get basic action types. ({ type, payload?, meta? })

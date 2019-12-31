@@ -11,7 +11,7 @@ import {
  * @template A Action
  * @template H Action handlers
  */
-export function createDefaultReducer<
+export function createReducer<
   S extends {},
   C extends DefaultActionCatalog,
   A extends DefaultAction,

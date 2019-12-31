@@ -1,6 +1,5 @@
 import { DefaultActionCatalog, ActionType, DefaultActionHandler } from './utils'
-import { createDefaultReducer } from './create-reducer'
-export { CreateActionCatalog, ActionType } from './utils'
+import { createReducer as createDefaultReducer } from './create-reducer'
 
 /**
  * Get FSA compliant action types. ({ type, payload?, meta?, error? })
