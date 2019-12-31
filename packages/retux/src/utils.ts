@@ -8,6 +8,7 @@ export interface DefaultActionCatalog {
   [type: string]: {
     payload?: any
     meta?: any
+    error?: any
   }
 }
 
@@ -43,3 +44,15 @@ export type DefaultActionHandler<S extends {}, A extends DefaultAction> = (
   state: Readonly<S>,
   action: A
 ) => Readonly<S>
+
+/**
+ * Get all basic action handler types of a module.
+ * @template S Module state.
+ * @template C Module ActionCatalog.
+ */
+export type DefaultActionHandlers<
+  S extends {},
+  C extends DefaultActionCatalog
+> = {
+  readonly [K in ActionType<C>]: DefaultActionHandler<S, DefaultAction>
+}

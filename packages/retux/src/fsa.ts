@@ -2,6 +2,21 @@ import { DefaultActionCatalog, ActionType, DefaultActionHandler } from './utils'
 import { createReducer as createDefaultReducer } from './create-reducer'
 
 /**
+ * @template C ActionCatalog.
+ * @template T Action type. If ignored a union of all action types will be used.
+ */
+export type ActionError<
+  C extends DefaultActionCatalog,
+  T extends keyof C = ActionType<C>
+> = Readonly<
+  {
+    type: T
+    error: true
+    payload: Extract<'error', keyof C[T]> extends never ? Error : C[T]['error']
+  } & Pick<C[T], Extract<'meta', keyof C[T]>>
+>
+
+/**
  * Get FSA compliant action types. ({ type, payload?, meta?, error? })
  * @template C ActionCatalog.
  * @template T Action type. If ignored a union of all action types will be used.
@@ -16,11 +31,7 @@ export type Action<
           { type: T, error?: false } &
           Pick<C[T], Extract<'payload' | 'meta', keyof C[T]>>
         >
-      | Readonly<
-          // prettier-ignore
-          { type: T, error: true, payload: Error } &
-          Pick<C[T], Extract<'meta', keyof C[T]>>
-        >
+      | ActionError<C, T>
   : never
 
 /**

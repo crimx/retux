@@ -1,6 +1,7 @@
 export { Action, ActionHandler, ActionHandlers, createReducer } from './basic'
 export {
   Action as FSA,
+  ActionError as FSAError,
   ActionHandler as FSAHandler,
   ActionHandlers as FSAHandlers,
   createReducer as createFSAReducer
