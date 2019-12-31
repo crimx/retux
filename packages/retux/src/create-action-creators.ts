@@ -1,4 +1,4 @@
-import { DefaultAction } from '../lib/utils'
+import { DefaultAction } from './utils'
 
 /**
  * Generate Action Creators with signature:
