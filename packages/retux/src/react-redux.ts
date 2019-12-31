@@ -13,7 +13,7 @@ export type MapStateToProps<
 > = (state: State, ownProps: OwnProps) => Omit<TargetProps, Dispatchers>
 
 /**
- * @template State Store state
+ * @template Action Action. Add function or promise accordingly if with middlewares.
  * @template TargetProps Props of the target component
  * @template Dispatchers Union of target component props property names that
  *                    are for `mapDispatchToProps`
