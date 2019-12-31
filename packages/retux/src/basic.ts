@@ -1,6 +1,12 @@
-import { DefaultActionCatalog, ActionType, DefaultActionHandler } from './utils'
+import {
+  DefaultActionCatalog,
+  ActionType,
+  DefaultActionHandler,
+  IntersectionFromUnion
+} from './utils'
 import { createReducer as createDefaultReducer } from './create-reducer'
 import { createActionCreators as createDefaultActionCreators } from './create-action-creators'
+import { mergeUniqueObjects } from './merge-unique-objects'
 
 /**
  * Get basic action types. ({ type, payload?, meta? })
@@ -32,14 +38,60 @@ export type ActionHandler<
  * @template C Module ActionCatalog.
  */
 export type ActionHandlers<S extends {}, C extends DefaultActionCatalog> = {
-  readonly [K in ActionType<C>]: ActionHandler<S, C, K>
+  readonly [K in keyof C]: ActionHandler<S, C, K>
 }
 
 /**
+ * Extract ActionCatalog from ActionHandlers
+ *
  * @template H ActionHandlers
  */
-type GetActionCatalog<H> = H extends ActionHandlers<infer S, infer C> ? C : H
+export type GetActionCatalog<H> = H extends ActionHandlers<infer S, infer C>
+  ? C
+  : never
 
+/**
+ * Extract ActionCatalog from list of ActionHandlers
+ *
+ * @template H ActionHandlers
+ */
+type GetActionCatalogFromHandlersList<H> = H extends ActionHandlers<
+  infer S,
+  infer C
+>[]
+  ? C
+  : never
+
+/**
+ * Extract State from List of ActionHandlers
+ *
+ * @template H ActionHandlers
+ */
+export type GetStateFromHandlersList<H> = H extends ActionHandlers<
+  infer S,
+  infer C
+>[]
+  ? S
+  : never
+
+/**
+ * Merge multiple action handlers into one.
+ * Use `mergeUniqueObjects` directly on action handlers will lose index
+ * signature. This method patches the typings.
+ */
+export const mergeActionHandlers = mergeUniqueObjects as <
+  S extends any[],
+  R = IntersectionFromUnion<GetActionCatalogFromHandlersList<S>>
+>(
+  ...args: S
+) => ActionHandlers<
+  GetStateFromHandlersList<S>,
+  R extends DefaultActionCatalog ? R : DefaultActionCatalog
+>
+
+/**
+ * Create Redux compatible reducer.
+ */
 export const createReducer: <S extends {}, C extends DefaultActionCatalog>(
   initialState: S,
   handlers: ActionHandlers<S, C>

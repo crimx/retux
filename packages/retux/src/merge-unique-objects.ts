@@ -5,9 +5,7 @@ import { IntersectionFromUnion } from './utils'
  * - Duplicated keys are not allowed.
  * - Always returns a new object.
  */
-export function mergeUniqueObjects<S extends any[]>(
-  ...objs: S
-): IntersectionFromUnion<S[number]> {
+export function mergeUniqueObjects<S extends any[]>(...objs: S) {
   const result: { [k: string]: any } = {}
   for (let i = 0; i <= objs.length; i++) {
     const obj = objs[i]
