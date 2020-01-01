@@ -1,5 +1,6 @@
-import { CreateActionCatalog } from '../src/'
-import { ActionHandlers, createReducer, createActionCreators } from '../src/fsa'
+import { ActionHandlers, createActionCreators } from '../src/fsa'
+import { CreateActionCatalog } from '../src/utils'
+import { createReducer } from '../src/create-reducer'
 import { createStore } from 'redux'
 
 describe('fsa', () => {
@@ -42,7 +43,9 @@ describe('fsa', () => {
               }
       }
 
-      const store = createStore(createReducer(initState, counterActionHandlers))
+      const reducer = createReducer(initState, counterActionHandlers)
+
+      const store = createStore(reducer)
 
       expect(store.getState()).toEqual({ count: 0 })
 

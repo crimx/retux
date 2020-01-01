@@ -43,10 +43,10 @@ export type DefaultActionHandler<S extends {}, A extends DefaultAction> = (
 ) => Readonly<S>
 
 /**
- * Get all basic action handler types of a module.
+ * Get all action handler types of a module.
  * @template S Module state.
  * @template C Module ActionCatalog.
  */
-export type DefaultActionHandlers<S extends {}, C> = {
-  readonly [K in ActionType<C>]: DefaultActionHandler<S, DefaultAction>
+export type DefaultActionHandlers<S extends {}> = {
+  readonly [K: string]: DefaultActionHandler<S, DefaultAction>
 }

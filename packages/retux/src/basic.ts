@@ -4,7 +4,6 @@ import {
   DefaultActionHandler,
   IntersectionFromUnion
 } from './utils'
-import { createReducer as createDefaultReducer } from './create-reducer'
 import { createActionCreators as createDefaultActionCreators } from './create-action-creators'
 import { mergeUniqueObjects } from './merge-unique-objects'
 
@@ -42,7 +41,10 @@ export type ActionHandlers<S, C> = {
  *
  * @template H ActionHandlers
  */
-export type GetActionCatalog<H> = H extends ActionHandlers<infer S, infer C>
+export type GetActionCatalogFromHandlers<H> = H extends ActionHandlers<
+  infer S,
+  infer C
+>
   ? C
   : never
 
@@ -76,22 +78,16 @@ export type GetStateFromHandlersList<H> = H extends ActionHandlers<
  * signature. This method patches the typings.
  */
 export const mergeActionHandlers = mergeUniqueObjects as <
-  S extends any[],
-  R = IntersectionFromUnion<GetActionCatalogFromHandlersList<S>>
+  H extends any[],
+  S = GetStateFromHandlersList<H>,
+  C = IntersectionFromUnion<GetActionCatalogFromHandlersList<H>>
 >(
-  ...args: S
-) => ActionHandlers<
-  GetStateFromHandlersList<S>,
-  R extends DefaultActionCatalog ? R : DefaultActionCatalog
->
-
-/**
- * Create Redux compatible reducer.
- */
-export const createReducer = createDefaultReducer as <S, C>(
-  initialState: S,
-  handlers: ActionHandlers<S, C>
-) => (state: S | undefined, action: Action<C>) => S
+  ...args: H
+) => S extends never
+  ? IntersectionFromUnion<H[number]>
+  : C extends DefaultActionCatalog
+  ? ActionHandlers<S, C>
+  : IntersectionFromUnion<H[number]>
 
 /**
  * Generate Action Creators with signature:
@@ -104,7 +100,7 @@ export const createReducer = createDefaultReducer as <S, C>(
  */
 export const createActionCreators = createDefaultActionCreators as <
   AH extends {},
-  C = GetActionCatalog<AH>,
+  C = GetActionCatalogFromHandlers<AH>,
   AC extends
     | { [T: string]: (...args: any[]) => Action<C> | Function | Promise<any> }
     | undefined = undefined

@@ -1,9 +1,7 @@
-import { CreateActionCatalog } from '../src'
-import {
-  ActionHandlers,
-  createReducer,
-  createActionCreators
-} from '../src/basic'
+import { ActionHandlers, createActionCreators } from '../src/basic'
+import { createReducer } from '../src/create-reducer'
+import { CreateActionCatalog } from '../src/utils'
+
 import { createStore } from 'redux'
 
 describe('basic', () => {
