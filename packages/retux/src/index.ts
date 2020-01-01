@@ -2,18 +2,16 @@ export {
   Action,
   ActionHandler,
   ActionHandlers,
-  createActionCreators,
-  mergeActionHandlers
+  createActionCreators
 } from './basic'
 export {
   Action as FSA,
   ActionError as FSAError,
   ActionHandler as FSAHandler,
   ActionHandlers as FSAHandlers,
-  createActionCreators as createFSACreators,
-  mergeActionHandlers as mergeFSAHandlers
+  createActionCreators as createFSACreators
 } from './fsa'
 export { MapStateToProps, MapDispatchToProps } from './react-redux'
-export { mergeUniqueObjects } from './merge-unique-objects'
+export { combineUniqueObjects } from './combine-unique-objects'
 export { createReducer } from './create-reducer'
 export { CreateActionCatalog, ActionType } from './utils'

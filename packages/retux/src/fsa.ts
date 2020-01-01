@@ -1,11 +1,5 @@
-import {
-  DefaultActionCatalog,
-  ActionType,
-  DefaultActionHandler,
-  IntersectionFromUnion
-} from './utils'
+import { ActionType, DefaultActionHandler } from './utils'
 import { createActionCreators as createDefaultActionCreators } from './create-action-creators'
-import { mergeUniqueObjects } from './merge-unique-objects'
 
 /**
  * @template C ActionCatalog.
@@ -75,7 +69,7 @@ export type GetActionCatalogFromHandlers<H> = H extends ActionHandlers<
  *
  * @template H ActionHandlers
  */
-type GetActionCatalogFromHandlersList<H> = H extends ActionHandlers<
+export type GetActionCatalogFromHandlersList<H> = H extends ActionHandlers<
   infer S,
   infer C
 >[]
@@ -93,23 +87,6 @@ export type GetStateFromHandlersList<H> = H extends ActionHandlers<
 >[]
   ? S
   : never
-
-/**
- * Merge multiple action handlers into one.
- * Use `mergeUniqueObjects` directly on action handlers will lose index
- * signature. This method patches the typings.
- */
-export const mergeActionHandlers = mergeUniqueObjects as <
-  H extends any[],
-  S = GetStateFromHandlersList<H>,
-  C = IntersectionFromUnion<GetActionCatalogFromHandlersList<H>>
->(
-  ...args: H
-) => S extends never
-  ? IntersectionFromUnion<H[number]>
-  : C extends DefaultActionCatalog
-  ? ActionHandlers<S, C>
-  : IntersectionFromUnion<H[number]>
 
 /**
  * Generate Action Creators with signature:
