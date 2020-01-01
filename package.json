@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "lerna bootstrap",
     "lint": "eslint --no-eslintrc -c .eslintrc.js ./*.js ./packages/**/*.ts",
-    "test": "jest --coverage --testPathPattern=packages/",
+    "test": "jest --coverage",
     "build": "lerna run build && lerna bootstrap",
     "create-translator": "node scripts/create-translator",
     "commit": "git-cz",

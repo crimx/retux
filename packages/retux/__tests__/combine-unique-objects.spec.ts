@@ -1,8 +1,10 @@
 import { combineUniqueObjects } from '../src/combine-unique-objects'
-import { CreateActionCatalog } from '../src/utils'
-import { createReducer } from '../src/create-reducer'
-import { ActionHandlers } from '../src/basic'
-import { ActionHandlers as FSAHandlers } from '../src/fsa'
+import {
+  ActionHandlers,
+  FSAHandlers,
+  CreateActionCatalog,
+  createReducer
+} from '../src'
 
 describe('combine-unique-objects', () => {
   it('should merge objects', () => {

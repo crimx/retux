@@ -1,8 +1,6 @@
-import { createStore } from 'redux'
 import { createReducer } from '../src/create-reducer'
-import { ActionHandlers } from '../src/basic'
-import { ActionHandlers as FSAHandlers } from '../src/fsa'
-import { CreateActionCatalog } from '../src/utils'
+import { createStore } from 'redux'
+import { FSAHandlers, ActionHandlers, CreateActionCatalog } from '../src/'
 
 describe('create-reducer', () => {
   it('should create Redux compatible reducer from any action handlers', () => {

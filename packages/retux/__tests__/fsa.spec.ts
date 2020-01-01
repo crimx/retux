@@ -1,7 +1,6 @@
 import { ActionHandlers, createActionCreators } from '../src/fsa'
-import { CreateActionCatalog } from '../src/utils'
-import { createReducer } from '../src/create-reducer'
 import { createStore } from 'redux'
+import { createReducer, CreateActionCatalog } from '../src'
 
 describe('fsa', () => {
   describe('should create correct reducer', () => {
