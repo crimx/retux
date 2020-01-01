@@ -20,16 +20,15 @@ const mapDispatchToProps: MapDispatchToProps<
   StoreAction,
   TodoListProp,
   Dispatchers
-> = dispatch => ({
-  editTodo: (id, text) => dispatch(action['TODOS/EDIT']({ id, text })),
-  ...bindActionCreators(
+> = dispatch =>
+  bindActionCreators(
     {
+      editTodo: action['TODOS/EDIT'],
       deleteTodo: action['TODOS/DELETE'],
       completeTodo: action['TODOS/COMPLETE']
     },
     dispatch
   )
-})
 
 export const VisibleTodoList = connect(
   mapStateToProps,

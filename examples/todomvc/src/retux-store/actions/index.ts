@@ -6,6 +6,12 @@ import { actionHandlers as visibilityFilterActionHandlers } from '../modules/vis
 // Strongly typed and also customizable.
 
 export const action = combineUniqueObjects(
-  createActionCreators(todoActionHandlers),
+  createActionCreators(todoActionHandlers, {
+    'TODOS/EDIT': (id: string, text: string) =>
+      ({
+        type: 'TODOS/EDIT',
+        payload: { id, text }
+      } as const)
+  }),
   createActionCreators(visibilityFilterActionHandlers)
 )
