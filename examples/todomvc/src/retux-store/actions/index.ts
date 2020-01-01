@@ -1,11 +1,11 @@
-import { createActionCreators, mergeUniqueObjects } from 'retux'
+import { createActionCreators, combineUniqueObjects } from 'retux'
 import { actionHandlers as todoActionHandlers } from '../modules/todos'
 import { actionHandlers as visibilityFilterActionHandlers } from '../modules/visibilityFilter'
 
 // Auto generate Action creators!
-// Strongly typed and customizable.
+// Strongly typed and also customizable.
 
-export const action = mergeUniqueObjects(
+export const action = combineUniqueObjects(
   createActionCreators(todoActionHandlers),
   createActionCreators(visibilityFilterActionHandlers)
 )

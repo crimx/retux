@@ -1,4 +1,4 @@
-import { mergeActionHandlers } from 'retux'
+import { combineUniqueObjects } from 'retux'
 import {
   ActionCatalog as CRUDActionCatalog,
   actionHandlers as crudActionHandlers
@@ -17,7 +17,7 @@ export type State = typeof state
 
 export type ActionCatalog = CRUDActionCatalog & BulkActionCatalog
 
-export const actionHandlers = mergeActionHandlers(
+export const actionHandlers = combineUniqueObjects(
   crudActionHandlers,
   bulkActionHandlers
 )
