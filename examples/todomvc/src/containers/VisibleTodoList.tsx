@@ -4,6 +4,7 @@ import { TodoList, TodoListProp } from '../components/TodoList'
 import { getVisibleTodos } from '../selectors'
 import { MapDispatchToProps, MapStateToProps } from 'retux'
 import { StoreAction, StoreState } from '../retux-store'
+import { bindActionCreators } from 'redux'
 
 type Dispatchers = 'editTodo' | 'deleteTodo' | 'completeTodo'
 
@@ -21,8 +22,13 @@ const mapDispatchToProps: MapDispatchToProps<
   Dispatchers
 > = dispatch => ({
   editTodo: (id, text) => dispatch(action['TODOS/EDIT']({ id, text })),
-  deleteTodo: id => dispatch(action['TODOS/DELETE'](id)),
-  completeTodo: id => dispatch(action['TODOS/COMPLETE'](id))
+  ...bindActionCreators(
+    {
+      deleteTodo: action['TODOS/DELETE'],
+      completeTodo: action['TODOS/COMPLETE']
+    },
+    dispatch
+  )
 })
 
 export const VisibleTodoList = connect(

@@ -24,7 +24,11 @@ export type MapDispatchToProps<
   TargetProps extends {},
   Dispatchers extends keyof TargetProps = never,
   OwnProps = {}
-> = (
-  dispatch: (action: Action) => Action,
-  ownProps: OwnProps
-) => Pick<TargetProps, Dispatchers>
+> =
+  | ((
+      dispatch: <T extends Action>(action: T) => T,
+      ownProps: OwnProps
+    ) => Pick<TargetProps, Dispatchers>)
+  | {
+      [K in Dispatchers]: (...args: any[]) => Action
+    }

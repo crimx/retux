@@ -20,9 +20,9 @@ const mapDispatchToProps: MapDispatchToProps<
   StoreAction,
   MainSectionProps,
   Dispatchers
-> = dispatch => ({
-  completeAllTodos: () => dispatch(action['TODOS/COMPLETE_ALL']()),
-  clearCompleted: () => dispatch(action['TODOS/CLEAR_COMPLETED']())
-})
+> = {
+  completeAllTodos: action['TODOS/COMPLETE_ALL'],
+  clearCompleted: action['TODOS/CLEAR_COMPLETED']
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainSection)
