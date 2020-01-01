@@ -1,4 +1,8 @@
 {
   "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "jsx": "react",
+    "lib": ["esnext", "dom", "dom.iterable", "scripthost"]
+  },
   "include": ["packages/**/__tests__"]
 }
