@@ -21,8 +21,8 @@ const mapDispatchToProps: MapDispatchToProps<
   MainSectionProps,
   Dispatchers
 > = {
-  completeAllTodos: action['TODOS/COMPLETE_ALL'],
-  clearCompleted: action['TODOS/CLEAR_COMPLETED']
+  completeAllTodos: action.TodosCompleteAll,
+  clearCompleted: action.TodosClearCompleted
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainSection)

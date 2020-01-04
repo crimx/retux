@@ -23,9 +23,9 @@ const mapDispatchToProps: MapDispatchToProps<
 > = dispatch =>
   bindActionCreators(
     {
-      editTodo: action['TODOS/EDIT'],
-      deleteTodo: action['TODOS/DELETE'],
-      completeTodo: action['TODOS/COMPLETE']
+      editTodo: action.editTodo,
+      deleteTodo: action.TodosDelete,
+      completeTodo: action.TodosComplete
     },
     dispatch
   )

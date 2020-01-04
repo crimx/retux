@@ -28,7 +28,7 @@ const mapDispatchToProps: MapDispatchToProps<
   PropsWithChildren<FilterLinkProps>
 > = (dispatch, ownProps) => ({
   setFilter: () => {
-    dispatch(action['VISIBILITY_FILTER/SET'](ownProps.filter))
+    dispatch(action.VisibilityFilterSet(ownProps.filter))
   }
 })
 

@@ -1,46 +1,62 @@
 import { action } from './index'
 
 describe('todo actions', () => {
-  it('addTodo should create ADD_TODO action', () => {
-    expect(action['TODOS/ADD']('Use Redux')).toEqual({
-      type: 'TODOS/ADD',
-      payload: 'Use Redux'
+  describe('Generated Actions', () => {
+    it('TodosAdd should create ADD_TODO action', () => {
+      expect(action.TodosAdd('Use Redux')).toEqual({
+        type: 'TodosAdd',
+        payload: 'Use Redux'
+      })
+    })
+
+    it('TodosDelete should create DELETE_TODO action', () => {
+      expect(action.TodosDelete('1')).toEqual({
+        type: 'TodosDelete',
+        payload: '1'
+      })
+    })
+
+    it('TodosEdit should create EDIT_TODO action', () => {
+      expect(
+        action.TodosEdit({ id: '1', text: 'Use Redux everywhere' })
+      ).toEqual({
+        type: 'TodosEdit',
+        payload: {
+          id: '1',
+          text: 'Use Redux everywhere'
+        }
+      })
+    })
+
+    it('TodosComplete should create COMPLETE_TODO action', () => {
+      expect(action.TodosComplete('1')).toEqual({
+        type: 'TodosComplete',
+        payload: '1'
+      })
+    })
+
+    it('TodosCompleteAll should create COMPLETE_ALL action', () => {
+      expect(action.TodosCompleteAll()).toEqual({
+        type: 'TodosCompleteAll'
+      })
+    })
+
+    it('TodosClearCompleted should create CLEAR_COMPLETED action', () => {
+      expect(action.TodosClearCompleted()).toEqual({
+        type: 'TodosClearCompleted'
+      })
     })
   })
 
-  it('deleteTodo should create DELETE_TODO action', () => {
-    expect(action['TODOS/DELETE']('1')).toEqual({
-      type: 'TODOS/DELETE',
-      payload: '1'
-    })
-  })
-
-  it('editTodo should create EDIT_TODO action', () => {
-    expect(action['TODOS/EDIT']('1', 'Use Redux everywhere')).toEqual({
-      type: 'TODOS/EDIT',
-      payload: {
-        id: '1',
-        text: 'Use Redux everywhere'
-      }
-    })
-  })
-
-  it('completeTodo should create COMPLETE_TODO action', () => {
-    expect(action['TODOS/COMPLETE']('1')).toEqual({
-      type: 'TODOS/COMPLETE',
-      payload: '1'
-    })
-  })
-
-  it('completeAll should create COMPLETE_ALL action', () => {
-    expect(action['TODOS/COMPLETE_ALL']()).toEqual({
-      type: 'TODOS/COMPLETE_ALL'
-    })
-  })
-
-  it('clearCompleted should create CLEAR_COMPLETED action', () => {
-    expect(action['TODOS/CLEAR_COMPLETED']()).toEqual({
-      type: 'TODOS/CLEAR_COMPLETED'
+  describe('Custom Actions', () => {
+    it('editTodo should create EDIT_TODO action', () => {
+      expect(action.editTodo('1', 'Use Redux everywhere')).toEqual({
+        type: 'TodosEdit',
+        payload: {
+          id: '1',
+          text: 'Use Redux everywhere'
+        }
+      })
     })
   })
 })

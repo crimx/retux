@@ -1,17 +1,21 @@
-import { createActionCreators, combineUniqueObjects } from 'retux'
+import {
+  createActionCreators,
+  combineUniqueObjects,
+  ActionHandlers
+} from 'retux'
 import { actionHandlers as todoActionHandlers } from '../modules/todos'
 import { actionHandlers as visibilityFilterActionHandlers } from '../modules/visibilityFilter'
 
-// Auto generate Action creators!
-// Strongly typed and also customizable.
-
-export const action = combineUniqueObjects(
-  createActionCreators(todoActionHandlers, {
-    'TODOS/EDIT': (id: string, text: string) =>
+export const action = createActionCreators(
+  // Auto-generated Action creators!
+  // Strongly typed and also customizable.
+  combineUniqueObjects(visibilityFilterActionHandlers, todoActionHandlers),
+  // Custom action creators start with lowercase which are easy to identify
+  {
+    editTodo: (id: string, text: string) =>
       ({
-        type: 'TODOS/EDIT',
+        type: 'TodosEdit',
         payload: { id, text }
       } as const)
-  }),
-  createActionCreators(visibilityFilterActionHandlers)
+  }
 )
