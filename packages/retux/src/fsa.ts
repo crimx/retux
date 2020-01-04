@@ -65,28 +65,24 @@ export type GetActionCatalogFromHandlers<H> = H extends ActionHandlers<
   : never
 
 /**
- * Extract ActionCatalog from list of ActionHandlers
+ * Extract ActionCatalogs from list of ActionHandlers
  *
  * @template H ActionHandlers
  */
-export type GetActionCatalogFromHandlersList<H> = H extends ActionHandlers<
-  infer S,
-  infer C
->[]
-  ? C
-  : never
+export type GetActionCatalogFromHandlersList<
+  HS extends any[],
+  H = HS[number]
+> = H extends ActionHandlers<infer S, infer C> ? C : never
 
 /**
- * Extract State from List of ActionHandlers
+ * Extract States from List of ActionHandlers
  *
  * @template H ActionHandlers
  */
-export type GetStateFromHandlersList<H> = H extends ActionHandlers<
-  infer S,
-  infer C
->[]
-  ? S
-  : never
+export type GetStateFromHandlersList<
+  HS extends any[],
+  H = HS[number]
+> = H extends ActionHandlers<infer S, infer C> ? S : never
 
 /**
  * Generate Action Creators with signature:
