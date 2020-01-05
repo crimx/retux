@@ -27,9 +27,6 @@
     "eject": "react-scripts eject",
     "test": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts test --env=node"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
   "browserslist": [
     ">0.2%",
     "not dead",
