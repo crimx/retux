@@ -73,25 +73,25 @@ export type GetStateFromHandlersList<
  */
 export const createActionCreators = createDefaultActionCreators as <
   AH extends {},
-  C = GetActionCatalogFromHandlers<AH>,
-  AC extends
-    | { [T: string]: (...args: any[]) => Action<C> | Function | Promise<any> }
-    | undefined = undefined
+  AC extends {},
+  C = GetActionCatalogFromHandlers<AH>
 >(
   actionHandlers: AH,
   extraAcionCreators?: AC
-) => {
-  [T in Extract<Exclude<keyof AH, keyof AC>, keyof C>]: (
-    ...args: Extract<'payload', keyof C[T]> extends never
-      ? Extract<'meta', keyof C[T]> extends never
-        ? []
-        : [undefined, C[T][Extract<'meta', keyof C[T]>]]
-      : Extract<'meta', keyof C[T]> extends never
-      ? [C[T][Extract<'payload', keyof C[T]>]]
-      : [
-          C[T][Extract<'payload', keyof C[T]>],
-          C[T][Extract<'meta', keyof C[T]>]
-        ]
-  ) => Action<C, T>
-} &
+) => (C extends never
+  ? AH
+  : {
+      [T in Extract<Exclude<keyof AH, keyof AC>, keyof C>]: (
+        ...args: Extract<'payload', keyof C[T]> extends never
+          ? Extract<'meta', keyof C[T]> extends never
+            ? []
+            : [undefined, C[T][Extract<'meta', keyof C[T]>]]
+          : Extract<'meta', keyof C[T]> extends never
+          ? [C[T][Extract<'payload', keyof C[T]>]]
+          : [
+              C[T][Extract<'payload', keyof C[T]>],
+              C[T][Extract<'meta', keyof C[T]>]
+            ]
+      ) => Action<C, T>
+    }) &
   (AC extends undefined ? {} : AC)

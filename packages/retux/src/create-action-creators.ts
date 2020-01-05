@@ -2,22 +2,20 @@ import { DefaultAction } from './utils'
 
 /**
  * Generate Action Creators with signature:
- * (payload?, meta?, error?) => Action | Function | Promise
+ * (payload?, meta?, error?) => Action
  *
  * @param actionHandlers Retux Action Handlers.
  * @param extraAcionCreators Extra Action Creators.
  *                           Can overwrite generated Action Creators.
  *                           Can return Thunk or Promise actions.
  */
-export function createActionCreators<
-  AH extends {},
-  AC extends {
-    [T: string]: (...args: any[]) => DefaultAction | Function | Promise<any>
-  }
->(actionHandlers: AH, extraAcionCreators?: AC) {
+export function createActionCreators<AH extends {}, AC extends {}>(
+  actionHandlers: AH,
+  extraAcionCreators?: AC
+) {
   const result = {} as {
-    [T: string]: (...args: any[]) => DefaultAction | Function | Promise<any>
-  }
+    [T: string]: (...args: any[]) => DefaultAction
+  } & AC
 
   if (extraAcionCreators) {
     for (const type in extraAcionCreators) {
@@ -35,7 +33,7 @@ export function createActionCreators<
     /* istanbul ignore else */
     if (Object.prototype.hasOwnProperty.call(actionHandlers, type)) {
       if (!Object.prototype.hasOwnProperty.call(result, type)) {
-        result[type] = (...args) => {
+        ;(result[type] as (...args: any[]) => DefaultAction) = (...args) => {
           switch (args.length) {
             case 0:
               return { type }

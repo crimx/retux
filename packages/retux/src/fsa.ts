@@ -95,49 +95,49 @@ export type GetStateFromHandlersList<
  */
 export const createActionCreators = createDefaultActionCreators as <
   AH extends {},
-  C = GetActionCatalogFromHandlers<AH>,
-  AC extends
-    | { [T: string]: (...args: any[]) => Action<C> | Function | Promise<any> }
-    | undefined = undefined
+  AC extends {},
+  C = GetActionCatalogFromHandlers<AH>
 >(
   actionHandlers: AH,
   extraAcionCreators?: AC
-) => {
-  [T in Extract<Exclude<keyof AH, keyof AC>, keyof C>]: (
-    ...args: Extract<'payload', keyof C[T]> extends never
-      ? Extract<'meta', keyof C[T]> extends never
-        ?
-            | []
-            | [undefined, undefined, false]
-            | [ActionError<C, T>['payload'], undefined, true]
-        :
-            | [undefined, C[T][Extract<'meta', keyof C[T]>]]
-            | [undefined, C[T][Extract<'meta', keyof C[T]>], false]
-            | [
-                ActionError<C, T>['payload'],
-                C[T][Extract<'meta', keyof C[T]>],
-                true
-              ]
-      : Extract<'meta', keyof C[T]> extends never
-      ?
-          | [C[T][Extract<'payload', keyof C[T]>]]
-          | [C[T][Extract<'payload', keyof C[T]>], undefined, false]
-          | [ActionError<C, T>['payload'], undefined, true]
-      :
-          | [
-              C[T][Extract<'payload', keyof C[T]>],
-              C[T][Extract<'meta', keyof C[T]>]
-            ]
-          | [
-              C[T][Extract<'payload', keyof C[T]>],
-              C[T][Extract<'meta', keyof C[T]>],
-              false
-            ]
-          | [
-              ActionError<C, T>['payload'],
-              C[T][Extract<'meta', keyof C[T]>],
-              true
-            ]
-  ) => Action<C, T>
-} &
+) => (C extends never
+  ? AH
+  : {
+      [T in Extract<Exclude<keyof AH, keyof AC>, keyof C>]: (
+        ...args: Extract<'payload', keyof C[T]> extends never
+          ? Extract<'meta', keyof C[T]> extends never
+            ?
+                | []
+                | [undefined, undefined, false]
+                | [ActionError<C, T>['payload'], undefined, true]
+            :
+                | [undefined, C[T][Extract<'meta', keyof C[T]>]]
+                | [undefined, C[T][Extract<'meta', keyof C[T]>], false]
+                | [
+                    ActionError<C, T>['payload'],
+                    C[T][Extract<'meta', keyof C[T]>],
+                    true
+                  ]
+          : Extract<'meta', keyof C[T]> extends never
+          ?
+              | [C[T][Extract<'payload', keyof C[T]>]]
+              | [C[T][Extract<'payload', keyof C[T]>], undefined, false]
+              | [ActionError<C, T>['payload'], undefined, true]
+          :
+              | [
+                  C[T][Extract<'payload', keyof C[T]>],
+                  C[T][Extract<'meta', keyof C[T]>]
+                ]
+              | [
+                  C[T][Extract<'payload', keyof C[T]>],
+                  C[T][Extract<'meta', keyof C[T]>],
+                  false
+                ]
+              | [
+                  ActionError<C, T>['payload'],
+                  C[T][Extract<'meta', keyof C[T]>],
+                  true
+                ]
+      ) => Action<C, T>
+    }) &
   (AC extends undefined ? {} : AC)
