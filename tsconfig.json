@@ -4,6 +4,7 @@
     "declaration": true,
     "esModuleInterop": true,
     "importHelpers": true,
+    "jsx": "react",
     "lib": ["esnext", "scripthost"],
     "module": "commonjs",
     "resolveJsonModule": true,

@@ -4,6 +4,9 @@
   "useWorkspaces": true,
   "npmClient": "yarn",
   "command": {
+    "run": {
+      "npmClient": "yarn"
+    },
     "version": {
       "allowBranch": "release"
     }

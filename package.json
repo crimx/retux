@@ -55,6 +55,7 @@
     "shx": "^0.3.2",
     "standard-version": "^7.0.1",
     "ts-jest": "^24.2.0",
-    "typescript": "^3.7.3"
+    "typescript": "^3.7.3",
+    "vuepress": "^1.2.0"
   }
 }

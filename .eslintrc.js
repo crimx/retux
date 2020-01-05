@@ -3,7 +3,11 @@ module.exports = {
     node: true,
     jest: true
   },
-  extends: ['standard', 'plugin:prettier/recommended'],
+  extends: [
+    'standard',
+    'plugin:prettier/recommended',
+    'plugin:react/recommended'
+  ],
   plugins: ['@typescript-eslint'],
   parser: '@typescript-eslint/parser',
   rules: {
@@ -31,6 +35,7 @@ module.exports = {
       }
     ],
     'no-dupe-class-members': 'off',
-    'prefer-promise-reject-errors': 'off'
+    'prefer-promise-reject-errors': 'off',
+    'react/prop-types': 'off'
   }
 }
