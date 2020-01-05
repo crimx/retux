@@ -22,10 +22,10 @@
     "retux": "^0.0.1"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",
+    "build": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts build",
     "eject": "react-scripts eject",
-    "test": "react-scripts test --env=node"
+    "test": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts test --env=node"
   },
   "eslintConfig": {
     "extends": "react-app"
