@@ -4,7 +4,6 @@
     "packages/**/lib": true
   },
   "files.watcherExclude": {
-    "examples/**/build/**": true,
-    "packages/**/lib/**": true
+    "examples/**/build/**": true
   }
 }
