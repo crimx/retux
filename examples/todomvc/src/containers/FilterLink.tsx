@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { MapStateToProps, MapDispatchToProps } from 'retux'
+import { MapStateToProps, MapDispatchToProps } from 'react-retux'
 import { action } from '../retux-store/actions'
 import { Link, LinkProps } from '../components/Link'
 import { StoreState, StoreAction } from '../retux-store'

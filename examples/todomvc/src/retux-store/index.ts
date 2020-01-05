@@ -1,6 +1,5 @@
 import { combineReducers, createStore as createReduxStore } from 'redux'
 import { createReducer, Action, ActionType } from 'retux'
-// import { createReducer } from 'retux/lib/create-reducer'
 import {
   state as todosState,
   actionHandlers as todosHandlers,

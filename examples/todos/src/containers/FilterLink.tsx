@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { Link, LinkProps } from '../components/Link'
 import { StoreState, StoreAction } from '../retux-store'
 import { PropsWithChildren } from 'react'
-import { MapStateToProps, MapDispatchToProps } from 'retux'
+import { MapStateToProps, MapDispatchToProps } from 'react-retux'
 
 export interface FilterLinkProps {
   filter: StoreState['visibilityFilter']

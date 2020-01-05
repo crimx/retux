@@ -17,6 +17,7 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.1.3",
+    "react-retux": "^0.0.1",
     "redux": "^4.0.5",
     "reselect": "^4.0.0",
     "retux": "^0.0.1",

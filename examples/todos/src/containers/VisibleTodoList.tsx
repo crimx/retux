@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { TodoList, TodoListProps } from '../components/TodoList'
 import { StoreAction, StoreState } from '../retux-store'
-import { MapStateToProps, MapDispatchToProps } from 'retux'
+import { MapStateToProps, MapDispatchToProps } from 'react-retux'
 
 type Dispatchers = 'toggleTodo'
 
