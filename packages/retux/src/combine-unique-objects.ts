@@ -16,7 +16,7 @@ const { hasOwnProperty } = Object.prototype
  * Like Object.assign except:
  * - Always returns a new object.
  * - Duplicated keys are not allowed.
- * - Symble-typed properties are ignored.
+ * - Symbol-typed properties are ignored.
  */
 export function combineUniqueObjects<H extends any[]>(...objs: H) {
   // If it is a list of Action Handlers, extract ActionCatalog
