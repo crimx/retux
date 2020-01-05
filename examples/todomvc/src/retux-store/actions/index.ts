@@ -12,10 +12,13 @@ export const action = createActionCreators(
   combineUniqueObjects(visibilityFilterActionHandlers, todoActionHandlers),
   // Custom action creators start with lowercase which are easy to identify
   {
-    editTodo: (id: string, text: string): StoreAction<'TodosEdit'> => ({
-      type: 'TodosEdit',
-      payload: { id, text }
-    })
+    // You don't need to specify the returned type `StoreAction<'TodosEdit'>`
+    // which is inferred by ts.
+    editTodo: (id: string, text: string) =>
+      ({
+        type: 'TodosEdit',
+        payload: { id, text }
+      } as const)
   }
 )
 
