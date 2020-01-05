@@ -1,10 +1,12 @@
-# `example-basic-todo`
+# Retux Todo List Example
 
-This example is based on the Redux [Todo List](https://redux.js.org/basics/example) example.
+This example is based on the Redux [Todo List](https://github.com/reduxjs/redux/blob/master/examples) example.
+
+This project template was built with [Create React App](https://github.com/facebookincubator/create-react-app), which provides a simple way to start React projects with no build configuration needed.
 
 ## Explanation
 
-Read the [core concept of Retux](https://github.com/crimx/retux/blob/master/packages/retux/README.md#core-concept-of-retux) before proceed.
+It is recommended to read the core concept of Retux first for better understanding.
 
 ### Directory Structure
 
@@ -40,12 +42,12 @@ All Retux modules live in `retux-store/modules`. In the Todo List example there 
 
 Since they are independent, in the Redux example they are placed in separate reducers. In Retux we can do the same. There are other patterns for modularization in Retux but let's stick with the original example for now.
 
-Inside each module, export these properties:
+For each module, export these properties:
 
 - `ActionCatalog`: Core of Retux.
 - `actionHandlers` of the module.
 - `state`: Module state.
-  - A way to avoid maintaining a side-by-side state type is to leverage type inferring Use `as` to give properties proper typings. e.g.
+  - A way to avoid maintaining a side-by-side state type is to leverage type inferring. Use `as` to give properties proper typings. e.g.
     ```typescript
     export const state = {
       status: 'success' as 'success' | 'loading' | 'error'
@@ -53,8 +55,6 @@ Inside each module, export these properties:
   
     export type State = typeof state
     ```
-
-As you can see they are all necessary ingredients. No boilerplate ceremony is going on.
 
 In `retux-store/index.ts` we expose these properties:
 
@@ -77,20 +77,24 @@ Containers are glue components between Retux store and normal components.
 
 Retux offers `MapStateToProps` and `MapDispatchToProps` types for usage with `react-redux`.
 
-Take `FilterLink.tsx` as example:
+Take `FilterLink.tsx` for example:
 
 ```typescript
 import { connect } from 'react-redux'
 import { Link, LinkProps } from '../components/Link'
 import { StoreState, StoreAction } from '../retux-store'
 import { PropsWithChildren } from 'react'
-import { MapStateToProps, MapDispatchToProps } from 'retux'
+import {
+  ExtractDispatchers,
+  MapStateToProps,
+  MapDispatchToProps
+} from 'react-retux'
 
 export interface FilterLinkProps {
   filter: StoreState['visibilityFilter']
 }
 
-type Dispatchers = 'onClick'
+type Dispatchers = ExtractDispatchers<LinkProps, 'onClick'>
 
 const mapStateToProps: MapStateToProps<
   StoreState,
@@ -114,31 +118,36 @@ const mapDispatchToProps: MapDispatchToProps<
 export const FilterLink = connect(mapStateToProps, mapDispatchToProps)(Link)
 ```
 
-Here are some common questions:
+Common questions:
 
 > Why define `Dispatchers` in the container? Why not let the `Link` component export both Dispatchers and other Props types?
 
-Because as we metioned normal components are not aware of the Redux store. It is the container's job to decide which props property is dispatchable.
+Normal components should not be aware of the Redux store. It is the container's job to decide which props property is dispatchable.
+
+With `Dispatchers` the result of `mapStateToProps` and `mapDispatchToProps` can be further restricted. We have not only a safer type-checking but also a more pleasant coding experience with intellisense.
 
 > I don't see any action creator?
 
-Yes! With TypeScript you can get rid of the boilerplate action creators(who do nothing but simply return an action).
+Yes! This example shows the ability to reduce boilerplate action creators on small projects with Retux.
 
-Enjoy the TypeScript intellisense. :)
+TypeScript compiler and intellisense are your best buddies.
 
 ![action-intellisense](./assets/action-intellisense.gif)
 
-> Why if mistyped the action type?
+If you are more comfortable with action creators, Retux also offers a powerful way to generate boilerplate action creators for you. See docs and the todomvc example.
+
+> Why if I mistype the action type?
 
 All actions in Retux are strongly typed. TypeScript compiler will happily let you know.
 
 ![action-mistyped](./assets/action-mistyped.png)
 
-
 > What about changes in the future?
 
 You can either glue the changes in container(where the action is triggered) or in action handler(where the action is handled).
 
+But if you decide to use libraries which mutate action types(like Redux-Thunk and Redux-Promise), it's better to go for action creators.
+
 > Should I get rid of action creators entirly?
 
-No! Of cource you should use action creators **WHEN** abstraction is needed.
+No! You can always use action creators when abstraction is needed. See other Retux examples.

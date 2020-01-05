@@ -8,8 +8,11 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-Minimalist type-safe(strongly-typed) high-performance Redux architecture.
+Minimalist type-safe(strongly-typed) scalable declarative Redux architecture.
+
+Leverage the latest advanced TypeScript features under the hood while exposing simple, clean and declarative API.
 
 ## Usage
 
 - Core: [retux](https://github.com/crimx/retux/tree/master/packages/retux)
+- React-Redux enhancement: [react-retux](https://github.com/crimx/retux/tree/master/packages/react-retux)

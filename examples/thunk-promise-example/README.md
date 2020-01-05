@@ -2,16 +2,13 @@
 
 This example shows the ability of mixing other action types in Retux while still maintaining strongly-typed.
 
-## Installation
-
-- yarn: `yarn add react-retux`
-- npm: `npm add react-retux`
-
 ## Usage
 
 This project template was built with [Create React App](https://github.com/facebookincubator/create-react-app), which provides a simple way to start React projects with no build configuration needed.
 
 ## Highlights
+
+It is recommended to read the core concept of Retux first for better understanding.
 
 ### Redux-Thunk Setup
 
