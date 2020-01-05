@@ -1,11 +1,18 @@
 import { connect } from 'react-redux'
 import { MainSection, MainSectionProps } from '../components/MainSection'
 import { getCompletedTodoCount } from '../selectors'
-import { MapStateToProps, MapDispatchToProps } from 'react-retux'
+import {
+  ExtractDispatchers,
+  MapStateToProps,
+  MapDispatchToProps
+} from 'react-retux'
 import { StoreState, StoreAction } from '../retux-store'
 import { action } from '../retux-store/actions'
 
-type Dispatchers = 'completeAllTodos' | 'clearCompleted'
+type Dispatchers = ExtractDispatchers<
+  MainSectionProps,
+  'completeAllTodos' | 'clearCompleted'
+>
 
 const mapStateToProps: MapStateToProps<
   StoreState,

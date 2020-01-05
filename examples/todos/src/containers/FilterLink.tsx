@@ -2,13 +2,17 @@ import { connect } from 'react-redux'
 import { Link, LinkProps } from '../components/Link'
 import { StoreState, StoreAction } from '../retux-store'
 import { PropsWithChildren } from 'react'
-import { MapStateToProps, MapDispatchToProps } from 'react-retux'
+import {
+  ExtractDispatchers,
+  MapStateToProps,
+  MapDispatchToProps
+} from 'react-retux'
 
 export interface FilterLinkProps {
   filter: StoreState['visibilityFilter']
 }
 
-type Dispatchers = 'onClick'
+type Dispatchers = ExtractDispatchers<LinkProps, 'onClick'>
 
 const mapStateToProps: MapStateToProps<
   StoreState,

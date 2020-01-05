@@ -1,9 +1,13 @@
 import { connect } from 'react-redux'
 import { TodoList, TodoListProps } from '../components/TodoList'
 import { StoreAction, StoreState } from '../retux-store'
-import { MapStateToProps, MapDispatchToProps } from 'react-retux'
+import {
+  ExtractDispatchers,
+  MapStateToProps,
+  MapDispatchToProps
+} from 'react-retux'
 
-type Dispatchers = 'toggleTodo'
+type Dispatchers = ExtractDispatchers<TodoListProps, 'toggleTodo'>
 
 const mapStateToProps: MapStateToProps<
   StoreState,

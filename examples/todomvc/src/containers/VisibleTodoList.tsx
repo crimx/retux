@@ -2,11 +2,18 @@ import { connect } from 'react-redux'
 import { action } from '../retux-store/actions'
 import { TodoList, TodoListProp } from '../components/TodoList'
 import { getVisibleTodos } from '../selectors'
-import { MapDispatchToProps, MapStateToProps } from 'react-retux'
+import {
+  ExtractDispatchers,
+  MapDispatchToProps,
+  MapStateToProps
+} from 'react-retux'
 import { StoreAction, StoreState } from '../retux-store'
 import { bindActionCreators } from 'redux'
 
-type Dispatchers = 'editTodo' | 'deleteTodo' | 'completeTodo'
+type Dispatchers = ExtractDispatchers<
+  TodoListProp,
+  'editTodo' | 'deleteTodo' | 'completeTodo'
+>
 
 const mapStateToProps: MapStateToProps<
   StoreState,

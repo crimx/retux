@@ -1,12 +1,16 @@
 import { connect } from 'react-redux'
-import { MapStateToProps, MapDispatchToProps } from 'react-retux'
+import {
+  ExtractDispatchers,
+  MapStateToProps,
+  MapDispatchToProps
+} from 'react-retux'
 import { action } from '../retux-store/actions'
 import { Link, LinkProps } from '../components/Link'
 import { StoreState, StoreAction } from '../retux-store'
 import { VisibilityFilter } from '../utilities/visibility'
 import { PropsWithChildren } from 'react'
 
-type Dispatchers = 'setFilter'
+type Dispatchers = ExtractDispatchers<LinkProps, 'setFilter'>
 
 export interface FilterLinkProps {
   filter: VisibilityFilter
