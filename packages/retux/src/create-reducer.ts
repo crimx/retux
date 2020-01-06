@@ -1,4 +1,4 @@
-import { DefaultAction, DefaultActionHandlers } from './utils'
+import { DefaultAction, DefaultActionHandlers, hasOwnProperty } from './utils'
 import { GetActionCatalogFromHandlers, Action } from './basic'
 import {
   GetActionCatalogFromHandlers as GetActionCatalogFromFSAHandlers,
@@ -27,7 +27,7 @@ export function createReducer<
     : A
 ) => S {
   return function reducer(state = initialState, action) {
-    if (Object.prototype.hasOwnProperty.call(handlers, action.type)) {
+    if (hasOwnProperty.call(handlers, action.type)) {
       return (handlers as DefaultActionHandlers<S>)[action.type](state, action)
     } else {
       return state

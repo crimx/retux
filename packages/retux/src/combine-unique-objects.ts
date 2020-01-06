@@ -8,9 +8,7 @@ import {
   GetStateFromHandlersList as GetStateFromFSAHandlersList,
   GetActionCatalogFromHandlersList as GetActionCatalogFromFSAHandlersList
 } from './fsa'
-import { IntersectionFromUnion } from './utils'
-
-const { hasOwnProperty } = Object.prototype
+import { IntersectionFromUnion, hasOwnProperty } from './utils'
 
 /**
  * Like Object.assign except:

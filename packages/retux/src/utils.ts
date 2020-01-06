@@ -1,3 +1,5 @@
+export const { hasOwnProperty } = Object.prototype
+
 export type IntersectionFromUnion<U> = (U extends any
 ? (arg: U) => void
 : never) extends (arg: infer T) => void
