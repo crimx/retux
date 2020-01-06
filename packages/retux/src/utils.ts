@@ -18,6 +18,10 @@ export interface DefaultAction {
   type: string
 }
 
+export type DefaultActionCreator = (...args: any) => DefaultAction
+
+export type CreateDefaultActionCreator = (type: string) => DefaultActionCreator
+
 /**
  * Basic actions configuration.
  * Index as action type.

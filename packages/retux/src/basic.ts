@@ -1,8 +1,10 @@
-import { ActionType, DefaultActionHandler, DefaultActionCatalog } from './utils'
 import {
-  createActionCreators as createDefaultActionCreators,
-  ActionCreator as DefaultActionCreator
-} from './create-action-creators'
+  ActionType,
+  DefaultActionHandler,
+  DefaultActionCatalog,
+  DefaultActionCreator
+} from './utils'
+import { createActionCreators as createDefaultActionCreators } from './create-action-creators'
 
 /**
  * Get basic action types. ({ type, payload?, meta? })

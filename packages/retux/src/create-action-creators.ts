@@ -1,8 +1,4 @@
-import { DefaultAction, hasOwnProperty } from './utils'
-
-export type ActionCreator = (...args: any) => DefaultAction
-
-export type CreateActionCreator = (type: string) => ActionCreator
+import { CreateDefaultActionCreator, hasOwnProperty } from './utils'
 
 /**
  * Generate Action Creators.
@@ -13,7 +9,7 @@ export type CreateActionCreator = (type: string) => ActionCreator
  *                           Can overwrite generated Action Creators.
  */
 export function createActionCreators<
-  TCreator extends CreateActionCreator,
+  TCreator extends CreateDefaultActionCreator,
   THandlers extends {},
   TExtra extends { [key: string]: any }
 >(
@@ -25,7 +21,7 @@ export function createActionCreators<
 } &
   TExtra
 export function createActionCreators(
-  createActionCreator: CreateActionCreator,
+  createActionCreator: CreateDefaultActionCreator,
   actionHandlers: {},
   extraAcionCreators?: { [key: string]: any }
 ) {
