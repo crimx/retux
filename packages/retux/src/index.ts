@@ -4,7 +4,8 @@ export {
   ActionHandlers,
   ActionCreator,
   createActionCreator,
-  createActionCreators
+  createActionCreators,
+  defineActionCreators
 } from './basic'
 export {
   Action as FSA,
@@ -13,7 +14,8 @@ export {
   ActionHandlers as FSAHandlers,
   ActionCreator as FSACreator,
   createActionCreator as createFSACreator,
-  createActionCreators as createFSACreators
+  createActionCreators as createFSACreators,
+  defineActionCreators as defineFSACreators
 } from './fsa'
 export { combineUniqueObjects } from './combine-unique-objects'
 export { createReducer } from './create-reducer'

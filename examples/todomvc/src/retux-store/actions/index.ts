@@ -1,17 +1,11 @@
-import { createActionCreators, combineUniqueObjects } from 'retux'
-import { actionHandlers as todoActionHandlers } from '../modules/todos'
-import { actionHandlers as visibilityFilterActionHandlers } from '../modules/visibilityFilter'
-import { StoreAction } from '../index'
+import { defineActionCreators } from 'retux'
+import { StoreAction, StoreActionCatalog } from '../index'
 
-export const action = createActionCreators(
-  // Auto-generated Action creators!
-  // Strongly typed and also customizable.
-  // Also if you don't use Redux's combineReducers you can move this code to
-  // the index and create a single combined state and reducer for all modules
-  // then export the combined action handlers back here.
-  combineUniqueObjects(visibilityFilterActionHandlers, todoActionHandlers)
-)
+// This proxies all the action creators!
+// For older browser Retux also offers `createActionCreators`.
+export const action = defineActionCreators<StoreActionCatalog>()
 
+// Custom action creators
 export const editTodo = (
   id: string,
   text: string

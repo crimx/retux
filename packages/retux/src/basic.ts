@@ -114,6 +114,32 @@ export function createActionCreator(type: string) {
 }
 
 /**
+ * Using Proxy for lazy creating.
+ *
+ * Generate Action Creators with signature:
+ * (payload?, meta?) => Action
+ *
+ * @template TCatalog ActionCatalog
+ */
+export function defineActionCreators<TCatalog = DefaultActionCatalog>(): {
+  [key in keyof TCatalog]: ActionCreator<TCatalog, key>
+} {
+  return new Proxy(
+    {} as { [key in keyof TCatalog]: ActionCreator<TCatalog, key> },
+    {
+      get(obj, type: keyof TCatalog) {
+        if (!hasOwnProperty.call(obj, type)) {
+          obj[type] = createActionCreator(type)
+        }
+        return obj[type]
+      }
+    }
+  )
+}
+
+/**
+ * For environment that does not support Proxy.
+ *
  * Generate Action Creators with signature:
  * (payload?, meta?) => Action
  *
