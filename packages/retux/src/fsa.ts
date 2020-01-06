@@ -1,5 +1,8 @@
-import { ActionType, DefaultActionHandler } from './utils'
-import { createActionCreators as createDefaultActionCreators } from './create-action-creators'
+import { ActionType, DefaultActionHandler, DefaultActionCatalog } from './utils'
+import {
+  createActionCreators as createDefaultActionCreators,
+  ActionCreator as DefaultActionCreator
+} from './create-action-creators'
 
 /**
  * @template C ActionCatalog.
@@ -85,6 +88,121 @@ export type GetStateFromHandlersList<
 > = H extends ActionHandlers<infer S, infer C> ? S : never
 
 /**
+ * Default type of the generated Action Creator
+ * ```
+ * (payload?, error?, meta?) => Action
+ * ```
+ * (depending on each Action)
+ *
+ */
+export type ActionCreator<TCatalog, TType extends keyof TCatalog> = (
+  ...args: Extract<'payload', keyof TCatalog[TType]> extends never
+    ? Extract<'meta', keyof TCatalog[TType]> extends never
+      ?
+          | []
+          | [undefined, false]
+          | [ActionError<TCatalog, TType>['payload'], true]
+      :
+          | [
+              undefined,
+              false,
+              TCatalog[TType][Extract<'meta', keyof TCatalog[TType]>]
+            ]
+          | [
+              ActionError<TCatalog, TType>['payload'],
+              true,
+              TCatalog[TType][Extract<'meta', keyof TCatalog[TType]>]
+            ]
+    : Extract<'meta', keyof TCatalog[TType]> extends never
+    ?
+        | [TCatalog[TType][Extract<'payload', keyof TCatalog[TType]>]]
+        | [TCatalog[TType][Extract<'payload', keyof TCatalog[TType]>], false]
+        | [ActionError<TCatalog, TType>['payload'], true]
+    :
+        | [
+            TCatalog[TType][Extract<'payload', keyof TCatalog[TType]>],
+            false,
+            TCatalog[TType][Extract<'meta', keyof TCatalog[TType]>]
+          ]
+        | [
+            ActionError<TCatalog, TType>['payload'],
+            true,
+            TCatalog[TType][Extract<'meta', keyof TCatalog[TType]>]
+          ]
+) => Action<TCatalog, TType>
+
+/**
+ * Generate single Action Creator with signature:
+ * (depending on each Action)
+ * ```
+ * (payload?, error?, meta?) => Action
+ * ```
+ *
+ * @template TCatalog ActionCatalog
+ * @template TType Action Type
+ *
+ * @param type action type
+ */
+export function createActionCreator<
+  TCatalog = DefaultActionCatalog,
+  TType extends keyof TCatalog = keyof TCatalog
+>(type: TType): ActionCreator<TCatalog, TType>
+export function createActionCreator<
+  TCatalog = DefaultActionCatalog,
+  TType extends keyof TCatalog = keyof TCatalog
+>(type: TType) {
+  return (...args: any): unknown => {
+    switch (args.length) {
+      case 0:
+        return { type }
+      case 1:
+        return { type, payload: args[0] }
+      case 2:
+        return { type, payload: args[0], error: args[1] }
+      default:
+        return { type, payload: args[0], error: args[1], meta: args[2] }
+    }
+  }
+}
+
+/**
+ * Generate Action Creators with signature:
+ * (payload?, error?, meta?) => Action
+ *
+ * @param actionHandlers Retux Action Handlers.
+ * @param extraAcionCreators Extra Action Creators.
+ *                           Can overwrite generated Action Creators.
+ */
+export function createActionCreators<
+  THandlers extends {},
+  TExtra extends {},
+  TCatalog = GetActionCatalogFromHandlers<THandlers>
+>(
+  actionHandlers: THandlers,
+  extraAcionCreators?: TExtra
+): (TCatalog extends never
+  ? {
+      [key in Exclude<keyof THandlers, keyof TExtra>]: DefaultActionCreator
+    }
+  : {
+      [key in Extract<
+        Exclude<keyof THandlers, keyof TExtra>,
+        keyof TCatalog
+      >]: ActionCreator<TCatalog, key>
+    }) &
+  (TExtra extends undefined ? {} : TExtra)
+export function createActionCreators<THandlers extends {}, TExtra extends {}>(
+  actionHandlers: THandlers,
+  extraAcionCreators?: TExtra
+) {
+  return createDefaultActionCreators(
+    createActionCreator,
+    actionHandlers,
+    extraAcionCreators
+  )
+}
+
+/**
  * Generate Action Creators with signature:
  * (payload?, meta?, error?) => Action | Function | Promise
  *
@@ -93,7 +211,7 @@ export type GetStateFromHandlersList<
  *                           Can overwrite generated Action Creators.
  *                           Can return Thunk or Promise actions.
  */
-export const createActionCreators = createDefaultActionCreators as <
+export const createActionCreatorsx = createDefaultActionCreators as <
   AH extends {},
   AC extends {},
   C = GetActionCatalogFromHandlers<AH>

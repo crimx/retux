@@ -2,6 +2,8 @@ export {
   Action,
   ActionHandler,
   ActionHandlers,
+  ActionCreator,
+  createActionCreator,
   createActionCreators
 } from './basic'
 export {
@@ -9,6 +11,8 @@ export {
   ActionError as FSAError,
   ActionHandler as FSAHandler,
   ActionHandlers as FSAHandlers,
+  ActionCreator as FSACreator,
+  createActionCreator as createFSACreator,
   createActionCreators as createFSACreators
 } from './fsa'
 export { combineUniqueObjects } from './combine-unique-objects'
