@@ -1,6 +1,6 @@
 {
   "name": "react-retux",
-  "description": "React Redux integration for Retux",
+  "description": "React-Redux Type enhancement suite for Retux architecture.",
   "homepage": "https://github.com/crimx/retux/tree/master/packages/react-retux",
   "keywords": [
     "react",
