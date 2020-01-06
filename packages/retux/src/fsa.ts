@@ -2,9 +2,9 @@ import {
   ActionType,
   DefaultActionHandler,
   DefaultActionCatalog,
-  DefaultActionCreator
+  DefaultActionCreator,
+  hasOwnProperty
 } from './utils'
-import { createActionCreators as createDefaultActionCreators } from './create-action-creators'
 
 /**
  * @template C ActionCatalog.
@@ -172,92 +172,29 @@ export function createActionCreator<
  * (payload?, error?, meta?) => Action
  *
  * @param actionHandlers Retux Action Handlers.
- * @param extraAcionCreators Extra Action Creators.
- *                           Can overwrite generated Action Creators.
  */
 export function createActionCreators<
   THandlers extends {},
-  TExtra extends {},
   TCatalog = GetActionCatalogFromHandlers<THandlers>
 >(
-  actionHandlers: THandlers,
-  extraAcionCreators?: TExtra
-): (TCatalog extends never
+  actionHandlers: THandlers
+): THandlers extends never
   ? {
-      [key in Exclude<keyof THandlers, keyof TExtra>]: DefaultActionCreator
+      [key in keyof THandlers]: DefaultActionCreator
     }
   : {
-      [key in Extract<
-        Exclude<keyof THandlers, keyof TExtra>,
-        keyof TCatalog
-      >]: ActionCreator<TCatalog, key>
-    }) &
-  (TExtra extends undefined ? {} : TExtra)
-export function createActionCreators<THandlers extends {}, TExtra extends {}>(
-  actionHandlers: THandlers,
-  extraAcionCreators?: TExtra
-) {
-  return createDefaultActionCreators(
-    createActionCreator,
-    actionHandlers,
-    extraAcionCreators
-  )
-}
+      [key in keyof THandlers]: key extends keyof TCatalog
+        ? ActionCreator<TCatalog, key>
+        : DefaultActionCreator
+    }
+export function createActionCreators(actionHandlers: {}) {
+  const result: { [key: string]: DefaultActionCreator } = {}
 
-/**
- * Generate Action Creators with signature:
- * (payload?, meta?, error?) => Action | Function | Promise
- *
- * @param actionHandlers Retux Action Handlers.
- * @param extraAcionCreators Extra Action Creators.
- *                           Can overwrite generated Action Creators.
- *                           Can return Thunk or Promise actions.
- */
-export const createActionCreatorsx = createDefaultActionCreators as <
-  AH extends {},
-  AC extends {},
-  C = GetActionCatalogFromHandlers<AH>
->(
-  actionHandlers: AH,
-  extraAcionCreators?: AC
-) => (C extends never
-  ? AH
-  : {
-      [T in Extract<Exclude<keyof AH, keyof AC>, keyof C>]: (
-        ...args: Extract<'payload', keyof C[T]> extends never
-          ? Extract<'meta', keyof C[T]> extends never
-            ?
-                | []
-                | [undefined, undefined, false]
-                | [ActionError<C, T>['payload'], undefined, true]
-            :
-                | [undefined, C[T][Extract<'meta', keyof C[T]>]]
-                | [undefined, C[T][Extract<'meta', keyof C[T]>], false]
-                | [
-                    ActionError<C, T>['payload'],
-                    C[T][Extract<'meta', keyof C[T]>],
-                    true
-                  ]
-          : Extract<'meta', keyof C[T]> extends never
-          ?
-              | [C[T][Extract<'payload', keyof C[T]>]]
-              | [C[T][Extract<'payload', keyof C[T]>], undefined, false]
-              | [ActionError<C, T>['payload'], undefined, true]
-          :
-              | [
-                  C[T][Extract<'payload', keyof C[T]>],
-                  C[T][Extract<'meta', keyof C[T]>]
-                ]
-              | [
-                  C[T][Extract<'payload', keyof C[T]>],
-                  C[T][Extract<'meta', keyof C[T]>],
-                  false
-                ]
-              | [
-                  ActionError<C, T>['payload'],
-                  C[T][Extract<'meta', keyof C[T]>],
-                  true
-                ]
-      ) => Action<C, T>
-    }) &
-  (AC extends undefined ? {} : AC)
+  for (const type in actionHandlers) {
+    if (hasOwnProperty.call(actionHandlers, type)) {
+      result[type] = createActionCreator(type)
+    }
+  }
+
+  return result
+}

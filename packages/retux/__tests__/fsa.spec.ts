@@ -119,39 +119,5 @@ describe('fsa', () => {
         meta: 122
       })
     })
-
-    it('should create actions creators with extraActionCreators', () => {
-      type ActionCatalog = CreateActionCatalog<{
-        ACTION1: {}
-        ACTION2: {
-          payload: number
-        }
-        ACTION3: {
-          payload: boolean
-          meta: boolean
-        }
-      }>
-
-      const actionHandlers: ActionHandlers<{}, ActionCatalog> = {
-        ACTION1: state => state,
-        ACTION2: state => state,
-        ACTION3: state => state
-      }
-
-      const action = createActionCreators(actionHandlers, {
-        ACTION3: () =>
-          ({ type: 'ACTION3', payload: true, meta: true } as const),
-        ACTION4: () => ({ type: 'ACTION2', payload: 12 } as const)
-      })
-
-      expect(action.ACTION1()).toEqual({ type: 'ACTION1' })
-      expect(action.ACTION2(40)).toEqual({ type: 'ACTION2', payload: 40 })
-      expect(action.ACTION3()).toEqual({
-        type: 'ACTION3',
-        payload: true,
-        meta: true
-      })
-      expect(action.ACTION4()).toEqual({ type: 'ACTION2', payload: 12 })
-    })
   })
 })

@@ -9,17 +9,9 @@ export const action = createActionCreators(
   // Also if you don't use Redux's combineReducers you can move this code to
   // the index and create a single combined state and reducer for all modules
   // then export the combined action handlers back here.
-  combineUniqueObjects(visibilityFilterActionHandlers, todoActionHandlers),
-  // Custom action creators start with lowercase which are easy to identify
-  {
-    editTodo: (id: string, text: string): StoreAction<'TodosEdit'> => ({
-      type: 'TodosEdit',
-      payload: { id, text }
-    })
-  }
+  combineUniqueObjects(visibilityFilterActionHandlers, todoActionHandlers)
 )
 
-// You can also write in the regular format
 export const editTodo = (
   id: string,
   text: string

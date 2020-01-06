@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { action } from '../retux-store/actions'
+import { action, editTodo } from '../retux-store/actions'
 import { TodoList, TodoListProp } from '../components/TodoList'
 import { getVisibleTodos } from '../selectors'
 import {
@@ -30,7 +30,7 @@ const mapDispatchToProps: MapDispatchToProps<
 > = dispatch =>
   bindActionCreators(
     {
-      editTodo: action.editTodo,
+      editTodo: editTodo,
       deleteTodo: action.TodosDelete,
       completeTodo: action.TodosComplete
     },

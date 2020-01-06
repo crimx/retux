@@ -2,9 +2,9 @@ import {
   ActionType,
   DefaultActionHandler,
   DefaultActionCatalog,
-  DefaultActionCreator
+  DefaultActionCreator,
+  hasOwnProperty
 } from './utils'
-import { createActionCreators as createDefaultActionCreators } from './create-action-creators'
 
 /**
  * Get basic action types. ({ type, payload?, meta? })
@@ -118,34 +118,29 @@ export function createActionCreator(type: string) {
  * (payload?, meta?) => Action
  *
  * @param actionHandlers Retux Action Handlers.
- * @param extraAcionCreators Extra Action Creators.
- *                           Can overwrite generated Action Creators.
  */
 export function createActionCreators<
   THandlers extends {},
-  TExtra extends {},
   TCatalog = GetActionCatalogFromHandlers<THandlers>
 >(
-  actionHandlers: THandlers,
-  extraAcionCreators?: TExtra
-): (TCatalog extends never
+  actionHandlers: THandlers
+): THandlers extends never
   ? {
-      [key in Exclude<keyof THandlers, keyof TExtra>]: DefaultActionCreator
+      [key in keyof THandlers]: DefaultActionCreator
     }
   : {
-      [key in Extract<
-        Exclude<keyof THandlers, keyof TExtra>,
-        keyof TCatalog
-      >]: ActionCreator<TCatalog, key>
-    }) &
-  (TExtra extends undefined ? {} : TExtra)
-export function createActionCreators<THandlers extends {}, TExtra extends {}>(
-  actionHandlers: THandlers,
-  extraAcionCreators?: TExtra
-) {
-  return createDefaultActionCreators(
-    createActionCreator,
-    actionHandlers,
-    extraAcionCreators
-  )
+      [key in keyof THandlers]: key extends keyof TCatalog
+        ? ActionCreator<TCatalog, key>
+        : DefaultActionCreator
+    }
+export function createActionCreators(actionHandlers: {}) {
+  const result: { [key: string]: DefaultActionCreator } = {}
+
+  for (const type in actionHandlers) {
+    if (hasOwnProperty.call(actionHandlers, type)) {
+      result[type] = createActionCreator(type)
+    }
+  }
+
+  return result
 }

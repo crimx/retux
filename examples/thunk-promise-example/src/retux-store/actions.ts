@@ -6,21 +6,8 @@ import {
   ThunkActionWithPromise
 } from './index'
 
-export const action = createActionCreators(storeActionHandlers, {
-  // We can put the thunk/promise action creators here
-  incrementDelay: (step: number, delay: number): ThunkAction => dispatch => {
-    setTimeout(() => {
-      dispatch({ type: 'INCREMENT', payload: step })
-    }, delay)
-  },
-  decrementDelay: (step: number, delay: number): ThunkAction => dispatch => {
-    setTimeout(() => {
-      dispatch({ type: 'DECREMENT', payload: step })
-    }, delay)
-  }
-})
+export const action = createActionCreators(storeActionHandlers)
 
-// Or the conventional style
 export const incrementDelay = (
   step: number,
   delay: number
