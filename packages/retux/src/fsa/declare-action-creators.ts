@@ -4,7 +4,7 @@ import { declareDefaultActionCreators } from '../default-action-creators/declare
 import { MixedActionCreators } from '../utils'
 
 /**
- * Lazy generate FSA Creators with signature:
+ * Lazy generate Flux Standard Action Creators with signature:
  * `(payload?, meta?) => Action`
  *
  * Action Creators are created on the first call

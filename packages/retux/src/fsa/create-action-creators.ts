@@ -4,7 +4,7 @@ import { createDefaultActionCreators } from '../default-action-creators/create'
 import { DefaultActionCreator, MixedActionCreators } from '../utils'
 
 /**
- * Generate FSA Creators with signature:
+ * Generate Flux Standard Action Creators with signature:
  * `(payload?, meta?) => Action`
  *
  * Example

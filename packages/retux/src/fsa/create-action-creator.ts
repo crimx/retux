@@ -2,7 +2,7 @@ import { DefaultActionCatalog } from '../utils'
 import { ActionCreator } from './types'
 
 /**
- * Generate single FSA Creator with signature:
+ * Generate single Flux Standard Action Creator with signature:
  * (depending on each Action)
  * ```
  * (payload?, error?, meta?) => Action
