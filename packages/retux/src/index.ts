@@ -5,7 +5,8 @@ export {
   ActionCreator,
   createActionCreator,
   createActionCreators,
-  defineActionCreators
+  declareActionCreators,
+  proxyActionCreators
 } from './basic'
 export {
   Action as FSA,
