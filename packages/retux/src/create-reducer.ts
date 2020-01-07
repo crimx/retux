@@ -1,9 +1,9 @@
 import { DefaultAction, DefaultActionHandlers, hasOwnProperty } from './utils'
-import { GetActionCatalogFromHandlers, Action } from './basic'
+import { GetActionCatalogFromHandlers, Action } from './basic/types'
 import {
   GetActionCatalogFromHandlers as GetActionCatalogFromFSAHandlers,
   Action as FSA
-} from './fsa'
+} from './fsa/types'
 
 /**
  * @template S State

@@ -2,12 +2,12 @@ import {
   ActionHandlers,
   GetStateFromHandlersList,
   GetActionCatalogFromHandlersList
-} from './basic'
+} from './basic/types'
 import {
   ActionHandlers as FSAHandlers,
   GetStateFromHandlersList as GetStateFromFSAHandlersList,
   GetActionCatalogFromHandlersList as GetActionCatalogFromFSAHandlersList
-} from './fsa'
+} from './fsa/types'
 import { IntersectionFromUnion, hasOwnProperty } from './utils'
 
 /**
