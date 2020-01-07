@@ -1,4 +1,4 @@
-import { action } from './index'
+import { action, action2 } from './index'
 
 describe('todo actions', () => {
   describe('Generated Actions', () => {
@@ -50,7 +50,7 @@ describe('todo actions', () => {
 
   describe('Custom Actions', () => {
     it('editTodo should create EDIT_TODO action', () => {
-      expect(action.editTodo('1', 'Use Redux everywhere')).toEqual({
+      expect(action2.TodosEdit('1', 'Use Redux everywhere')).toEqual({
         type: 'TodosEdit',
         payload: {
           id: '1',

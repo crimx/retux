@@ -11,7 +11,7 @@ export const action = proxyActionCreators<StoreActionCatalog>()
 const rewiredActionCreators = {
   // Also useful if you want to replace an Action Creator
   // with thunk or promise later on
-  EditTodo: (id: string, text: string): StoreAction<'TodosEdit'> => ({
+  TodosEdit: (id: string, text: string): StoreAction<'TodosEdit'> => ({
     type: 'TodosEdit',
     payload: { id, text }
   })
