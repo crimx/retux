@@ -19,8 +19,16 @@ export interface DefaultAction {
 }
 
 export type DefaultActionCreator = (...args: any) => DefaultAction
-
+export type DefaultActionCreators = {
+  readonly [type: string]: DefaultActionCreator
+}
 export type CreateDefaultActionCreator = (type: string) => DefaultActionCreator
+
+export type MixedActionCreator = (...args: any) => any
+export type MixedActionCreators = {
+  readonly [type: string]: MixedActionCreator
+}
+export type CreateMixedActionCreator = (type: string) => MixedActionCreator
 
 /**
  * Basic actions configuration.

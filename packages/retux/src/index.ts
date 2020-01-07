@@ -15,7 +15,8 @@ export {
   ActionCreator as FSACreator,
   createActionCreator as createFSACreator,
   createActionCreators as createFSACreators,
-  defineActionCreators as defineFSACreators
+  declareActionCreators as declareFSACreators,
+  proxyActionCreators as proxyFSACreators
 } from './fsa'
 export { combineUniqueObjects } from './combine-unique-objects'
 export { createReducer } from './create-reducer'
