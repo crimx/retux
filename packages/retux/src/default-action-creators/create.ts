@@ -26,6 +26,7 @@ export function createDefaultActionCreators<
 
   if (extraActionCreators) {
     for (const type in extraActionCreators) {
+      /* istanbul ignore else */
       if (hasOwnProperty.call(extraActionCreators, type)) {
         result[type] = extraActionCreators[type]
       }
@@ -33,8 +34,9 @@ export function createDefaultActionCreators<
   }
 
   for (const type in actionHandlers) {
+    /* istanbul ignore else */
     if (hasOwnProperty.call(actionHandlers, type)) {
-      if (extraActionCreators && !hasOwnProperty.call(result, type)) {
+      if (!extraActionCreators || !hasOwnProperty.call(result, type)) {
         result[type] = createActionCreator(type)
       }
     }
