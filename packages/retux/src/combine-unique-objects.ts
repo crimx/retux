@@ -11,30 +11,39 @@ import {
 import { IntersectionFromUnion, hasOwnProperty } from './utils'
 
 /**
+ * If it is a list of Action Handlers, extract ActionCatalog.
+ * so that the resulted object is not losing index signature.
+ *
+ * @template TObject Union of Object
+ */
+type WrapResultInHandlers<TObject> = GetActionCatalogFromHandlersList<
+  TObject
+> extends never
+  ? GetActionCatalogFromFSAHandlersList<TObject> extends never
+    ? IntersectionFromUnion<TObject>
+    : GetStateFromFSAHandlersList<TObject> extends never
+    ? IntersectionFromUnion<TObject>
+    : FSAHandlers<
+        GetStateFromFSAHandlersList<TObject>,
+        IntersectionFromUnion<GetActionCatalogFromFSAHandlersList<TObject>>
+      >
+  : GetStateFromHandlersList<TObject> extends never
+  ? IntersectionFromUnion<TObject>
+  : ActionHandlers<
+      GetStateFromHandlersList<TObject>,
+      IntersectionFromUnion<GetActionCatalogFromHandlersList<TObject>>
+    >
+
+/**
  * Like Object.assign except:
  * - Always returns a new object.
  * - Duplicated keys are not allowed.
  * - Symbol-typed properties are ignored.
  */
-export function combineUniqueObjects<H extends any[]>(...objs: H) {
-  // If it is a list of Action Handlers, extract ActionCatalog
-  // so that the resulted object is not losing index signature.
-  type Result = GetActionCatalogFromHandlersList<H> extends never
-    ? GetActionCatalogFromFSAHandlersList<H> extends never
-      ? IntersectionFromUnion<H[number]>
-      : GetStateFromFSAHandlersList<H> extends never
-      ? IntersectionFromUnion<H[number]>
-      : FSAHandlers<
-          GetStateFromFSAHandlersList<H>,
-          IntersectionFromUnion<GetActionCatalogFromFSAHandlersList<H>>
-        >
-    : GetStateFromHandlersList<H> extends never
-    ? IntersectionFromUnion<H[number]>
-    : ActionHandlers<
-        GetStateFromHandlersList<H>,
-        IntersectionFromUnion<GetActionCatalogFromHandlersList<H>>
-      >
-
+export function combineUniqueObjects<TObjects extends any[]>(
+  ...objs: TObjects
+): WrapResultInHandlers<TObjects[number]>
+export function combineUniqueObjects(...objs: any[]) {
   const result: { [k: string]: any } = {}
   for (let i = 0; i <= objs.length; i++) {
     const obj = objs[i]
@@ -47,5 +56,5 @@ export function combineUniqueObjects<H extends any[]>(...objs: H) {
       }
     }
   }
-  return result as Result
+  return result
 }

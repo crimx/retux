@@ -1,9 +1,9 @@
 export const { hasOwnProperty } = Object.prototype
 
-export type IntersectionFromUnion<U> = (U extends any
-? (arg: U) => void
-: never) extends (arg: infer T) => void
-  ? T
+export type IntersectionFromUnion<TUnion> = (TUnion extends any
+? (arg: TUnion) => void
+: never) extends (arg: infer TArg) => void
+  ? TArg
   : never
 
 export interface DefaultActionCatalog {
@@ -35,32 +35,33 @@ export type CreateMixedActionCreator = (type: string) => MixedActionCreator
  * Index as action type.
  * Error type is added by `Action`.
  *
- * @template C ActionCatalog
+ * @template TCatalog ActionCatalog
  */
-export type CreateActionCatalog<C extends DefaultActionCatalog> = C
+export type CreateActionCatalog<
+  TCatalog extends DefaultActionCatalog
+> = TCatalog
 
 /**
  * Extract action types from a ActionCatalog
  *
- * @template C ActionCatalog
+ * @template TCatalog ActionCatalog
  */
-export type ActionType<C> = Extract<keyof C, string>
+export type ActionType<TCatalog> = Extract<keyof TCatalog, string>
 
 /**
  * Get action handler type of a module.
- * @template S State.
- * @template A Action.
+ * @template TState State.
+ * @template TAction Action.
  */
-export type DefaultActionHandler<S extends {}, A extends DefaultAction> = (
-  state: Readonly<S>,
-  action: A
-) => Readonly<S>
+export type DefaultActionHandler<
+  TState extends {},
+  TAction extends DefaultAction
+> = (state: Readonly<TState>, action: TAction) => Readonly<TState>
 
 /**
  * Get all action handler types of a module.
- * @template S Module state.
- * @template C Module ActionCatalog.
+ * @template TState Module state.
  */
-export type DefaultActionHandlers<S extends {}> = {
-  readonly [K: string]: DefaultActionHandler<S, DefaultAction>
+export type DefaultActionHandlers<TState extends {}> = {
+  readonly [key: string]: DefaultActionHandler<TState, DefaultAction>
 }

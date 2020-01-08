@@ -2,64 +2,74 @@ import { ActionType, DefaultActionHandler } from '../utils'
 
 /**
  * Get basic action types. ({ type, payload?, meta? })
- * @template C ActionCatalog.
- * @template T Action type. If ignored a union of all action types will be used.
+ * @template TCatalog ActionCatalog.
+ * @template TType Action type. If ignored a union of all action types will be used.
  */
-export type Action<C, T extends keyof C = keyof C> = T extends ActionType<C> // generate union
-  ? Readonly<{ type: T } & Pick<C[T], Extract<'payload' | 'meta', keyof C[T]>>>
+export type Action<
+  TCatalog,
+  TType extends keyof TCatalog = keyof TCatalog
+> = TType extends ActionType<TCatalog> // generate union
+  ? Readonly<
+      { type: TType } & Pick<
+        TCatalog[TType],
+        Extract<'payload' | 'meta', keyof TCatalog[TType]>
+      >
+    >
   : never
 
 /**
  * Get basic action handler type of a module.
- * @template S Module state.
- * @template C ActionCatalog.
- * @template T Action type.
+ * @template TState Module state.
+ * @template TCatalog ActionCatalog.
+ * @template TType Action type.
  */
-export type ActionHandler<S, C, T extends keyof C> = DefaultActionHandler<
-  S,
-  Action<C, T>
->
+export type ActionHandler<
+  TState,
+  TCatalog,
+  TType extends keyof TCatalog
+> = DefaultActionHandler<TState, Action<TCatalog, TType>>
 
 /**
  * Get all basic action handler types of a module.
- * @template S Module state.
- * @template C Module ActionCatalog.
+ * @template TState Module state.
+ * @template TCatalog Module ActionCatalog.
  */
-export type ActionHandlers<S, C> = {
-  readonly [K in keyof C]: ActionHandler<S, C, K>
+export type ActionHandlers<TState, TCatalog> = {
+  readonly [TType in keyof TCatalog]: ActionHandler<TState, TCatalog, TType>
 }
 
 /**
  * Extract ActionCatalog from ActionHandlers
  *
- * @template H ActionHandlers
+ * @template THandlers ActionHandlers
  */
-export type GetActionCatalogFromHandlers<H> = H extends ActionHandlers<
-  infer S,
-  infer C
->
-  ? C
+export type GetActionCatalogFromHandlers<
+  THandlers
+> = THandlers extends ActionHandlers<infer TState, infer TCatalog>
+  ? TCatalog
   : never
 
 /**
  * Extract ActionCatalogs from list of ActionHandlers
  *
- * @template H ActionHandlers
+ * @template THandler Union of ActionHandler
  */
 export type GetActionCatalogFromHandlersList<
-  HS extends any[],
-  H = HS[number]
-> = H extends ActionHandlers<infer S, infer C> ? C : never
+  THandler
+> = THandler extends ActionHandlers<infer TState, infer TCatalog>
+  ? TCatalog
+  : never
 
 /**
  * Extract States from List of ActionHandlers
  *
- * @template H ActionHandlers
+ * @template THandler Union of ActionHandler
  */
 export type GetStateFromHandlersList<
-  HS extends any[],
-  H = HS[number]
-> = H extends ActionHandlers<infer S, infer C> ? S : never
+  THandler
+> = THandler extends ActionHandlers<infer TState, infer TCatalog>
+  ? TState
+  : never
 
 /**
  * Default type of the generated Action Creator

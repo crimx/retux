@@ -1,87 +1,93 @@
 import { ActionType, DefaultActionHandler } from '../utils'
 
 /**
- * @template C ActionCatalog.
- * @template T Action type. If ignored a union of all action types will be used.
+ * @template TCatalog ActionCatalog.
+ * @template TType Action type. If ignored a union of all action types will be used.
  */
-export type ActionError<C, T extends keyof C = ActionType<C>> = Readonly<
+export type ActionError<
+  TCatalog,
+  TType extends keyof TCatalog = ActionType<TCatalog>
+> = Readonly<
   {
-    type: T
+    type: TType
     error: true
-    payload: Extract<'error', keyof C[T]> extends never
+    payload: Extract<'error', keyof TCatalog[TType]> extends never
       ? Error
-      : C[T][Extract<'error', keyof C[T]>]
-  } & Pick<C[T], Extract<'meta', keyof C[T]>>
+      : TCatalog[TType][Extract<'error', keyof TCatalog[TType]>]
+  } & Pick<TCatalog[TType], Extract<'meta', keyof TCatalog[TType]>>
 >
 
 /**
  * Get FSA compliant action types. ({ type, payload?, meta?, error? })
- * @template C ActionCatalog.
- * @template T Action type. If ignored a union of all action types will be used.
+ * @template TCatalog ActionCatalog.
+ * @template TType Action type. If ignored a union of all action types will be used.
  */
-export type Action<C, T extends keyof C = ActionType<C>> = T extends ActionType<
-  C
->
+export type Action<
+  TCatalog,
+  TType extends keyof TCatalog = ActionType<TCatalog>
+> = TType extends ActionType<TCatalog>
   ?
       | Readonly<
           // prettier-ignore
-          { type: T, error?: false } &
-          Pick<C[T], Extract<'payload' | 'meta', keyof C[T]>>
+          { type: TType, error?: false } &
+          Pick<TCatalog[TType], Extract<'payload' | 'meta', keyof TCatalog[TType]>>
         >
-      | ActionError<C, T>
+      | ActionError<TCatalog, TType>
   : never
 
 /**
  * Get FSA compliant action handler type.
- * @template S Module state.
- * @template C ActionCatalog.
- * @template T Action type. If ignored a union of all action types will be used.
+ * @template TState Module state.
+ * @template TCatalog ActionCatalog.
+ * @template TType Action type. If ignored a union of all action types will be used.
  */
-export type ActionHandler<S, C, T extends keyof C> = DefaultActionHandler<
-  S,
-  Action<C, T>
->
+export type ActionHandler<
+  TState,
+  TCatalog,
+  TType extends keyof TCatalog
+> = DefaultActionHandler<TState, Action<TCatalog, TType>>
 
 /**
  * Get all FSA compliant action handler types of a module.
- * @template S Module state.
- * @template C Module ActionCatalog.
+ * @template TState Module state.
+ * @template TCatalog Module ActionCatalog.
  */
-export type ActionHandlers<S, C> = {
-  readonly [K in keyof C]: ActionHandler<S, C, K>
+export type ActionHandlers<TState, TCatalog> = {
+  readonly [TType in keyof TCatalog]: ActionHandler<TState, TCatalog, TType>
 }
 
 /**
  * Extract ActionCatalog from ActionHandlers
  *
- * @template H ActionHandlers
+ * @template THandlers ActionHandlers
  */
-export type GetActionCatalogFromHandlers<H> = H extends ActionHandlers<
-  infer S,
-  infer C
->
-  ? C
+export type GetActionCatalogFromHandlers<
+  THandlers
+> = THandlers extends ActionHandlers<infer TState, infer TCatalog>
+  ? TCatalog
   : never
 
 /**
  * Extract ActionCatalogs from list of ActionHandlers
  *
- * @template H ActionHandlers
+ * @template THandler Union of ActionHandler
  */
 export type GetActionCatalogFromHandlersList<
-  HS extends any[],
-  H = HS[number]
-> = H extends ActionHandlers<infer S, infer C> ? C : never
+  THandler
+> = THandler extends ActionHandlers<infer TState, infer TCatalog>
+  ? TCatalog
+  : never
 
 /**
  * Extract States from List of ActionHandlers
  *
- * @template H ActionHandlers
+ * @template THandler Union of ActionHandler
  */
 export type GetStateFromHandlersList<
-  HS extends any[],
-  H = HS[number]
-> = H extends ActionHandlers<infer S, infer C> ? S : never
+  THandler
+> = THandler extends ActionHandlers<infer TState, infer TCatalog>
+  ? TState
+  : never
 
 /**
  * Default type of the generated Action Creator

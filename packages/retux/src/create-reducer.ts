@@ -6,29 +6,32 @@ import {
 } from './fsa/types'
 
 /**
- * @template S State
- * @template A Action
+ * @param initialState Initial state
+ * @param handlers Retux Action Handler
  */
 export function createReducer<
-  S,
-  A extends DefaultAction | undefined = undefined,
-  AH extends {} = DefaultActionHandlers<S>
+  TState,
+  TAction extends DefaultAction | undefined = undefined,
+  THandlers extends {} = DefaultActionHandlers<TState>
 >(
-  initialState: S,
-  handlers: AH
+  initialState: TState,
+  handlers: THandlers
 ): (
-  state: S | undefined,
-  action: A extends undefined
-    ? GetActionCatalogFromHandlers<AH> extends never
-      ? GetActionCatalogFromFSAHandlers<AH> extends never
+  state: TState | undefined,
+  action: TAction extends undefined
+    ? GetActionCatalogFromHandlers<THandlers> extends never
+      ? GetActionCatalogFromFSAHandlers<THandlers> extends never
         ? DefaultAction & { [T: string]: any }
-        : FSA<GetActionCatalogFromFSAHandlers<AH>> // fsa actions
-      : Action<GetActionCatalogFromHandlers<AH>> // basic actions
-    : A
-) => S {
+        : FSA<GetActionCatalogFromFSAHandlers<THandlers>> // fsa actions
+      : Action<GetActionCatalogFromHandlers<THandlers>> // basic actions
+    : TAction
+) => TState {
   return function reducer(state = initialState, action) {
     if (hasOwnProperty.call(handlers, action.type)) {
-      return (handlers as DefaultActionHandlers<S>)[action.type](state, action)
+      return (handlers as DefaultActionHandlers<TState>)[action.type](
+        state,
+        action
+      )
     } else {
       return state
     }
