@@ -16,19 +16,23 @@ export function proxyDefaultActionCreators<
   TCreateActionCreator extends CreateDefaultActionCreator,
   TExtra extends MixedActionCreators
 >(createActionCreator: TCreateActionCreator, extraActionCreators?: TExtra) {
-  return new Proxy({} as { [key: string]: DefaultActionCreator }, {
-    get(memo, type: string) {
-      if (!hasOwnProperty.call(memo, type)) {
-        if (
-          extraActionCreators &&
-          hasOwnProperty.call(extraActionCreators, type)
-        ) {
-          memo[type] = extraActionCreators[type]
-        } else {
-          memo[type] = createActionCreator(type)
+  const memo: { [key: string]: DefaultActionCreator } = {}
+  return new Proxy(
+    {}, // keep it empty to disable enumerability
+    {
+      get(_, type: string) {
+        if (!hasOwnProperty.call(memo, type)) {
+          if (
+            extraActionCreators &&
+            hasOwnProperty.call(extraActionCreators, type)
+          ) {
+            memo[type] = extraActionCreators[type]
+          } else {
+            memo[type] = createActionCreator(type)
+          }
         }
+        return memo[type]
       }
-      return memo[type]
     }
-  })
+  )
 }
