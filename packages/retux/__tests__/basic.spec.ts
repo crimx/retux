@@ -1,7 +1,6 @@
 import {
   ActionHandlers,
   createActionCreators,
-  // declareActionCreators,
   Action,
   proxyActionCreators
 } from '../src/basic'
@@ -88,35 +87,6 @@ describe('basic', () => {
         })
         expect(action.ACTION4()).toEqual({ type: 'ACTION2', payload: 12 })
       })
-    })
-
-    describe.skip('declareActionCreators', () => {
-      // it('should declare actions creators without extraActionCreators', () => {
-      //   const action = declareActionCreators<ActionCatalog>()()
-      //   expect(action('ACTION1')()).toEqual({ type: 'ACTION1' })
-      //   expect(action('ACTION2')(40)).toEqual({ type: 'ACTION2', payload: 40 })
-      //   expect(action('ACTION3')(true, false)).toEqual({
-      //     type: 'ACTION3',
-      //     payload: true,
-      //     meta: false
-      //   })
-      // })
-      // it('should declare actions creators with extraActionCreators', () => {
-      //   const action = declareActionCreators<ActionCatalog>()({
-      //     ACTION4: (): Action<ActionCatalog, 'ACTION2'> => ({
-      //       type: 'ACTION2',
-      //       payload: 12
-      //     })
-      //   })
-      //   expect(action('ACTION1')()).toEqual({ type: 'ACTION1' })
-      //   expect(action('ACTION2')(40)).toEqual({ type: 'ACTION2', payload: 40 })
-      //   expect(action('ACTION3')(true, false)).toEqual({
-      //     type: 'ACTION3',
-      //     payload: true,
-      //     meta: false
-      //   })
-      //   expect(action('ACTION4')()).toEqual({ type: 'ACTION2', payload: 12 })
-      // })
     })
   })
 })

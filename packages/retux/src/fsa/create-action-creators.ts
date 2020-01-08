@@ -10,8 +10,19 @@ import { DefaultActionCreator, MixedActionCreators } from '../utils'
  * Example
  *
  * ```typescript
- * const action = declareActionCreators<ActionCalatog>(actionHandlers)
+ * const action = createActionCreators(actionHandlers)
  * dispatch(action.ACTION_NAME)
+ * ```
+ *
+ * Rewire `ACTION1` to an alternative Action Creator.
+ *
+ * ```typescript
+ * const action = createActionCreators(
+ *   actionHandlers,
+ *   {
+ *     ACTION1: () => {}
+ *   }
+ * )
  * ```
  *
  * @param actionHandlers Retux Action Handlers.
