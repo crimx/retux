@@ -96,4 +96,37 @@ describe('proxy-combine-objects', () => {
     expect(reducer(state, { type: 'ACTION1' })).toBe(state)
     expect(reducer(state, { type: 'ACTION2', payload: 2 })).toBe(state + 2)
   })
+
+  it('should works fine after accessing over 100 nonexistent keys', () => {
+    const obj = proxyCombineObjects({} as { [k: string]: any }, {
+      otherKey: () => 'OtherKey'
+    })
+
+    // check one key over 100 times
+    for (let i = 0; i <= 110; i++) {
+      expect(obj.xxx).toBeUndefined()
+    }
+
+    // check over 100 keys over 100 times
+    for (let i = 0; i <= 110; i++) {
+      expect(obj[Date.now() + i]).toBeUndefined()
+    }
+  })
+
+  it('should works fine after checking own properties on over 100 nonexistent keys', () => {
+    const obj = proxyCombineObjects({} as { [k: string]: any }, {
+      otherKey: () => 'OtherKey'
+    })
+
+    const { hasOwnProperty } = Object.prototype
+
+    for (let i = 0; i <= 110; i++) {
+      expect(hasOwnProperty.call(obj, 'xxx')).toBeFalsy()
+      expect(hasOwnProperty.call(obj, 'otherKey')).toBeTruthy()
+    }
+
+    for (let i = 0; i <= 110; i++) {
+      expect(hasOwnProperty.call(obj, Date.now() + i)).toBeFalsy()
+    }
+  })
 })
