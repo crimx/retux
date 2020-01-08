@@ -17,9 +17,7 @@ describe('todo actions', () => {
     })
 
     it('TodosEdit should create EDIT_TODO action', () => {
-      expect(
-        action.TodosEdit({ id: '1', text: 'Use Redux everywhere' })
-      ).toEqual({
+      expect(action.TodosEdit('1', 'Use Redux everywhere')).toEqual({
         type: 'TodosEdit',
         payload: {
           id: '1',
@@ -44,18 +42,6 @@ describe('todo actions', () => {
     it('TodosClearCompleted should create CLEAR_COMPLETED action', () => {
       expect(action.TodosClearCompleted()).toEqual({
         type: 'TodosClearCompleted'
-      })
-    })
-  })
-
-  describe('Custom Actions', () => {
-    it('editTodo should create EDIT_TODO action', () => {
-      expect(action.TodosEdit('1', 'Use Redux everywhere')).toEqual({
-        type: 'TodosEdit',
-        payload: {
-          id: '1',
-          text: 'Use Redux everywhere'
-        }
       })
     })
   })
