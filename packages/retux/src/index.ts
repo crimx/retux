@@ -5,7 +5,6 @@ export {
   ActionCreator,
   createActionCreator,
   createActionCreators,
-  declareActionCreators,
   proxyActionCreators
 } from './basic'
 export {
@@ -16,7 +15,6 @@ export {
   ActionCreator as FSACreator,
   createActionCreator as createFSACreator,
   createActionCreators as createFSACreators,
-  declareActionCreators as declareFSACreators,
   proxyActionCreators as proxyFSACreators
 } from './fsa'
 export { combineUniqueObjects } from './combine-unique-objects'
