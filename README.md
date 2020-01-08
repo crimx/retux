@@ -8,9 +8,14 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-Minimalist type-safe(strongly-typed) scalable declarative Redux architecture.
+Minimalist declarative type-safe(strongly-typed) scalable Redux architecture.
 
-Leverage the latest advanced TypeScript features under the hood while exposing simple, clean and declarative API.
+## Features
+
+- Minimalist. Retux reduces huge volume of boilerplate code while still gaining better type-infer and auto-completion.
+- Declarative. Action-First desgin instead of Action-Creator-Fisrt makes it clean, less-hacking and easy to read for new contributors(including future-self!).
+- Type-safe(strongly-typed). Retux enforces strict typings. With utilities of Retux you will never lose the strictness of typings while enjoying great flexibility.
+- Scalable. A Retux module can be easily split into isomorphic sub-modules. Retux can also optionly leverage the power of meta-programming on modern engine for further performance boost.
 
 ## Usage
 

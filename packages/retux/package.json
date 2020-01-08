@@ -1,6 +1,6 @@
 {
   "name": "retux",
-  "description": "Minimalist type-safe(strongly-typed) high-performance Redux architecture.",
+  "description": "Core library of Retux, a minimalist declarative type-safe(strongly-typed) scalable Redux architecture.",
   "homepage": "https://github.com/crimx/retux/tree/master/packages/retux",
   "keywords": [
     "redux",
