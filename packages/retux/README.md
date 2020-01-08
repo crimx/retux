@@ -123,32 +123,27 @@ type ModuleActions = {
 
 Retux is Action-First. All Action Creators are generated from Actions.
 
-With modern engine you can:
-
 ```typescript
-import { proxyActionCreators } from 'retux'
+import { createActionCreators } from 'retux'
 
-export type ActionCatalog = CreateActionCatalog<{
-  ACTION1: { payload: boolean }
-  ACTION2: { payload: number, meta?: boolean }
-  ACTION3: { payload: { val: string } }
-}>
-
-const action = proxyActionCreators<ActionCatalog>()()
+const action = createActionCreators<ActionCatalog>(actionHandlers)
 
 dispatch(action.ACTION1(true))
 ```
 
-That's it! If later on you want to replace an action with thunk etc.
+That's it! Later on if you want to replace an action with thunk etc.
 
 ```typescript
-const action = proxyActionCreators<ActionCatalog>()({
-  ACTION1: (payload: boolean): MyThunkAction<'ACTION1'> =>
-    dispatch => dispatch({ type: 'ACTION1', payload })
-})
+const action = createActionCreators<ActionCatalog>(
+  actionHandlers,
+  {
+    ACTION1: (payload: boolean): MyThunkAction<'ACTION1'> =>
+      dispatch => dispatch({ type: 'ACTION1', payload })
+  }
+)
 ```
 
-Retux also offers `createActionCreators` and `declareActionCreators` for older engine.
+Retux also offers `proxyActionCreators` for modern engines which does the same thing except action creators are lazy created on first visit.
 
 See the docs for all the features of Retux.
 

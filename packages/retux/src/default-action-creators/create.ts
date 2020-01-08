@@ -5,8 +5,7 @@ import {
 } from '../utils'
 
 /**
- * Generate Action Creators with signature:
- * `(payload?, meta?) => Action`
+ * Generate Action Creators.
  *
  * @param createActionCreator Retux basic or fsa `createActionCreator` function.
  * @param actionHandlers Retux Action Handlers.

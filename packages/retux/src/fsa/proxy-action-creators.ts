@@ -1,10 +1,10 @@
-import { ActionCreator } from './types'
+import { ActionCreator, GetActionCatalogFromHandlers } from './types'
 import { createActionCreator } from './create-action-creator'
 import { proxyDefaultActionCreators } from '../default-action-creators/proxy'
-import { MixedActionCreators } from '../utils'
+import { MixedActionCreators, DefaultActionCreator } from '../utils'
 
 /**
- * Lazy generate Flux Standard Action Creators with signature:
+ * Lazy generate Basic Action Creators with signature:
  * `(payload?, meta?) => Action`
  *
  * Action Creators are created on first visit
@@ -12,38 +12,75 @@ import { MixedActionCreators } from '../utils'
  *
  * Requires modern JS engine which supports `Proxy`.
  *
- * Notice the `()()` in the example.
- * Due to limitation of TypeScript, this function is
- * curried in order to infer the extra Action Creators.
- *
  * Example
  *
  * ```typescript
- * const action = proxyActionCreators<ActionCalatog>()()
+ * const action = proxyActionCreators<ActionCalatog>(actionHandlers)
  * dispatch(action.ACTION_NAME)
- * dispatch(action.ACTION_NAME) // same Action Creator
+ * dispatch(action.ACTION_NAME) // same action creator
  * ```
  *
  * Rewire `ACTION1` to an alternative Action Creator.
  *
  * ```typescript
- * const action = proxyActionCreators<ActionCatalog>()({
- *   ACTION1: () => {}
- * })
+ * const action = proxyActionCreators<ActionCatalog>(
+ *   actionHandlers,
+ *   {
+ *     ACTION1: () => {}
+ *   }
+ * )
  * ```
  *
- * @template TCatalog Retux Action Catalog
+ * @param actionHandlers Retux Action Handlers.
  */
-export function proxyActionCreators<TCatalog>(): <
-  TExtra extends MixedActionCreators
+export function proxyActionCreators<
+  THandlers extends {},
+  TCatalog = GetActionCatalogFromHandlers<THandlers>
 >(
-  extraActionCreators?: TExtra
-) => {
-  [key in Exclude<keyof TCatalog, keyof TExtra>]: ActionCreator<TCatalog, key>
-} &
+  actionHandlers: THandlers
+): TCatalog extends never
+  ? {
+      [key in keyof THandlers]: DefaultActionCreator
+    }
+  : {
+      [key in keyof THandlers]: key extends keyof TCatalog
+        ? ActionCreator<TCatalog, key>
+        : DefaultActionCreator
+    }
+
+/**
+ * @param actionHandlers Retux Action Handlers.
+ * @param extraActionCreators Overwrite some of the generated
+ * Action Creators or add more.
+ */
+export function proxyActionCreators<
+  THandlers extends {},
+  TCatalog = GetActionCatalogFromHandlers<THandlers>,
+  TExtra extends MixedActionCreators = MixedActionCreators
+>(
+  actionHandlers: THandlers,
+  extraActionCreators: TExtra
+): (TCatalog extends never
+  ? {
+      [key in Exclude<keyof THandlers, keyof TExtra>]: DefaultActionCreator
+    }
+  : {
+      [key in Exclude<
+        keyof THandlers,
+        keyof TExtra
+      >]: key extends keyof TCatalog
+        ? ActionCreator<TCatalog, key>
+        : DefaultActionCreator
+    }) &
   TExtra
 
-export function proxyActionCreators() {
-  return (extraActionCreators?: MixedActionCreators) =>
-    proxyDefaultActionCreators(createActionCreator, extraActionCreators)
+export function proxyActionCreators(
+  actionHandlers: { [type: string]: (...args: any) => any },
+  extraActionCreators?: MixedActionCreators
+) {
+  return proxyDefaultActionCreators(
+    createActionCreator,
+    actionHandlers,
+    extraActionCreators
+  )
 }

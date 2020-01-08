@@ -60,7 +60,7 @@ describe('basic', () => {
 
     describe('proxyActionCreators', () => {
       it('should proxy actions creators without extraActionCreators', () => {
-        const action = proxyActionCreators<ActionCatalog>()()
+        const action = proxyActionCreators(actionHandlers)
 
         expect(action.ACTION1()).toEqual({ type: 'ACTION1' })
         expect(action.ACTION2(40)).toEqual({ type: 'ACTION2', payload: 40 })
@@ -72,7 +72,7 @@ describe('basic', () => {
       })
 
       it('should proxy actions creators with extraActionCreators', () => {
-        const action = proxyActionCreators<ActionCatalog>()({
+        const action = proxyActionCreators(actionHandlers, {
           ACTION4: (): Action<ActionCatalog, 'ACTION2'> => ({
             type: 'ACTION2',
             payload: 12

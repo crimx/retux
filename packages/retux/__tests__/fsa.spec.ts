@@ -93,7 +93,7 @@ describe('fsa', () => {
 
     describe('proxyActionCreators', () => {
       it('should proxy actions creators without extraActionCreators', () => {
-        const action = proxyActionCreators<ActionCatalog>()()
+        const action = proxyActionCreators(actionHandlers)
 
         expect(action.ACTION1()).toEqual({ type: 'ACTION1' })
         expect(action.ACTION1(undefined, false)).toEqual({
@@ -133,7 +133,7 @@ describe('fsa', () => {
       })
 
       it('should proxy actions creators with extraActionCreators', () => {
-        const action = proxyActionCreators<ActionCatalog>()({
+        const action = proxyActionCreators(actionHandlers, {
           ACTION3: (): Action<ActionCatalog, 'ACTION3'> => ({
             type: 'ACTION3',
             payload: true,

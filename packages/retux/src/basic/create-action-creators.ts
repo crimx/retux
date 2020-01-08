@@ -10,14 +10,22 @@ import { DefaultActionCreator, MixedActionCreators } from '../utils'
  * Example
  *
  * ```typescript
- * const action = declareActionCreators<ActionCalatog>(actionHandlers)
+ * const action = createActionCreators(actionHandlers)
  * dispatch(action.ACTION_NAME)
  * ```
  *
- * @param actionHandlers Retux Action Handlers.
+ * Rewire `ACTION1` to an alternative Action Creator.
  *
- * @template THandlers Retux Action Handlers
- * @template TCatalog Retux Action Catalog
+ * ```typescript
+ * const action = createActionCreators(
+ *   actionHandlers,
+ *   {
+ *     ACTION1: () => {}
+ *   }
+ * )
+ * ```
+ *
+ * @param actionHandlers Retux Action Handlers.
  */
 export function createActionCreators<
   THandlers extends {},
@@ -38,10 +46,6 @@ export function createActionCreators<
  * @param actionHandlers Retux Action Handlers.
  * @param extraActionCreators Overwrite some of the generated
  * Action Creators or add more.
- *
- * @template THandlers Retux Action Handlers
- * @template TCatalog Retux Action Catalog
- * @template TExtra Extra Action Handlers
  */
 export function createActionCreators<
   THandlers extends {},
