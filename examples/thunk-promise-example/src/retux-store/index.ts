@@ -58,7 +58,7 @@ export type ThunkDispatch<
 export interface StoreDispatch<Type extends StoreActionType = StoreActionType> {
   <T extends StoreAction>(action: T): T
   <P extends Promise<StoreAction<Type>>>(promiseAction: P): P
-  <R>(thunkAction: ThunkAction<Type, R>): R
+  <R>(thunkAction: ThunkActionWithPromise<Type, R>): R
 }
 
 /// Redux Thunk with Redux Promise
@@ -76,7 +76,7 @@ export type ThunkActionWithPromise<
 
 declare global {
   interface Window {
-    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: typeof compose
+    __REDUX_DEVTOOLS_EXTENSION_COMPOSE__?: any
   }
 }
 

@@ -8,7 +8,14 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 
-React-Redux Type enhancement suite for Retux architecture.
+React-Redux Type enhancement suite.
+
+## Features
+
+- Better intellisense auto-complete and error code highlight.
+- Prevent duplicated keys on mapState and mapDispatch.
+- Easy to work with mixed action types(Thunk, Promise...).
+- Designed for Retux architecture but can be used in any project directly.
 
 ## Installation
 
@@ -26,4 +33,69 @@ All typings no JavaScript code.
 
 ## Examples
 
-See [Tests](./__tests__).
+See [Tests](https://github.com/crimx/retux/tree/master/packages/react-retux/__tests__) and [Retux Examples](https://github.com/crimx/retux/tree/master/examples), specifically [thunk-promise-example](https://github.com/crimx/retux/tree/master/examplesthunk-promise-example).
+
+## Highlights
+
+For mixed action types, with `MapDispatchToPropsFunction`:
+
+```typescript
+// src/retux-store/index.ts
+
+export interface StoreDispatch<Type extends StoreActionType = StoreActionType> {
+  <T extends StoreAction>(action: T): T
+  <P extends Promise<StoreAction<Type>>>(promiseAction: P): P
+  <R>(thunkAction: ThunkActionWithPromise<Type, R>): R
+}
+
+// Dispatch Promise inside thunk.
+export type ThunkActionWithPromise<
+  Type extends StoreActionType = StoreActionType,
+  Result = void
+> = (
+  dispatch: StoreDispatch<Type>,
+  getState: () => StoreState,
+  extraArgument: ThunkExtraArgs
+) => Result
+```
+
+```typescript
+// src/containers/ComponentA.tsx
+
+import { MapDispatchToPropsFunction } from 'react-retux'
+import { ComponentA, ComponentAProps } from '../components/ComponentA.tsx'
+import { StoreDispatch } from '../retux-store'
+
+type Dispatchers = ExtractDispatchers<ComponentAProps, 'onClick'>
+
+const mapDispatchToProps = MapDispatchToPropsFunction<
+  StoreDispatch,
+  ComponentAProps,
+  Dispatchers
+> = dispatch => ({
+  onClick: (...) => {
+    dispatch(...)
+  }
+})
+```
+
+Or with `MapDispatchToPropsObject`:
+
+```typescript
+// src/containers/ComponentA.tsx
+
+import { MapDispatchToPropsObject } from 'react-retux'
+import { ComponentA, ComponentAProps } from '../components/ComponentA.tsx'
+import { StoreAction, ThunkActionWithPromise } from '../retux-store'
+import { anActionCreator } from '../retux-store/actions'
+
+type Dispatchers = ExtractDispatchers<ComponentAProps, 'onClick'>
+
+const mapDispatchToProps = MapDispatchToPropsObject<
+  StoreAction | ThunkActionWithPromise | Promise<StoreAction>,
+  ComponentAProps,
+  Dispatchers
+> = {
+  onClick: anActionCreator
+}
+```

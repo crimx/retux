@@ -90,7 +90,7 @@ If you need to dispatch Promise within thunk.
 export interface StoreDispatch<Type extends StoreActionType = StoreActionType> {
   <T extends StoreAction>(action: T): T
   <P extends Promise<StoreAction<Type>>>(promiseAction: P): P
-  <R>(thunkAction: ThunkAction<Type, R>): R
+  <R>(thunkAction: ThunkActionWithPromise<Type, R>): R
 }
 
 export type ThunkActionWithPromise<
