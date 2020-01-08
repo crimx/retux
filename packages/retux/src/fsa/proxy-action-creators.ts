@@ -12,37 +12,38 @@ import { MixedActionCreators } from '../utils'
  *
  * Requires modern JS engine which supports `Proxy`.
  *
+ * Notice the `()()` in the example.
+ * Due to limitation of TypeScript, this function is
+ * curried in order to infer the extra Action Creators.
+ *
  * Example
  *
  * ```typescript
- * const action = proxyActionCreators<ActionCalatog>()
+ * const action = proxyActionCreators<ActionCalatog>()()
  * dispatch(action.ACTION_NAME)
  * dispatch(action.ACTION_NAME) // same Action Creator
  * ```
  *
- * @template TCatalog Retux Action Catalog
- */
-export function proxyActionCreators<TCatalog>(): {
-  [key in keyof TCatalog]: ActionCreator<TCatalog, key>
-}
-
-/**
- * @param extraActionCreators Overwrite some of the generated
- * Action Creators or add more.
+ * Rewire `ACTION1` to an alternative Action Creator.
+ *
+ * ```typescript
+ * const action = proxyActionCreators<ActionCatalog>()({
+ *   ACTION1: () => {}
+ * })
+ * ```
  *
  * @template TCatalog Retux Action Catalog
- * @template TExtra Extra Action Handlers
  */
-export function proxyActionCreators<
-  TCatalog,
-  TExtra extends MixedActionCreators = {}
+export function proxyActionCreators<TCatalog>(): <
+  TExtra extends MixedActionCreators
 >(
-  extraActionCreators: TExtra
-): {
+  extraActionCreators?: TExtra
+) => {
   [key in Exclude<keyof TCatalog, keyof TExtra>]: ActionCreator<TCatalog, key>
 } &
   TExtra
 
-export function proxyActionCreators(extraActionCreators?: MixedActionCreators) {
-  return proxyDefaultActionCreators(createActionCreator, extraActionCreators)
+export function proxyActionCreators() {
+  return (extraActionCreators?: MixedActionCreators) =>
+    proxyDefaultActionCreators(createActionCreator, extraActionCreators)
 }

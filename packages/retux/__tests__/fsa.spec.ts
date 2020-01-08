@@ -4,70 +4,10 @@ import {
   declareActionCreators,
   proxyActionCreators
 } from '../src/fsa'
-import { createStore } from 'redux'
-import { createReducer, CreateActionCatalog } from '../src'
+import { CreateActionCatalog } from '../src'
 import { Action } from '../lib/fsa'
 
 describe('fsa', () => {
-  describe('should create correct reducer', () => {
-    it('createReducer', () => {
-      const initState = {
-        count: 0
-      }
-
-      type CounterState = typeof initState
-
-      type CounterActionCatalog = CreateActionCatalog<{
-        INCREMENT: {
-          // optional increment step
-          payload?: number
-        }
-        DECREMENT: {
-          // optional decrement step
-          payload?: number
-        }
-      }>
-
-      const counterActionHandlers: ActionHandlers<
-        CounterState,
-        CounterActionCatalog
-      > = {
-        INCREMENT: (state, action) =>
-          action.error
-            ? state
-            : {
-                count:
-                  state.count + (action.payload == null ? 1 : action.payload)
-              },
-        DECREMENT: (state, action) =>
-          action.error
-            ? state
-            : {
-                count:
-                  state.count - (action.payload == null ? 1 : action.payload)
-              }
-      }
-
-      const reducer = createReducer(initState, counterActionHandlers)
-
-      const store = createStore(reducer)
-
-      expect(store.getState()).toEqual({ count: 0 })
-
-      store.dispatch({ type: 'INCREMENT' })
-      expect(store.getState()).toEqual({ count: 1 })
-
-      store.dispatch({ type: 'INCREMENT', payload: 2 })
-      expect(store.getState()).toEqual({ count: 3 })
-
-      store.dispatch({ type: 'DECREMENT', payload: 2 })
-      expect(store.getState()).toEqual({ count: 1 })
-
-      store.dispatch({ type: 'DECREMENT', payload: new Error(), error: true })
-      expect(store.getState()).toEqual({ count: 1 })
-    })
-  })
-
   describe('Generate Action Creators', () => {
     type ActionCatalog = CreateActionCatalog<{
       ACTION1: {}
@@ -153,7 +93,7 @@ describe('fsa', () => {
 
     describe('declareActionCreators', () => {
       it('should declare actions creators without extraActionCreators', () => {
-        const action = declareActionCreators<ActionCatalog>()
+        const action = declareActionCreators<ActionCatalog>()()
 
         expect(action('ACTION1')()).toEqual({ type: 'ACTION1' })
         expect(action('ACTION1')(undefined, false)).toEqual({
@@ -196,7 +136,7 @@ describe('fsa', () => {
       })
 
       it('should declare actions creators with extraActionCreators', () => {
-        const rewiredActionCreators = {
+        const action = declareActionCreators<ActionCatalog>()({
           ACTION3: (): Action<ActionCatalog, 'ACTION3'> => ({
             type: 'ACTION3',
             payload: true,
@@ -206,12 +146,7 @@ describe('fsa', () => {
             type: 'ACTION2',
             payload: '12'
           })
-        }
-
-        const action = declareActionCreators<
-          ActionCatalog,
-          typeof rewiredActionCreators
-        >(rewiredActionCreators)
+        })
 
         expect(action('ACTION1')()).toEqual({ type: 'ACTION1' })
         expect(action('ACTION2')('40')).toEqual({
@@ -229,7 +164,7 @@ describe('fsa', () => {
 
     describe('proxyActionCreators', () => {
       it('should proxy actions creators without extraActionCreators', () => {
-        const action = proxyActionCreators<ActionCatalog>()
+        const action = proxyActionCreators<ActionCatalog>()()
 
         expect(action.ACTION1()).toEqual({ type: 'ACTION1' })
         expect(action.ACTION1(undefined, false)).toEqual({
@@ -269,7 +204,7 @@ describe('fsa', () => {
       })
 
       it('should proxy actions creators with extraActionCreators', () => {
-        const rewiredActionCreators = {
+        const action = proxyActionCreators<ActionCatalog>()({
           ACTION3: (): Action<ActionCatalog, 'ACTION3'> => ({
             type: 'ACTION3',
             payload: true,
@@ -279,12 +214,7 @@ describe('fsa', () => {
             type: 'ACTION2',
             payload: '12'
           })
-        }
-
-        const action = proxyActionCreators<
-          ActionCatalog,
-          typeof rewiredActionCreators
-        >(rewiredActionCreators)
+        })
 
         expect(action.ACTION1()).toEqual({ type: 'ACTION1' })
         expect(action.ACTION2('40')).toEqual({ type: 'ACTION2', payload: '40' })

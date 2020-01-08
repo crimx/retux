@@ -5,22 +5,15 @@ import { StoreAction, StoreActionCatalog } from '../index'
 // on the first visit and be cached for subsequence visits.
 // For older browser Retux also offers
 // `createActionCreators` and `declareActionCreators`.
-export const action = proxyActionCreators<StoreActionCatalog>()
-
-// You can also rewire custom action creators with anything.
-const rewiredActionCreators = {
+export const action = proxyActionCreators<StoreActionCatalog>()({
+  // You can rewire custom action creators with anything.
   // Also useful if you want to replace an Action Creator
   // with thunk or promise later on
   TodosEdit: (id: string, text: string): StoreAction<'TodosEdit'> => ({
     type: 'TodosEdit',
     payload: { id, text }
   })
-}
-
-export const action2 = proxyActionCreators<
-  StoreActionCatalog,
-  typeof rewiredActionCreators
->(rewiredActionCreators)
+})
 
 // Or write in a conventional way
 export const editTodo = (
