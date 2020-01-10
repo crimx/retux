@@ -4,18 +4,19 @@ import { proxyDefaultActionCreators } from '../default-action-creators/proxy'
 import { MixedActionCreators, DefaultActionCreator } from '../utils'
 
 /**
- * Lazy generate Basic Action Creators with signature:
+ * Lazy generate Flux Standard Action Creators with signature:
  * `(payload?, meta?) => Action`
  *
  * Action Creators are created on first visit
  * and be reused on subsequence visits.
  *
- * Requires modern JS engine which supports `Proxy`.
+ * Fallback to [[createDefaultActionCreators]]
+ * if `Proxy` is not supported.
  *
  * Example
  *
  * ```typescript
- * const action = proxyActionCreators<ActionCalatog>(actionHandlers)
+ * const action = proxyActionCreators(actionHandlers)
  * dispatch(action.ACTION_NAME)
  * dispatch(action.ACTION_NAME) // same action creator
  * ```
@@ -23,7 +24,7 @@ import { MixedActionCreators, DefaultActionCreator } from '../utils'
  * Rewire `ACTION1` to an alternative Action Creator.
  *
  * ```typescript
- * const action = proxyActionCreators<ActionCatalog>(
+ * const action = proxyActionCreators(
  *   actionHandlers,
  *   {
  *     ACTION1: () => {}

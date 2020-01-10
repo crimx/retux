@@ -4,9 +4,13 @@ import {
   DefaultActionCreator,
   CreateDefaultActionCreator
 } from '../utils'
+import { createDefaultActionCreators } from './create'
 
 /**
  * Lazy generate Action Creators with Proxy.
+ *
+ * Fallback to [[createDefaultActionCreators]]
+ * if `Proxy` is not supported.
  *
  * @param createActionCreator Retux basic or fsa `createActionCreator` function.
  * @param actionHandlers Retux Action Handlers.
@@ -24,7 +28,7 @@ export function proxyDefaultActionCreators<
 ) {
   let cachedOwnKeys: Set<string> | undefined
 
-  return new Proxy({} as { [key: string]: DefaultActionCreator }, {
+  const handler: ProxyHandler<{ [key: string]: DefaultActionCreator }> = {
     get(memo, type: string) {
       if (hasOwnProperty.call(memo, type)) {
         return memo[type]
@@ -68,5 +72,15 @@ export function proxyDefaultActionCreators<
         return { value: memo[type], configurable: true, enumerable: true }
       }
     }
-  })
+  }
+
+  try {
+    return new Proxy({}, handler)
+  } catch (e) {
+    return createDefaultActionCreators(
+      createActionCreator,
+      actionHandlers,
+      extraActionCreators
+    )
+  }
 }

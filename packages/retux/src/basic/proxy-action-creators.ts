@@ -10,7 +10,8 @@ import { MixedActionCreators, DefaultActionCreator } from '../utils'
  * Action Creators are created on first visit
  * and be reused on subsequence visits.
  *
- * Requires modern JS engine which supports `Proxy`.
+ * Fallback to [[createDefaultActionCreators]]
+ * if `Proxy` is not supported.
  *
  * Example
  *
