@@ -1,4 +1,4 @@
-import { proxyCombineObjects } from '../src/proxy-combine-objects'
+import { proxyCombineObjects } from '../src/'
 import {
   ActionHandlers,
   FSAHandlers,
@@ -128,5 +128,23 @@ describe('proxy-combine-objects', () => {
     for (let i = 0; i <= 110; i++) {
       expect(hasOwnProperty.call(obj, Date.now() + i)).toBeFalsy()
     }
+  })
+
+  it('should fallback to combineObjects when Proxy is not supported', () => {
+    const originProxy = Proxy
+
+    // eslint-disable-next-line no-global-assign
+    Proxy = (undefined as unknown) as ProxyConstructor
+
+    expect(
+      proxyCombineObjects({ a: 1, b: { b1: 2 } }, { c: [1, 2] }, {})
+    ).toEqual({
+      a: 1,
+      b: { b1: 2 },
+      c: [1, 2]
+    })
+
+    // eslint-disable-next-line no-global-assign
+    Proxy = originProxy
   })
 })

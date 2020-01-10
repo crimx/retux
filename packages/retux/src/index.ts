@@ -17,7 +17,8 @@ export {
   createActionCreators as createFSACreators,
   proxyActionCreators as proxyFSACreators
 } from './fsa'
-export { combineUniqueObjects } from './combine-unique-objects'
-export { proxyCombineObjects } from './proxy-combine-objects'
+export { combineObjects } from './combine-objects/combine-objects'
+export { combineUniqueObjects } from './combine-objects/combine-unique-objects'
+export { proxyCombineObjects } from './combine-objects/proxy-combine-objects'
 export { createReducer } from './create-reducer'
 export { CreateActionCatalog, ActionType } from './utils'

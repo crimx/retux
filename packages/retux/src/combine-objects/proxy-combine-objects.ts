@@ -1,45 +1,17 @@
-import {
-  ActionHandlers,
-  GetStateFromHandlersList,
-  GetActionCatalogFromHandlersList
-} from './basic/types'
-import {
-  ActionHandlers as FSAHandlers,
-  GetStateFromHandlersList as GetStateFromFSAHandlersList,
-  GetActionCatalogFromHandlersList as GetActionCatalogFromFSAHandlersList
-} from './fsa/types'
-import { IntersectionFromUnion, hasOwnProperty } from './utils'
+import { hasOwnProperty } from '../utils'
+import { WrapResultInHandlers } from './types'
+import { combineObjects } from './combine-objects'
 
 /**
- * If it is a list of Action Handlers, extract ActionCatalog.
- * so that the resulted object is not losing index signature.
+ * Same as [[combineObjects]]:
  *
- * @template TObject Union of Object
- */
-type WrapResultInHandlers<TObject> = GetActionCatalogFromHandlersList<
-  TObject
-> extends never
-  ? GetActionCatalogFromFSAHandlersList<TObject> extends never
-    ? IntersectionFromUnion<TObject>
-    : GetStateFromFSAHandlersList<TObject> extends never
-    ? IntersectionFromUnion<TObject>
-    : FSAHandlers<
-        GetStateFromFSAHandlersList<TObject>,
-        IntersectionFromUnion<GetActionCatalogFromFSAHandlersList<TObject>>
-      >
-  : GetStateFromHandlersList<TObject> extends never
-  ? IntersectionFromUnion<TObject>
-  : ActionHandlers<
-      GetStateFromHandlersList<TObject>,
-      IntersectionFromUnion<GetActionCatalogFromHandlersList<TObject>>
-    >
-
-/**
- * Lazy combine a list of objects with Proxy.
+ * - Always returns a new object.
+ * - The combined ActionHandlers won't lose index signature.
  *
- * Properties are cached on first visit.
+ * Since it's wrapped with Proxy:
  *
- * Properties of latter objects have higher priority.
+ * - Properties are only created and cached on first visit.
+ * - Fallback to [[combineObjects]] if `Proxy` is not supported.
  */
 export function proxyCombineObjects<TObjects extends any[]>(
   ...objs: TObjects
@@ -51,7 +23,7 @@ export function proxyCombineObjects(...objs: any[]) {
   // cache 100 nonexistent keys that were accessed
   const nonexistentKeys = new Set<string>()
 
-  return new Proxy(Object.create(null) as { [k: string]: any }, {
+  const handler: ProxyHandler<{ [k: string]: any }> = {
     get(memo, key: string) {
       if (hasOwnProperty.call(memo, key)) {
         return memo[key]
@@ -103,5 +75,11 @@ export function proxyCombineObjects(...objs: any[]) {
       }
       nonexistentKeys.add(key)
     }
-  })
+  }
+
+  try {
+    return new Proxy(Object.create(null), handler)
+  } catch (e) {
+    return combineObjects(...objs)
+  }
 }

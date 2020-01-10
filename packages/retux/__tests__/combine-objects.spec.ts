@@ -1,5 +1,5 @@
 import {
-  combineUniqueObjects,
+  combineObjects,
   ActionHandlers,
   FSAHandlers,
   CreateActionCatalog,
@@ -8,9 +8,7 @@ import {
 
 describe('combine-unique-objects', () => {
   it('should combine objects', () => {
-    expect(
-      combineUniqueObjects({ a: 1, b: { b1: 2 } }, { c: [1, 2] }, {})
-    ).toEqual({
+    expect(combineObjects({ a: 1, b: { b1: 2 } }, { c: [1, 2] }, {})).toEqual({
       a: 1,
       b: { b1: 2 },
       c: [1, 2]
@@ -19,13 +17,13 @@ describe('combine-unique-objects', () => {
 
   it('should always return new object', () => {
     const obj = { a: 1 }
-    const result = combineUniqueObjects(obj)
+    const result = combineObjects(obj)
     expect(result).toEqual(obj)
     expect(result).not.toBe(obj)
   })
 
-  it('should throw error when there are duplicated keys', () => {
-    expect(() => combineUniqueObjects({ a: 1 }, { a: 2 })).toThrow()
+  it('should not throw error when there are duplicated keys', () => {
+    expect(() => combineObjects({ a: 1 }, { a: 2 })).not.toThrow()
   })
 
   it('should ignore properties on prototype chain', () => {
@@ -40,7 +38,7 @@ describe('combine-unique-objects', () => {
     }
 
     // @ts-ignore
-    expect(combineUniqueObjects(new Obj1(), new Obj2())).toEqual({
+    expect(combineObjects(new Obj1(), new Obj2())).toEqual({
       prop2: fn
     })
   })
@@ -64,10 +62,7 @@ describe('combine-unique-objects', () => {
       ACTION2: (state, action) => state + action.payload
     }
 
-    const actionHandlers = combineUniqueObjects(
-      actionHandlers1,
-      actionHandlers2
-    )
+    const actionHandlers = combineObjects(actionHandlers1, actionHandlers2)
 
     const reducer = createReducer(state, actionHandlers)
 
@@ -94,10 +89,7 @@ describe('combine-unique-objects', () => {
       ACTION2: (state, action) => state + (action.error ? 1 : action.payload)
     }
 
-    const actionHandlers = combineUniqueObjects(
-      actionHandlers1,
-      actionHandlers2
-    )
+    const actionHandlers = combineObjects(actionHandlers1, actionHandlers2)
 
     const reducer = createReducer(state, actionHandlers)
 
