@@ -1,15 +1,19 @@
 import {
-  proxyCombineObjects,
+  proxyCombineUniqueObjects,
   ActionHandlers,
   FSAHandlers,
   CreateActionCatalog,
   createReducer
 } from '../src'
 
-describe('proxy-combine-objects', () => {
+describe('proxy-combine-unique-objects', () => {
+  it('should throw error when there are duplicated keys', () => {
+    expect(() => proxyCombineUniqueObjects({ a: 1 }, { a: 2 })).toThrow()
+  })
+
   it('should combine objects', () => {
     expect(
-      proxyCombineObjects({ a: 1, b: { b1: 2 } }, { c: [1, 2] }, {})
+      proxyCombineUniqueObjects({ a: 1, b: { b1: 2 } }, { c: [1, 2] }, {})
     ).toEqual({
       a: 1,
       b: { b1: 2 },
@@ -19,7 +23,7 @@ describe('proxy-combine-objects', () => {
 
   it('should always return new object', () => {
     const obj = { a: 1 }
-    const result = proxyCombineObjects(obj)
+    const result = proxyCombineUniqueObjects(obj)
     expect(result).toEqual(obj)
     expect(result).not.toBe(obj)
   })
@@ -36,7 +40,7 @@ describe('proxy-combine-objects', () => {
     }
 
     // @ts-ignore
-    const result = proxyCombineObjects(new Obj1(), new Obj2())
+    const result = proxyCombineUniqueObjects(new Obj1(), new Obj2())
     // @ts-ignore
     expect(result.prop1).toBeUndefined()
     // @ts-ignore
@@ -62,7 +66,10 @@ describe('proxy-combine-objects', () => {
       ACTION2: (state, action) => state + action.payload
     }
 
-    const actionHandlers = proxyCombineObjects(actionHandlers1, actionHandlers2)
+    const actionHandlers = proxyCombineUniqueObjects(
+      actionHandlers1,
+      actionHandlers2
+    )
 
     const reducer = createReducer(state, actionHandlers)
 
@@ -89,7 +96,10 @@ describe('proxy-combine-objects', () => {
       ACTION2: (state, action) => state + (action.error ? 1 : action.payload)
     }
 
-    const actionHandlers = proxyCombineObjects(actionHandlers1, actionHandlers2)
+    const actionHandlers = proxyCombineUniqueObjects(
+      actionHandlers1,
+      actionHandlers2
+    )
 
     const reducer = createReducer(state, actionHandlers)
 
@@ -98,12 +108,13 @@ describe('proxy-combine-objects', () => {
   })
 
   it('should works fine after accessing over 100 nonexistent keys', () => {
-    const obj = proxyCombineObjects({} as { [k: string]: any }, {
+    const obj = proxyCombineUniqueObjects({} as { [k: string]: any }, {
       otherKey: () => 'OtherKey'
     })
 
     // check one key over 100 times
     for (let i = 0; i <= 110; i++) {
+      // @ts-ignore
       expect(obj.xxx).toBeUndefined()
     }
 
@@ -114,7 +125,7 @@ describe('proxy-combine-objects', () => {
   })
 
   it('should works fine after checking own properties on over 100 nonexistent keys', () => {
-    const obj = proxyCombineObjects({} as { [k: string]: any }, {
+    const obj = proxyCombineUniqueObjects({} as { [k: string]: any }, {
       otherKey: () => 'OtherKey'
     })
 
@@ -137,7 +148,7 @@ describe('proxy-combine-objects', () => {
     Proxy = (undefined as unknown) as ProxyConstructor
 
     expect(
-      proxyCombineObjects({ a: 1, b: { b1: 2 } }, { c: [1, 2] }, {})
+      proxyCombineUniqueObjects({ a: 1, b: { b1: 2 } }, { c: [1, 2] }, {})
     ).toEqual({
       a: 1,
       b: { b1: 2 },
