@@ -21,7 +21,7 @@ export function proxyCombineObjects(...objs: any[]) {
   let cachedOwnKeys: Set<string> | undefined
 
   // cache 100 nonexistent keys that were accessed
-  const nonexistentKeys = new Set<string>()
+  let nonexistentKeys: Set<string> | undefined
 
   const handler: ProxyHandler<{ [k: string]: any }> = {
     get(memo, key: string) {
@@ -29,7 +29,7 @@ export function proxyCombineObjects(...objs: any[]) {
         return memo[key]
       }
 
-      if (nonexistentKeys.has(key)) {
+      if (nonexistentKeys && nonexistentKeys.has(key)) {
         return
       }
 
@@ -40,7 +40,9 @@ export function proxyCombineObjects(...objs: any[]) {
         }
       }
 
-      if (nonexistentKeys.size >= 100) {
+      if (!nonexistentKeys) {
+        nonexistentKeys = new Set()
+      } else if (nonexistentKeys.size >= 100) {
         nonexistentKeys.clear()
       }
       nonexistentKeys.add(key)
@@ -58,7 +60,7 @@ export function proxyCombineObjects(...objs: any[]) {
         return { value: memo[key], configurable: true, enumerable: true }
       }
 
-      if (nonexistentKeys.has(key)) {
+      if (nonexistentKeys && nonexistentKeys.has(key)) {
         return
       }
 
@@ -70,7 +72,9 @@ export function proxyCombineObjects(...objs: any[]) {
         }
       }
 
-      if (nonexistentKeys.size >= 100) {
+      if (!nonexistentKeys) {
+        nonexistentKeys = new Set()
+      } else if (nonexistentKeys.size >= 100) {
         nonexistentKeys.clear()
       }
       nonexistentKeys.add(key)
