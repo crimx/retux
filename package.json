@@ -4,6 +4,8 @@
   "license": "MIT",
   "scripts": {
     "postinstall": "lerna bootstrap",
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
     "lint": "eslint --no-eslintrc -c .eslintrc.js ./*.js ./packages/**/*.ts",
     "test": "jest --coverage",
     "build": "lerna run build && lerna bootstrap",
@@ -56,6 +58,7 @@
     "standard-version": "^7.0.1",
     "ts-jest": "^24.2.0",
     "typescript": "^3.7.3",
-    "vuepress": "^1.2.0"
+    "vuepress": "^1.2.0",
+    "vuepress-theme-yuu": "^2.2.1"
   }
 }
