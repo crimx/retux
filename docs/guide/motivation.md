@@ -4,15 +4,9 @@ The main motivation of creating Retux is that the current solutions are more of 
 
 ## Problems of the Official Recipes
 
-Redux officially supports TypeScript typings. But if you read the [recipes](https://redux.js.org/recipes/usage-with-typescript#usage-with-typescript) on the docs it seems even more cumbersome than JavaScript.
+Redux officially supports TypeScript typings. Yay! But wait, reading the [recipes](https://redux.js.org/recipes/usage-with-typescript#usage-with-typescript) on the docs it seems even more cumbersome than JavaScript.
 
 You ended up writing something like this:
-
-```typescript
-export const SEND_MESSAGE = 'SEND_MESSAGE'
-```
-
-And also:
 
 ```typescript
 // src/store/system/types.ts
@@ -39,9 +33,9 @@ export function updateSession(newSession: SystemState): SystemActionTypes {
 }
 ```
 
-This is a lot of boilerplate code.
+This is a lot of boilerplate code for just one Action.
 
-In Retux Actions of a module are defined only once in a central hub called Action Catalog which will be reused to generate other utilities including Action Creators.
+In Retux Actions of a module are defined only once in a central hub called [Action Catalog][ActionCatalog] which will be reused to generate other utilities including Action Creators.
 
 ## Problems of Other Typescript Guide
 
@@ -58,7 +52,9 @@ switch (action.type) {
 
 `getType(todos.add)` works because `function` properties are modified by [typesafe-actions](https://github.com/piotrwitek/typesafe-actions#action-helpers).
 
-Also with the example on [Action Creators](https://github.com/piotrwitek/react-redux-typescript-guide#action-creators-):
+This is really a clever solution to reuse code. But base on experience we better follow the KISS rule(Keep It Simple Stupid). Also see Dan's [post](https://overreacted.io/goodbye-clean-code/) on this.
+
+Then the example on [Action Creators](https://github.com/piotrwitek/react-redux-typescript-guide#action-creators-):
 
 ```typescript
 export const increment = () => action(INCREMENT);
@@ -74,15 +70,15 @@ export const payloadCreatorAction = createAction(
 )<string>();
 ```
 
-This solves the boilerplate issue but the code is not clean enough for others to read. This is because the Action declaration is mixing with the Action Creator's implementation. As project scales it is not easy to take a glance and know what actions is provided and how to use them.
+This solves the boilerplate issue but the code is not clean enough for others to read. This is due to the Action declaration is mixing with the Action Creator's implementation. As project scales it is not easy to take a glance and know what actions is provided and how to use them.
 
-Maybe a separated documentation? Nah. Documentations are destined to be left unmaintained.
+How about a separated documentation? Nah. Documentations are destined to be left unmaintained.
 
-Retux addresses this issue with the concept of Action Catalog and `createActionCreators`.
+Retux addresses this issue with the concept of [Action Catalog][ActionCatalog] and `createActionCreators`.
 
 ## Problems of State Sharing
 
-As the store scales we were encouraged to split it into different reducers and combine them with `combineReducers`.
+As the store scales it was recommended to split it into different reducers and combine them with `combineReducers`.
 
 And [then](https://redux.js.org/faq/reducers#how-do-i-share-state-between-two-reducers-do-i-have-to-use-combinereducers):
 
@@ -118,3 +114,5 @@ There are two main reasons why action creators exist in Redux:
    This is true if you use middlerwares that introduce mixed action types. For others like Redux Sage or Redux Observable which implement Process Manager pattern, raw Actions are actually preferred in TypeScript. They are simpler to write and faster to run.
 
 Nevertheless, boilerplate Action Creators got to go. Redux offers `createActionCreators` and `proxyActionCreators` for easy generating Action Creators.
+
+[ActionCatalog]: ./core-concepts
