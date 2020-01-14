@@ -2771,6 +2771,15 @@
   dependencies:
     nprogress "^0.2.0"
 
+"@vuepress/plugin-pwa@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@vuepress/plugin-pwa/-/plugin-pwa-1.2.0.tgz#d9bc1d74bcf4d57535d15d7fab2fead7c1d3fb3b"
+  integrity sha512-2WKm0sV8unoM1Ck+k3PEyWS+OyjjpM/z0HoPol3Pqb1t2TcgSD7mzVwuoFaK2Z5g2BrqT9wBLm9r8UpKI5Zfzg==
+  dependencies:
+    "@vuepress/shared-utils" "^1.2.0"
+    register-service-worker "^1.5.2"
+    workbox-build "^4.3.1"
+
 "@vuepress/plugin-register-components@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@vuepress/plugin-register-components/-/plugin-register-components-1.2.0.tgz#95aa0e0af94b2758b26ab98814c43b0f7bcd502b"
@@ -12210,6 +12219,11 @@ regexpu-core@^4.6.0:
     unicode-match-property-ecmascript "^1.0.4"
     unicode-match-property-value-ecmascript "^1.1.0"
 
+register-service-worker@^1.5.2:
+  version "1.6.2"
+  resolved "https://registry.yarnpkg.com/register-service-worker/-/register-service-worker-1.6.2.tgz#9297e54c205c371c6e49bfa88f6997e8dd315f4c"
+  integrity sha512-I8L87fX2TK29LDx+wgyOUh2BJ3rDIRC1FtRZEHeP3rivzDv6p1DDZLGGtPucqjEkm45+2crtFIFssEWv56+9Wg==
+
 regjsgen@^0.5.0:
   version "0.5.1"
   resolved "https://registry.yarnpkg.com/regjsgen/-/regjsgen-0.5.1.tgz#48f0bf1a5ea205196929c0d9798b42d1ed98443c"
@@ -14146,11 +14160,6 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
-vue-click-outside@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/vue-click-outside/-/vue-click-outside-1.0.7.tgz#cdd2b1605e3c4944784e1794eae4a12a0f700bd6"
-  integrity sha1-zdKxYF48SUR4TheU6uShKg9wC9Y=
-
 vue-hot-reload-api@^2.3.0:
   version "2.3.4"
   resolved "https://registry.yarnpkg.com/vue-hot-reload-api/-/vue-hot-reload-api-2.3.4.tgz#532955cc1eb208a3d990b3a9f9a70574657e08f2"
@@ -14238,13 +14247,6 @@ vuepress-plugin-smooth-scroll@^0.0.3:
   integrity sha512-qsQkDftLVFLe8BiviIHaLV0Ea38YLZKKonDGsNQy1IE0wllFpFIEldWD8frWZtDFdx6b/O3KDMgVQ0qp5NjJCg==
   dependencies:
     smoothscroll-polyfill "^0.4.3"
-
-vuepress-theme-yuu@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/vuepress-theme-yuu/-/vuepress-theme-yuu-2.2.1.tgz#b5d34e0df5f7fd5cd02ed550217fa050c84bb348"
-  integrity sha512-3E6mGo0HEmTROnLXF2Tjju+dROyfPn1D8sW+LTLGpGNfo0dxAqT/SfWUUhEm+W4T2iZmSCNoZxosUxGFD4mc0Q==
-  dependencies:
-    vue-click-outside "^1.0.7"
 
 vuepress@^1.2.0:
   version "1.2.0"
