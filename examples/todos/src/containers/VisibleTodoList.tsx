@@ -22,7 +22,7 @@ const mapDispatchToProps: MapDispatchToProps<
   TodoListProps,
   Dispatchers
 > = dispatch => ({
-  toggleTodo: (id: string) => dispatch({ type: 'TODOS/TOGGLE', payload: id })
+  toggleTodo: (id: string) => dispatch({ type: 'TODOS$TOGGLE', payload: id })
 })
 
 export const VisibleTodoList = connect(

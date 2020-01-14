@@ -1,8 +1,8 @@
 import React, { FC } from 'react'
 import { Todo } from './Todo'
 
-export interface TodoListProps {
-  todos: Array<{ id: string; text: string; completed: boolean }>
+export type TodoListProps = {
+  todos: ReadonlyArray<{ id: string; text: string; completed: boolean }>
   toggleTodo: (id: string) => void
 }
 

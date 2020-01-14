@@ -1,26 +1,26 @@
 import { CreateActionCatalog, ActionHandlers } from 'retux'
 
-export const state = [] as Array<{
+export const initState = [] as Array<{
   id: string
   text: string
   completed: boolean
 }>
 
-export type State = typeof state
+export type State = Readonly<typeof initState>
 
 export type ActionCatalog = CreateActionCatalog<{
-  'TODOS/ADD': {
+  TODOS$ADD: {
     /** text */
     payload: string
   }
-  'TODOS/TOGGLE': {
+  TODOS$TOGGLE: {
     /** id */
     payload: string
   }
 }>
 
 export const actionHandlers: ActionHandlers<State, ActionCatalog> = {
-  'TODOS/ADD': (state, { payload: text }) => [
+  TODOS$ADD: (state, { payload: text }) => [
     ...state,
     {
       id:
@@ -34,7 +34,7 @@ export const actionHandlers: ActionHandlers<State, ActionCatalog> = {
       completed: false
     }
   ],
-  'TODOS/TOGGLE': (state, { payload: id }) =>
+  TODOS$TOGGLE: (state, { payload: id }) =>
     state.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     )

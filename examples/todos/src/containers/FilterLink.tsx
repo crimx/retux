@@ -30,7 +30,7 @@ const mapDispatchToProps: MapDispatchToProps<
   PropsWithChildren<FilterLinkProps>
 > = (dispatch, ownProps) => ({
   onClick: () =>
-    dispatch({ type: 'VISIBILITY_FILTER/SET', payload: ownProps.filter })
+    dispatch({ type: 'VISIBILITY_FILTER$SET', payload: ownProps.filter })
 })
 
 export const FilterLink = connect(mapStateToProps, mapDispatchToProps)(Link)

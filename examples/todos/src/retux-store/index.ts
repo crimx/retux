@@ -1,33 +1,25 @@
 import { combineReducers, createStore as createReduxStore } from 'redux'
 import { createReducer, Action } from 'retux'
-import {
-  state as todosState,
-  actionHandlers as todosHandler,
-  ActionCatalog as todosActionCatalog
-} from './modules/todos'
-import {
-  state as visibilityFilterState,
-  actionHandlers as visibilityFilterHandler,
-  ActionCatalog as visibilityFilterActionCatalog
-} from './modules/visibilityFilter'
+import * as Todos from './modules/todos'
+import * as VisibilityFilter from './modules/visibilityFilter'
 
 export type StoreAction =
-  | Action<todosActionCatalog>
-  | Action<visibilityFilterActionCatalog>
+  | Action<Todos.ActionCatalog>
+  | Action<VisibilityFilter.ActionCatalog>
 
-export type StoreState = {
-  todos: typeof todosState
-  visibilityFilter: typeof visibilityFilterState
-}
+export type StoreState = Readonly<{
+  todos: Todos.State
+  visibilityFilter: VisibilityFilter.State
+}>
 
 /** Redux store setup */
 export const createStore = () =>
   createReduxStore(
     combineReducers({
-      todos: createReducer(todosState, todosHandler),
+      todos: createReducer(Todos.initState, Todos.actionHandlers),
       visibilityFilter: createReducer(
-        visibilityFilterState,
-        visibilityFilterHandler
+        VisibilityFilter.initState,
+        VisibilityFilter.actionHandlers
       )
     })
   )

@@ -22,7 +22,7 @@ const AddTodoInner: FC<AddTodoProps> = ({ dispatch }) => {
           if (inputRef.current) {
             const text = inputRef.current.value.trim()
             if (text) {
-              dispatch({ type: 'TODOS/ADD', payload: text })
+              dispatch({ type: 'TODOS$ADD', payload: text })
               inputRef.current.value = ''
             }
           }
