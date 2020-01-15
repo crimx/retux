@@ -189,7 +189,7 @@ Notice with FSA we do not destructure the `action` argument so that we can separ
 
 Since `ActionHandlers` is strongly typed, any missing or misspelled action handler will fail TypeScript compiling.
 
-You can also get a single Action Handler type with `ActionHandler`. I will show how later in the modularization example.
+You can also get a single Action Handler type with `ActionHandler`. This is useful for defining large Action Handlers outside of `ActionHandlers`.
 
 ## Combine Action Handlers
 

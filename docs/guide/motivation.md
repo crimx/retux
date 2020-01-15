@@ -4,7 +4,7 @@ The main motivation of creating Retux is that the current solutions are more of 
 
 ## Problems of the Official Recipes
 
-Redux officially supports TypeScript typings. Yay! But wait, reading the [recipes](https://redux.js.org/recipes/usage-with-typescript#usage-with-typescript) on the docs it seems even more cumbersome than JavaScript.
+Redux officially supports TypeScript typings. Yay! But wait, after reading the [recipes](https://redux.js.org/recipes/usage-with-typescript#usage-with-typescript) on the docs it seems even more cumbersome than JavaScript.
 
 You ended up writing something like this:
 
@@ -50,11 +50,9 @@ switch (action.type) {
     ...
 ```
 
-`getType(todos.add)` works because `function` properties are modified by [typesafe-actions](https://github.com/piotrwitek/typesafe-actions#action-helpers).
+This is a clever solution to reuse code but it also brings obscurity. `getType(todos.add)` works because the `todos.add` function properties are modified by [typesafe-actions](https://github.com/piotrwitek/typesafe-actions#action-helpers). This is fine if everyone in the team are on the same page. For folks who prefer the KISS rule(Keep It Simple Stupid), Retux reuses Actions instead of Action Creators so no need to introduce extra magic. Also see Dan's [post](https://overreacted.io/goodbye-clean-code/) on clean code.
 
-This is really a clever solution to reuse code. But base on experience we better follow the KISS rule(Keep It Simple Stupid). Also see Dan's [post](https://overreacted.io/goodbye-clean-code/) on this.
-
-Then the example on [Action Creators](https://github.com/piotrwitek/react-redux-typescript-guide#action-creators-):
+Then in the example on [Action Creators](https://github.com/piotrwitek/react-redux-typescript-guide#action-creators-):
 
 ```typescript
 export const increment = () => action(INCREMENT);
@@ -70,23 +68,25 @@ export const payloadCreatorAction = createAction(
 )<string>();
 ```
 
-This solves the boilerplate issue but the code is not clean enough for others to read. This is due to the Action declaration is mixing with the Action Creator's implementation. As project scales it is not easy to take a glance and know what actions is provided and how to use them.
+This solves the boilerplate issue but the code is not clear enough for others to read. This is due to the Action declaration is mixing with the Action Creator's implementation. As project scales it is not easy for team members to take a glance and know what actions is provided and how to use them.
 
 How about a separated documentation? Nah. Documentations are destined to be left unmaintained.
 
-Retux addresses this issue with the concept of [Action Catalog][ActionCatalog] and `createActionCreators`.
+See how [Action Catalog][ActionCatalog] offers the same benefits of [Flux constant style][FluxConstantStyle] and how to generate Action Creators with [`createActionCreators`][CreateActionCreators].
 
 ## Problems of State Sharing
 
-As the store scales it was recommended to split it into different reducers and combine them with `combineReducers`.
+As the store scales in Redux it is recommended to split it into different reducers and combine them with `combineReducers`.
 
 And [then](https://redux.js.org/faq/reducers#how-do-i-share-state-between-two-reducers-do-i-have-to-use-combinereducers):
 
 > Many users later want to try to share data between two reducers, but find that `combineReducers` does not allow them to do so. There are several approaches that can be used:
 
-Now you either go down the reducer-hell with `reduce-reducers` or move logic to middlewares. If you move only the necessary logic to middlewares(a.k.a fat reducer) then your codebase will look scattered; or if for consistency you move most of the logic to middlewares(fat middleware) then the reducer is all boilerplate code.
+Now you either go down the reducer-hell with `reduce-reducers` or move logic to middlewares. If you move only the necessary logic to middlewares(a.k.a fat reducer) then your codebase will look scattered which is hard for others to follow; or if for consistency you move most of the logic to middlewares(fat middleware) then the reducer is all boilerplate code.
 
-Sharing states in Retux is simple because modules are desgined to be flexible on splitting and merging with low cost.
+Another drawback of combining reducers is performance related. With N reducers it will be N times slower on handling each Action. This may not be trivial for projects with many reducers and frequent `dispatch`.
+
+Sharing states in Retux is simple because modules are desgined to be flexible on splitting and merging with low cost. See [Action Handlers][ActionHandlers] and [Combine Action Handlers][CombineActionHandlers].
 
 ## Get Rid of Boilerplate Action Creators
 
@@ -105,14 +105,21 @@ There are two main reasons why action creators exist in Redux:
 
 1. Redux relies on `string` to distinguish action types. But to JavaScript compiler, `ACTION1` and `ACTIONI` are no different - they are all `string`. So if you mistype `ACTION1` as `ACTIONI`(and you will, according to Murphy's Law), no compile-time error is yelled. But when the action is wrapped in a function whose name should you mistyped, the compiler/linter can now correctly catch the error.
   
-   [Flux constant style](https://redux.js.org/recipes/reducing-boilerplate#actions) is another solution for this by assigning Actions names to constants.
+   [Flux constant style][FluxConstantStyle] is another solution for this by assigning Actions names to constants.
 
    With TypeScript this is not an issue because we can declare actual `ACTION1` and `ACTION2` types.
 
 2. With middlerwares like Redux Thunk or Redux Promise, an Action Creator can be easily swapped later on to gain async ability.
 
    This is true if you use middlerwares that introduce mixed action types. For others like Redux Sage or Redux Observable which implement Process Manager pattern, raw Actions are actually preferred in TypeScript. They are simpler to write and faster to run.
+   
+   Retux also has solution to strictly type mixed action types. See the [thunk-promise-example][examples].
 
-Nevertheless, boilerplate Action Creators got to go. Redux offers `createActionCreators` and `proxyActionCreators` for easy generating Action Creators.
+Nevertheless, boilerplate Action Creators got to go. Redux offers [`createActionCreators`][CreateActionCreators] and [`proxyActionCreators`][CreateActionCreators] for easy generating Action Creators.
 
-[ActionCatalog]: ./core-concepts
+[ActionCatalog]: ./core-concepts.md#action-catalog
+[ActionHandlers]: ./core-concepts.md#action-handlers
+[CreateActionCreators]: ./core-concepts.md#create-action-creators
+[CombineActionHandlers]: ./core-concepts.md#combine-action-handlers
+[FluxConstantStyle]: https://redux.js.org/recipes/reducing-boilerplate#actions
+[examples]: https://github.com/crimx/retux/tree/master/examples
