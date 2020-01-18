@@ -143,9 +143,15 @@ describe('proxy-combine-unique-objects', () => {
 
   it('should fallback to combineObjects when Proxy is not supported', () => {
     const originProxy = Proxy
+    const originSet = Set
 
     // eslint-disable-next-line no-global-assign
     Proxy = (undefined as unknown) as ProxyConstructor
+    // eslint-disable-next-line no-global-assign
+    Set = (undefined as unknown) as SetConstructor
+
+    expect(Proxy).toBeUndefined()
+    expect(Set).toBeUndefined()
 
     expect(
       proxyCombineUniqueObjects({ a: 1, b: { b1: 2 } }, { c: [1, 2] }, {})
@@ -157,5 +163,7 @@ describe('proxy-combine-unique-objects', () => {
 
     // eslint-disable-next-line no-global-assign
     Proxy = originProxy
+    // eslint-disable-next-line no-global-assign
+    Set = originSet
   })
 })

@@ -137,6 +137,41 @@ describe('basic', () => {
         expect(hasOwnProperty.call(action2, 'ACTION1')).toBeTruthy()
         expect(hasOwnProperty.call(action2, 'ACTION4')).toBeTruthy()
       })
+
+      it('should fallback to createActionCreators when Proxy is not supported', () => {
+        const originProxy = Proxy
+        const originSet = Set
+
+        // eslint-disable-next-line no-global-assign
+        Proxy = (undefined as unknown) as ProxyConstructor
+        // eslint-disable-next-line no-global-assign
+        Set = (undefined as unknown) as SetConstructor
+
+        expect(Proxy).toBeUndefined()
+        expect(Set).toBeUndefined()
+
+        const action = proxyActionCreators(actionHandlers, {
+          ACTION4: (): Action<ActionCatalog, 'ACTION2'> => ({
+            type: 'ACTION2',
+            payload: 12
+          })
+        })
+
+        expect(action['xxx' as keyof typeof action]).toBeUndefined()
+        expect(action.ACTION1()).toEqual({ type: 'ACTION1' })
+        expect(action.ACTION2(40)).toEqual({ type: 'ACTION2', payload: 40 })
+        expect(action.ACTION3(true, false)).toEqual({
+          type: 'ACTION3',
+          payload: true,
+          meta: false
+        })
+        expect(action.ACTION4()).toEqual({ type: 'ACTION2', payload: 12 })
+
+        // eslint-disable-next-line no-global-assign
+        Proxy = originProxy
+        // eslint-disable-next-line no-global-assign
+        Set = originSet
+      })
     })
   })
 })
