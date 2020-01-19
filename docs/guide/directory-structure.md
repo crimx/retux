@@ -173,7 +173,7 @@ export const createStore = () =>
   )
 ```
 
-Here shows usage with Redux's `combineReducers`. Each module has a separated state. Modules can also share a single state.
+Here shows usage with Redux's `combineReducers`. Each module has a separated state. Modules can also [share a single state](#state-sharing).
 
 If you have a complex store setup, move `createStore` to `retux-store/create-store.ts`.
 
@@ -182,24 +182,10 @@ If you have a complex store setup, move `createStore` to `retux-store/create-sto
 
 If you prefer Action Creators, add:
 
-```{3,4}
+```
 ├── src
 │   ├── retux-store
 │   │   ├── actions.ts
-│   │   ├── modules
-│   │   │   ├── todos.ts
-│   │   │   └── visibilityFilter.ts
-│   │   └── index.ts
-│   │
-│   ├── containers
-|   |   └── List.tsx
-│   │
-│   ├── components
-│   │   └── App.tsx
-│   │
-│   └── index.tsx
-│
-└── package.json
 ```
 
 In `retux-store/actions.ts` we generate and customize Action Creators.
@@ -246,7 +232,7 @@ You can have a single state for the entire store.
 │   │   │   └── visibilityFilter.ts
 ```
 
-Or just sharing state among a few modules.
+Or just share state among a few modules.
 
 ```
 ├── src
