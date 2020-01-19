@@ -1,6 +1,6 @@
 # Motivation
 
-The main motivation of creating Retux is that the current solutions are more of making TypeScript or Redux work for one another instead of work together.
+The main motivation of creating Retux is that we need a TypeScript Redux architecture that reduces boilerplate code while still being declarative. The current norm which surrounds Action Creators is mostly borrowed from the JavaScript realm. We know TypeScript can do more. That is why we redesigned from the ground up with type-first in mind.
 
 ## Problems of the Official Recipes
 
@@ -33,7 +33,7 @@ export function updateSession(newSession: SystemState): SystemActionTypes {
 }
 ```
 
-This is a lot of boilerplate code for just one Action.
+We still write the boilerplate code like in JavaScript and now plus type definitions.
 
 In Retux Actions of a module are defined only once in a central hub called [Action Catalog][ActionCatalog] which will be reused to generate other utilities including Action Creators.
 
@@ -111,7 +111,7 @@ There are two main reasons why action creators exist in Redux:
 
 2. With middlerwares like Redux Thunk or Redux Promise, an Action Creator can be easily swapped later on to gain async ability.
 
-   This is true if you use middlerwares that introduce mixed action types. For others like Redux Sage or Redux Observable which implement Process Manager pattern, raw Actions are actually preferred in TypeScript. They are simpler to write and faster to run.
+   This is true if you use middlerwares that introduce mixed action types. For others like Redux Saga or Redux Observable which implement Process Manager pattern, raw Actions are actually preferred in TypeScript. They are simpler to write and faster to run.
    
    Retux also has solution to strictly type mixed action types. See the [thunk-promise-example][examples].
 
