@@ -47,6 +47,8 @@ module.exports = {
               collapsable: false, // optional, defaults to true
               sidebarDepth: 2, // optional, defaults to 1
               children: [
+                '/middlewares/redux-thunk',
+                '/middlewares/redux-promise',
                 '/middlewares/redux-thunk-and-redux-promise',
                 '/middlewares/redux-observable'
               ]
