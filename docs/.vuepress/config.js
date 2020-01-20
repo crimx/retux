@@ -20,20 +20,39 @@ module.exports = {
           }
         },
         nav: [{ text: 'Guide', link: '/guide/' }],
-        sidebar: [
-          {
-            title: 'Guide', // required
-            path: '/guide/', // optional, which should be a absolute path.
-            collapsable: false, // optional, defaults to true
-            sidebarDepth: 1, // optional, defaults to 1
-            children: [
-              '/guide/',
-              '/guide/motivation',
-              '/guide/core-concepts',
-              '/guide/directory-structure'
-            ]
-          }
-        ]
+        sidebar: {
+          '/': [
+            {
+              title: 'Guide', // required
+              path: '/guide/', // optional, which should be a absolute path.
+              collapsable: false, // optional, defaults to true
+              sidebarDepth: 2, // optional, defaults to 1
+              children: [
+                '',
+                '/guide/motivation',
+                '/guide/core-concepts',
+                '/guide/directory-structure'
+              ]
+            },
+            {
+              title: 'Advanced', // required
+              path: '/guide/', // optional, which should be a absolute path.
+              collapsable: false, // optional, defaults to true
+              sidebarDepth: 2, // optional, defaults to 1
+              children: ['/guide/react-retux', '/guide/proxy']
+            },
+            {
+              title: 'Middlewares', // required
+              path: '/middlewares/', // optional, which should be a absolute path.
+              collapsable: false, // optional, defaults to true
+              sidebarDepth: 2, // optional, defaults to 1
+              children: [
+                '/middlewares/redux-thunk-and-redux-promise',
+                '/middlewares/redux-observable'
+              ]
+            }
+          ]
+        }
       }
     }
   },
