@@ -113,7 +113,7 @@ There are two main reasons why action creators exist in Redux:
 
    This is true if you use middlerwares that introduce mixed action types. For others like Redux Saga or Redux Observable which implement Process Manager pattern, raw Actions are actually preferred in TypeScript. They are simpler to write and faster to run.
    
-   Retux also has solution to strictly type mixed action types. See the [thunk-promise-example][examples].
+   Retux also has solution to strictly type mixed action types. See the [Redux Thunk and Redux Promise](../middlewares/redux-thunk-and-redux-promise.md) guide.
 
 Nevertheless, boilerplate Action Creators got to go. Redux offers [`createActionCreators`][CreateActionCreators] and [`proxyActionCreators`][CreateActionCreators] for easy generating Action Creators.
 

@@ -24,11 +24,10 @@ module.exports = {
           '/': [
             {
               title: 'Guide', // required
-              path: '/guide/', // optional, which should be a absolute path.
               collapsable: false, // optional, defaults to true
               sidebarDepth: 2, // optional, defaults to 1
               children: [
-                '',
+                '/guide/',
                 '/guide/motivation',
                 '/guide/core-concepts',
                 '/guide/directory-structure'
@@ -36,7 +35,6 @@ module.exports = {
             },
             {
               title: 'Advanced', // required
-              path: '/guide/', // optional, which should be a absolute path.
               collapsable: false, // optional, defaults to true
               sidebarDepth: 2, // optional, defaults to 1
               children: ['/guide/react-retux', '/guide/proxy']
