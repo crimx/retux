@@ -1,7 +1,3 @@
----
-sidebarDepth: 2
----
-
 # Directory Structure
 
 With Retux it is recommended always start with the basic structure and perform small refactoring as it scales.

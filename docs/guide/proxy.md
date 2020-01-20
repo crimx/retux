@@ -9,8 +9,8 @@ If you have read the [core concepts][core-concepts] of Retux, you may notice the
 Features:
 
 1. Same signature. Can be swapped directly.
-2. An object property is only created and cached on first visit.
+2. Object properties are only created and cached on first visit.
 3. `Object.keys`, `Object.prototype.hasOwnProperty` and other property descriptor related methods work as usual.
-4. Fallback to simple counterpart when Proxy is not supported.
+4. Fallback to the simple counterparts when Proxy is not supported.
 
 [core-concepts]: ./core-concepts.md
