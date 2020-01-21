@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "thunk-promise-example",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "devDependencies": {
     "react-scripts": "^3.3.0",
     "typescript": "^3.7.4"
@@ -15,11 +15,11 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.1.3",
-    "react-retux": "^0.0.1",
+    "react-retux": "^0.1.0",
     "redux": "^4.0.5",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "retux": "^0.0.1"
+    "retux": "^0.1.0"
   },
   "scripts": {
     "start": "cross-env SKIP_PREFLIGHT_CHECK=true react-scripts start",

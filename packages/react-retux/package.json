@@ -10,7 +10,7 @@
     "type-safe",
     "strongly-typed"
   ],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "files": [
     "lib/**/*",
     "README.md",
@@ -43,6 +43,6 @@
     "redux": "^4.0.5",
     "redux-promise": "^0.6.0",
     "redux-thunk": "^2.3.0",
-    "retux": "^0.0.1"
+    "retux": "^0.1.0"
   }
 }

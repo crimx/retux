@@ -9,7 +9,7 @@
     "type-safe",
     "strongly-typed"
   ],
-  "version": "0.0.1",
+  "version": "0.1.0",
   "files": [
     "lib/**/*",
     "README.md",
