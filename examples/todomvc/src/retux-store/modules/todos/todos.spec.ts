@@ -1,8 +1,8 @@
 import { createReducer, Action } from 'retux'
 import { actionHandlers, ActionCatalog } from './index'
-import { state } from './state'
+import { initialState } from './state'
 
-const todos = createReducer(state, actionHandlers)
+const todos = createReducer(initialState, actionHandlers)
 
 describe('todos reducer', () => {
   it('should handle initial state', () => {
