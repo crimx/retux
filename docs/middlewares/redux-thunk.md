@@ -13,7 +13,7 @@ This is a guide on how to strongly type [Redux Thunk](https://github.com/reduxjs
 First we define Action and Dispatch types specifically for Redux Thunk.
 
 ```typescript
-// src/retux-store/index.ts
+// src/retux-store/modules/index.ts
 import thunk, {
   ThunkAction as CreateThunkAction,
   ThunkDispatch as CreateThunkDispatch

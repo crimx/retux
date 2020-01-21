@@ -13,7 +13,7 @@ This is a guide on how to strongly type [Redux Promsie](https://github.com/redux
 First we define Action and Dispatch types specifically for Redux Promise.
 
 ```typescript
-// src/retux-store/index.ts
+// src/retux-store/modules/index.ts
 export type PromiseAction<
   Type extends StoreActionType = StoreActionType
 > = Promise<StoreAction<Type>>

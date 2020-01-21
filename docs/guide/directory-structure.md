@@ -9,7 +9,8 @@ With Retux it is recommended always start with the basic structure and perform s
 │   ├── retux-store
 │   │   ├── modules
 │   │   │   ├── todos.ts
-│   │   │   └── visibilityFilter.ts
+│   │   │   ├── visibilityFilter.ts
+│   │   │   └── index.ts
 │   │   └── index.ts
 │   │
 │   ├── containers
@@ -126,15 +127,16 @@ export { ActionCatalog } from './action-catalog'
 export { actionHandlers } from './action-handlers'
 ```
 
-### Retux Entry
+### Module Root
 
-In `retux-store/index.ts` we combine modules.
+In `retux-store/modules/index.ts` we combine modules.
 
 ```typescript
+// src/retux-store/modules/index.ts
 import { combineReducers, createStore as createReduxStore } from 'redux'
 import { createReducer, proxyCombineUniqueObjects, Action } from 'retux'
-import * as Todos from './modules/todos'
-import * as VisibilityFilter from './modules/visibilityFilter'
+import * as Todos from './todos'
+import * as VisibilityFilter from './visibilityFilter'
 
 export type StoreActionCatalog = Todos.ActionCatalog &
   VisibilityFilter.ActionCatalog
@@ -156,23 +158,31 @@ export type StoreState = Readonly<{
   visibilityFilter: VisibilityFilter.State
 }>
 
-/** Redux store setup */
-export const createStore = () =>
-  createReduxStore(
-    combineReducers({
-      todos: createReducer(Todos.initState, Todos.actionHandlers),
-      visibilityFilter: createReducer(
-        VisibilityFilter.initState,
-        VisibilityFilter.actionHandlers
-      )
-    })
+export const rootReducer = combineReducers({
+  todos: createReducer(Todos.initState, Todos.actionHandlers),
+  visibilityFilter: createReducer(
+    VisibilityFilter.initState,
+    VisibilityFilter.actionHandlers
   )
+})
 ```
 
 Here shows usage with Redux's `combineReducers`. Each module has a separated state. Modules can also [share a single state](#state-sharing).
 
-If you have a complex store setup, move `createStore` to `retux-store/create-store.ts`.
+### Create Redux Store
 
+Setup Redux store and middlewares.
+
+```typescript
+// src/retux-store/index.ts
+import { applyMiddleware, createStore as createReduxStore } from 'redux'
+import { createEpicMiddleware } from 'redux-observable'
+import { rootReducer } from './modules'
+
+export const createStore = () => {
+  return createReduxStore(rootReducer)
+}
+```
 
 ## With Action Creators
 
@@ -225,7 +235,8 @@ You can have a single state for the entire store.
 │   │   │   └── index.ts
 │   │   ├── modules
 │   │   │   ├── todos.ts
-│   │   │   └── visibilityFilter.ts
+│   │   │   ├── visibilityFilter.ts
+│   │   │   └── index.ts
 ```
 
 Or just share state among a few modules.
@@ -239,7 +250,8 @@ Or just share state among a few modules.
 │   │   │   │   ├── basic.ts
 │   │   │   │   ├── bulk.ts
 │   │   │   │   └── index.ts
-│   │   │   └── visibilityFilter.ts
+│   │   │   ├── visibilityFilter.ts
+│   │   │   └── index.ts
 ```
 
 See [example](https://github.com/crimx/retux/blob/master/examples/todomvc/src/retux-store/modules/todos).`todos/basic.ts` and `todos/bulk.ts` export `ActionCatalog` and `actionHandlers` which are combined at `todos/index.ts`.

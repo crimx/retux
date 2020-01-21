@@ -15,7 +15,7 @@ This is a guide on how to strongly type [Redux Thunk](https://github.com/reduxjs
 Since we have Promise, you might want to dispatch Promise with Thunk `dispatch`.
 
 ```typescript
-// src/retux-store/index.ts
+// src/retux-store/modules/index.ts
 export type PromiseAction<
   Type extends StoreActionType = StoreActionType
 > = Promise<StoreAction<Type>>
