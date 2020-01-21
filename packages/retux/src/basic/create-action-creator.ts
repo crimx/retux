@@ -5,7 +5,7 @@ import { ActionCreator } from './types'
  * Generate single Basic Action Creator with signature:
  * (depending on each Action)
  * ```
- * (payload?, error?, meta?) => Action
+ * (payload?, meta?) => Action
  * ```
  *
  * @template TCatalog ActionCatalog
