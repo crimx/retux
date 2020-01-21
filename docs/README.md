@@ -13,6 +13,6 @@ features:
 - title: 🛡 Type-safe
   details: Retux enforces strict typings. With the utilities in Retux you will never lose the strictness of typings while enjoying great flexibility.
 - title: 📈 Scalable
-  details: A Retux module can be easily split into isomorphic sub-modules. Retux can also optionly leverage the power of meta-programming on modern engine for further performance boost.
+  details: A Retux module can be easily split into isomorphic sub-modules. Retux can also optionally leverage the power of meta-programming on modern engine for further performance boost.
 footer: MIT Licensed | Copyright © 2019-present CRIMX
 ---

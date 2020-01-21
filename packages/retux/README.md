@@ -15,7 +15,7 @@ Core library of Retux, a minimalist declarative type-safe(strongly-typed) scalab
 - Minimalist. Retux reduces huge volume of boilerplate code while still gaining better type-infer and auto-completion.
 - Declarative. Action-First desgin instead of Action-Creator-Fisrt makes it clean, less-hacking and easy to read for new contributors(including future-self!).
 - Type-safe(strongly-typed). Retux enforces strict typings. With utilities of Retux you will never lose the strictness of typings while enjoying great flexibility.
-- Scalable. A Retux module can be easily split into isomorphic sub-modules. Retux can also optionly leverage the power of meta-programming on modern engine for further performance boost.
+- Scalable. A Retux module can be easily split into isomorphic sub-modules. Retux can also optionally leverage the power of meta-programming on modern engine for further performance boost.
 
 ## Installation
 
