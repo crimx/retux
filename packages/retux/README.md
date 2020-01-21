@@ -22,6 +22,14 @@ Core library of Retux, a minimalist declarative type-safe(strongly-typed) scalab
 - yarn: `yarn add retux`
 - npm: `npm add retux`
 
+## Usage
+
+See [official guide][guide].
+
+## API
+
+See [docs][docs].
+
 ## At First Glance
 
 This is the basic structure of Retux architecture(Others see [examples](https://github.com/crimx/retux/tree/master/examples)).
@@ -143,9 +151,10 @@ const action = createActionCreators<ActionCatalog>(
 )
 ```
 
-Retux also offers `proxyActionCreators` for modern engines which does the same thing except action creators are lazy created on first visit.
+Retux also offers [`proxyActionCreators`][proxy] for modern engines which does the same thing except action creators are lazy created on first visit.
 
-See the docs for all the features of Retux.
+See the [guide][guide] for all the features of Retux.
 
-
-
+[guide]: https://retux.js.org/guide/
+[docs]: https://retux.js.org/api/retux.html
+[proxy]: http://retux.js.org/guide/proxy.html

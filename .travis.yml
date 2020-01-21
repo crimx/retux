@@ -6,4 +6,16 @@ script:
   - yarn build
   - yarn test
 after_success:
+  - yarn docs:build
   - cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js
+deploy:
+  provider: pages
+  skip_cleanup: true
+  github_token: $GITHUB_TOKEN
+  keep_history: false
+  local_dir: 'docs/.vuepress/dist'
+  on:
+    branch: master
+before_deploy:
+  - touch 'docs/.vuepress/dist/.nojekyll'
+  - sed -i '/vuepress/d' .gitignore
