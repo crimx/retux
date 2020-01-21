@@ -21,9 +21,26 @@ module.exports = {
         },
         nav: [
           { text: 'Guide', link: '/guide/' },
-          { text: 'API', link: '/api/retux' }
+          { text: 'API', link: '/api/retux' },
+          { text: 'Examples', link: '/examples/' }
         ],
         sidebar: {
+          '/examples/': [
+            {
+              title: 'Examples', // required
+              collapsable: false, // optional, defaults to true
+              sidebarDepth: 2, // optional, defaults to 1
+              children: [
+                ['/examples/todos', 'Todo List'],
+                ['/examples/todomvc', 'Todo MVC'],
+                [
+                  '/examples/thunk-promise-example',
+                  'Redux Thunk and Redux Promsie'
+                ],
+                ['/examples/redux-observable-example', 'Redux Observable']
+              ]
+            }
+          ],
           '/api/': [
             {
               title: 'API Reference', // required
@@ -71,11 +88,34 @@ module.exports = {
     }
   },
   plugins: [
+    require('./plugins/examples'),
     [
       '@vuepress/pwa',
       {
         serviceWorker: true,
         updatePopup: true
+      }
+    ],
+    [
+      'vuepress-plugin-container',
+      {
+        type: 'codesandbox',
+        defaultTitle: 'CodeSandbox',
+        before: src => {
+          src = src
+            .trim()
+            .replace(
+              /^https:\/\/codesandbox\.io\/s\//,
+              'https://codesandbox.io/embed/'
+            )
+          return `<iframe
+            style="width:100%; height:500px; border:1px solid #ebedf0; background-color:#ebedf0; border-radius: 4px; overflow:hidden;"
+            title="vigorous-mirzakhani-684bw"
+            allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb"
+            sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin"
+            src="${src}?autoresize=1&fontsize=14&hidenavigation=1&theme=dark"></iframe>`
+        },
+        after: '\n'
       }
     ]
   ],
