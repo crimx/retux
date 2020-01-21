@@ -1,12 +1,12 @@
 import { CreateActionCatalog, ActionHandlers } from 'retux'
 
-export const initState = [] as Array<{
+export const initialState = [] as ReadonlyArray<{
   id: string
   text: string
   completed: boolean
 }>
 
-export type State = Readonly<typeof initState>
+export type State = Readonly<typeof initialState>
 
 export type ActionCatalog = CreateActionCatalog<{
   TODOS$ADD: {

@@ -1,5 +1,5 @@
 import { createSelector } from 'reselect'
-import { StoreState } from '../retux-store'
+import { StoreState } from '../retux-store/modules'
 
 const getVisibilityFilter = (state: StoreState) => state.visibilityFilter
 

@@ -3,33 +3,33 @@ import { State } from '../state'
 import { createTodo } from '../../../../utilities/todo'
 
 export type ActionCatalog = CreateActionCatalog<{
-  TodosAdd: {
+  TODOS$ADD: {
     /** todo text */
     payload: string
   }
-  TodosEdit: {
+  TODOS$EDIT: {
     payload: {
       id: string
       text: string
     }
   }
-  TodosComplete: {
+  TODOS$COMPLETE: {
     /** todo item id */
     payload: string
   }
-  TodosDelete: {
+  TODOS$DELETE: {
     /** todo item id */
     payload: string
   }
 }>
 
 export const actionHandlers: ActionHandlers<State, ActionCatalog> = {
-  TodosAdd: (state, { payload: text }) => [...state, createTodo(text)],
-  TodosEdit: (state, { payload: { id, text } }) =>
+  TODOS$ADD: (state, { payload: text }) => [...state, createTodo(text)],
+  TODOS$EDIT: (state, { payload: { id, text } }) =>
     state.map(todo => (todo.id === id ? { ...todo, text } : todo)),
-  TodosComplete: (state, { payload: id }) =>
+  TODOS$COMPLETE: (state, { payload: id }) =>
     state.map(todo =>
       todo.id === id ? { ...todo, completed: !todo.completed } : todo
     ),
-  TodosDelete: (state, { payload: id }) => state.filter(todo => todo.id !== id)
+  TODOS$DELETE: (state, { payload: id }) => state.filter(todo => todo.id !== id)
 }

@@ -3,7 +3,7 @@ import { TodoItem, TodoItemProps } from './TodoItem'
 import { Todo } from '../utilities/todo'
 
 export interface TodoListProp extends Omit<TodoItemProps, 'todo'> {
-  filteredTodos: Todo[]
+  filteredTodos: ReadonlyArray<Todo>
 }
 
 export const TodoList: FC<TodoListProp> = props => {

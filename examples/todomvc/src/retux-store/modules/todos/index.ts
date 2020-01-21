@@ -1,4 +1,4 @@
-import { combineUniqueObjects } from 'retux'
+import { proxyCombineUniqueObjects } from 'retux'
 import {
   ActionCatalog as CRUDActionCatalog,
   actionHandlers as crudActionHandlers
@@ -7,17 +7,19 @@ import {
   ActionCatalog as BulkActionCatalog,
   actionHandlers as bulkActionHandlers
 } from './handlers/bulk'
-import { state } from './state'
 
-export { state } from './state'
-
-export type State = typeof state
+// if '--isolatedModules' flag is provided
+import * as _State from './state'
+export type State = _State.State
+export { initialState } from './state'
+// Otherwise
+// export { state, State } from './state'
 
 // This shows the ability to split action handlers
 
 export type ActionCatalog = CRUDActionCatalog & BulkActionCatalog
 
-export const actionHandlers = combineUniqueObjects(
+export const actionHandlers = proxyCombineUniqueObjects(
   crudActionHandlers,
   bulkActionHandlers
 )

@@ -6,7 +6,7 @@ import {
   MapStateToProps,
   MapDispatchToProps
 } from 'react-retux'
-import { StoreState, StoreAction } from '../retux-store'
+import { StoreState, StoreAction } from '../retux-store/modules'
 import { action } from '../retux-store/actions'
 
 type Dispatchers = ExtractDispatchers<
@@ -28,8 +28,8 @@ const mapDispatchToProps: MapDispatchToProps<
   MainSectionProps,
   Dispatchers
 > = {
-  completeAllTodos: action.TodosCompleteAll,
-  clearCompleted: action.TodosClearCompleted
+  completeAllTodos: action.TODOS$COMPLETE_ALL,
+  clearCompleted: action.TODOS$CLEAR_COMPLETED
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainSection)

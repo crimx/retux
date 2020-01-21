@@ -1,5 +1,5 @@
 import { createTodo, Todo } from '../../../utilities/todo'
 
-export type State = typeof state
+export const initialState = [createTodo('Use Redux')] as ReadonlyArray<Todo>
 
-export const state = [createTodo('Use Redux')] as Todo[]
+export type State = typeof initialState

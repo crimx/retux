@@ -4,7 +4,7 @@ import {
   StoreAction,
   ThunkAction,
   ThunkActionWithPromise
-} from './index'
+} from './modules'
 
 export const action = createActionCreators(storeActionHandlers)
 
@@ -13,72 +13,91 @@ export const incrementDelay = (
   delay: number
 ): ThunkAction => dispatch => {
   setTimeout(() => {
-    dispatch({ type: 'INCREMENT', payload: step })
+    dispatch({ type: 'COUNTER$INCREMENT', payload: step })
   }, delay)
 }
+
 export const decrementDelay = (
   step: number,
   delay: number
 ): ThunkAction => dispatch => {
   setTimeout(() => {
-    dispatch({ type: 'DECREMENT', payload: step })
+    dispatch({ type: 'COUNTER$DECREMENT', payload: step })
   }, delay)
 }
 
-// We can also restrict the dispatchable action types
+/// We can also restrict the dispatchable action types
+
 export const incrementDelayRestrict = (
   step: number,
   delay: number
-): ThunkAction<'INCREMENT'> => dispatch => {
+): ThunkAction<'COUNTER$INCREMENT'> => dispatch => {
   setTimeout(() => {
-    dispatch({ type: 'INCREMENT', payload: step })
+    dispatch({ type: 'COUNTER$INCREMENT', payload: step })
   }, delay)
 }
+
 export const decrementDelayRestrict = (
   step: number,
   delay: number
-): ThunkAction<'DECREMENT'> => dispatch => {
+): ThunkAction<'COUNTER$DECREMENT'> => dispatch => {
   setTimeout(() => {
-    dispatch({ type: 'DECREMENT', payload: step })
+    dispatch({ type: 'COUNTER$DECREMENT', payload: step })
   }, delay)
 }
 
-// Redux-Promise
+/// Redux-Promise
+
 export const incrementDelayPromise = (
   step: number,
   delay: number
-): Promise<StoreAction<'INCREMENT'>> =>
+): Promise<StoreAction<'COUNTER$INCREMENT'>> =>
   new Promise(resolve =>
-    setTimeout(() => resolve({ type: 'INCREMENT', payload: step }), delay)
+    setTimeout(
+      () => resolve({ type: 'COUNTER$INCREMENT', payload: step }),
+      delay
+    )
   )
+
 export const decrementDelayPromise = (
   step: number,
   delay: number
-): Promise<StoreAction<'DECREMENT'>> =>
+): Promise<StoreAction<'COUNTER$DECREMENT'>> =>
   new Promise(resolve =>
-    setTimeout(() => resolve({ type: 'DECREMENT', payload: step }), delay)
+    setTimeout(
+      () => resolve({ type: 'COUNTER$DECREMENT', payload: step }),
+      delay
+    )
   )
 
-// Redux-Thunk with Redux-Promise
+/// Redux-Thunk with Redux-Promise
+
 export const incrementDelayThunkPromise = (
   step: number,
   delay: number
-): ThunkActionWithPromise<'INCREMENT'> => dispatch => {
-  dispatch({ type: 'INCREMENT', payload: step })
+): ThunkActionWithPromise<'COUNTER$INCREMENT'> => dispatch => {
+  dispatch({ type: 'COUNTER$INCREMENT', payload: step })
   dispatch(
-    new Promise<StoreAction<'INCREMENT'>>(resolve =>
-      setTimeout(() => resolve({ type: 'INCREMENT', payload: step }), delay)
+    new Promise<StoreAction<'COUNTER$INCREMENT'>>(resolve =>
+      setTimeout(
+        () => resolve({ type: 'COUNTER$INCREMENT', payload: step }),
+        delay
+      )
     )
   )
 }
+
 export const decrementDelayThunkPromise = (
   step: number,
   delay: number
-): ThunkActionWithPromise<'DECREMENT'> => dispatch => {
-  dispatch({ type: 'DECREMENT', payload: step })
+): ThunkActionWithPromise<'COUNTER$DECREMENT'> => dispatch => {
+  dispatch({ type: 'COUNTER$DECREMENT', payload: step })
   dispatch(
-    new Promise<StoreAction<'DECREMENT'>>(resolve =>
-      setTimeout(() => resolve({ type: 'DECREMENT', payload: step }), delay)
+    new Promise<StoreAction<'COUNTER$DECREMENT'>>(resolve =>
+      setTimeout(
+        () => resolve({ type: 'COUNTER$DECREMENT', payload: step }),
+        delay
+      )
     )
   )
 }

@@ -6,7 +6,7 @@ import {
 } from 'react-retux'
 import { action } from '../retux-store/actions'
 import { Link, LinkProps } from '../components/Link'
-import { StoreState, StoreAction } from '../retux-store'
+import { StoreState, StoreAction } from '../retux-store/modules'
 import { VisibilityFilter } from '../utilities/visibility'
 import { PropsWithChildren } from 'react'
 
@@ -32,7 +32,7 @@ const mapDispatchToProps: MapDispatchToProps<
   PropsWithChildren<FilterLinkProps>
 > = (dispatch, ownProps) => ({
   setFilter: () => {
-    dispatch(action.VisibilityFilterSet(ownProps.filter))
+    dispatch(action.VISIBILITY_FILTER$SET(ownProps.filter))
   }
 })
 

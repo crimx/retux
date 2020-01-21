@@ -1,5 +1,5 @@
 import { proxyActionCreators, proxyCombineObjects } from 'retux'
-import { StoreAction } from '../index'
+import { StoreAction } from '../modules'
 import { actionHandlers as todosHandlers } from '../modules/todos'
 import { actionHandlers as visibilityFilterHandlers } from '../modules/visibilityFilter'
 
@@ -15,8 +15,8 @@ export const action = proxyActionCreators(
     // You can rewire custom action creators with anything.
     // Also useful if you want to replace an Action Creator
     // with thunk or promise later on
-    TodosEdit: (id: string, text: string): StoreAction<'TodosEdit'> => ({
-      type: 'TodosEdit',
+    TODOS$EDIT: (id: string, text: string): StoreAction<'TODOS$EDIT'> => ({
+      type: 'TODOS$EDIT',
       payload: { id, text }
     })
   }
@@ -26,7 +26,7 @@ export const action = proxyActionCreators(
 export const editTodo = (
   id: string,
   text: string
-): StoreAction<'TodosEdit'> => ({
-  type: 'TodosEdit',
+): StoreAction<'TODOS$EDIT'> => ({
+  type: 'TODOS$EDIT',
   payload: { id, text }
 })

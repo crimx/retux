@@ -18,7 +18,7 @@ describe('todos reducer', () => {
   it('should handle ADD_TODO', () => {
     expect(
       todos([], {
-        type: 'TodosAdd',
+        type: 'TODOS$ADD',
         payload: 'Run the tests'
       })
     ).toEqual([
@@ -39,7 +39,7 @@ describe('todos reducer', () => {
           }
         ],
         {
-          type: 'TodosAdd',
+          type: 'TODOS$ADD',
           payload: 'Run the tests'
         }
       )
@@ -71,7 +71,7 @@ describe('todos reducer', () => {
           }
         ],
         {
-          type: 'TodosAdd',
+          type: 'TODOS$ADD',
           payload: 'Fix the tests'
         }
       )
@@ -110,7 +110,7 @@ describe('todos reducer', () => {
           }
         ],
         {
-          type: 'TodosDelete',
+          type: 'TODOS$DELETE',
           payload: '1'
         }
       )
@@ -139,7 +139,7 @@ describe('todos reducer', () => {
           }
         ],
         {
-          type: 'TodosEdit',
+          type: 'TODOS$EDIT',
           payload: {
             text: 'Fix the tests',
             id: '1'
@@ -176,7 +176,7 @@ describe('todos reducer', () => {
           }
         ],
         {
-          type: 'TodosComplete',
+          type: 'TODOS$COMPLETE',
           payload: '1'
         }
       )
@@ -210,7 +210,7 @@ describe('todos reducer', () => {
           }
         ],
         {
-          type: 'TodosCompleteAll'
+          type: 'TODOS$COMPLETE_ALL'
         }
       )
     ).toEqual([
@@ -242,7 +242,7 @@ describe('todos reducer', () => {
           }
         ],
         {
-          type: 'TodosCompleteAll'
+          type: 'TODOS$COMPLETE_ALL'
         }
       )
     ).toEqual([
@@ -275,7 +275,7 @@ describe('todos reducer', () => {
           }
         ],
         {
-          type: 'TodosClearCompleted'
+          type: 'TODOS$CLEAR_COMPLETED'
         }
       )
     ).toEqual([
@@ -291,14 +291,14 @@ describe('todos reducer', () => {
     expect(
       [
         {
-          type: 'TodosComplete',
+          type: 'TODOS$COMPLETE',
           payload: '0'
         } as const,
         {
-          type: 'TodosClearCompleted'
+          type: 'TODOS$CLEAR_COMPLETED'
         } as const,
         {
-          type: 'TodosAdd',
+          type: 'TODOS$ADD',
           payload: 'Write more tests'
         } as const
       ].reduce(todos, [

@@ -2,23 +2,23 @@ import { action } from './index'
 
 describe('todo actions', () => {
   describe('Generated Actions', () => {
-    it('TodosAdd should create ADD_TODO action', () => {
-      expect(action.TodosAdd('Use Redux')).toEqual({
-        type: 'TodosAdd',
+    it('TODOS$ADD should create ADD_TODO action', () => {
+      expect(action.TODOS$ADD('Use Redux')).toEqual({
+        type: 'TODOS$ADD',
         payload: 'Use Redux'
       })
     })
 
-    it('TodosDelete should create DELETE_TODO action', () => {
-      expect(action.TodosDelete('1')).toEqual({
-        type: 'TodosDelete',
+    it('TODOS$DELETE should create DELETE_TODO action', () => {
+      expect(action.TODOS$DELETE('1')).toEqual({
+        type: 'TODOS$DELETE',
         payload: '1'
       })
     })
 
-    it('TodosEdit should create EDIT_TODO action', () => {
-      expect(action.TodosEdit('1', 'Use Redux everywhere')).toEqual({
-        type: 'TodosEdit',
+    it('TODOS$EDIT should create EDIT_TODO action', () => {
+      expect(action.TODOS$EDIT('1', 'Use Redux everywhere')).toEqual({
+        type: 'TODOS$EDIT',
         payload: {
           id: '1',
           text: 'Use Redux everywhere'
@@ -26,22 +26,22 @@ describe('todo actions', () => {
       })
     })
 
-    it('TodosComplete should create COMPLETE_TODO action', () => {
-      expect(action.TodosComplete('1')).toEqual({
-        type: 'TodosComplete',
+    it('TODOS$COMPLETE should create COMPLETE_TODO action', () => {
+      expect(action.TODOS$COMPLETE('1')).toEqual({
+        type: 'TODOS$COMPLETE',
         payload: '1'
       })
     })
 
-    it('TodosCompleteAll should create COMPLETE_ALL action', () => {
-      expect(action.TodosCompleteAll()).toEqual({
-        type: 'TodosCompleteAll'
+    it('TODOS$COMPLETE_ALL should create COMPLETE_ALL action', () => {
+      expect(action.TODOS$COMPLETE_ALL()).toEqual({
+        type: 'TODOS$COMPLETE_ALL'
       })
     })
 
-    it('TodosClearCompleted should create CLEAR_COMPLETED action', () => {
-      expect(action.TodosClearCompleted()).toEqual({
-        type: 'TodosClearCompleted'
+    it('TODOS$CLEAR_COMPLETED should create CLEAR_COMPLETED action', () => {
+      expect(action.TODOS$CLEAR_COMPLETED()).toEqual({
+        type: 'TODOS$CLEAR_COMPLETED'
       })
     })
   })

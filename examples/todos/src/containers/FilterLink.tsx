@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { Link, LinkProps } from '../components/Link'
-import { StoreState, StoreAction } from '../retux-store'
+import { StoreState, StoreAction } from '../retux-store/modules'
 import { PropsWithChildren } from 'react'
 import {
   ExtractDispatchers,

@@ -7,7 +7,7 @@ import {
   MapDispatchToProps,
   MapStateToProps
 } from 'react-retux'
-import { StoreAction, StoreState } from '../retux-store'
+import { StoreAction, StoreState } from '../retux-store/modules'
 import { bindActionCreators } from 'redux'
 
 type Dispatchers = ExtractDispatchers<
@@ -31,8 +31,8 @@ const mapDispatchToProps: MapDispatchToProps<
   bindActionCreators(
     {
       editTodo: editTodo,
-      deleteTodo: action.TodosDelete,
-      completeTodo: action.TodosComplete
+      deleteTodo: action.TODOS$DELETE,
+      completeTodo: action.TODOS$COMPLETE
     },
     dispatch
   )

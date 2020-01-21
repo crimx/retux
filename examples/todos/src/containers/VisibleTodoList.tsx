@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { TodoList, TodoListProps } from '../components/TodoList'
-import { StoreAction, StoreState } from '../retux-store'
+import { StoreAction, StoreState } from '../retux-store/modules'
 import {
   ExtractDispatchers,
   MapStateToProps,

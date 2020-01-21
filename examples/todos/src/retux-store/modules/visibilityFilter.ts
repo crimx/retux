@@ -1,11 +1,11 @@
 import { CreateActionCatalog, ActionHandlers } from 'retux'
 
-export const initState = 'SHOW_ALL' as
+export const initialState = 'SHOW_ALL' as
   | 'SHOW_ALL'
   | 'SHOW_COMPLETED'
   | 'SHOW_ACTIVE'
 
-export type State = Readonly<typeof initState>
+export type State = Readonly<typeof initialState>
 
 export type ActionCatalog = CreateActionCatalog<{
   VISIBILITY_FILTER$SET: {

@@ -1,6 +1,6 @@
 import React, { FC, useRef } from 'react'
 import { connect } from 'react-redux'
-import { StoreAction } from '../retux-store'
+import { StoreAction } from '../retux-store/modules'
 import { Dispatch } from 'redux'
 
 export interface AddTodoProps {

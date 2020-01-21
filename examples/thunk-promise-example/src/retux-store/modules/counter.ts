@@ -1,11 +1,11 @@
 import { CreateActionCatalog, ActionHandlers } from 'retux'
 
 export type CounterActionCatalog = CreateActionCatalog<{
-  INCREMENT: {
+  COUNTER$INCREMENT: {
     /** Step */
     payload?: number
   }
-  DECREMENT: {
+  COUNTER$DECREMENT: {
     /** Step */
     payload?: number
   }
@@ -21,11 +21,11 @@ export const counterActionHandlers: ActionHandlers<
   CounterState,
   CounterActionCatalog
 > = {
-  INCREMENT: (state, { payload }) => ({
+  COUNTER$INCREMENT: (state, { payload }) => ({
     ...state,
     count: state.count + (payload == null ? 1 : payload)
   }),
-  DECREMENT: (state, { payload }) => ({
+  COUNTER$DECREMENT: (state, { payload }) => ({
     ...state,
     count: state.count - (payload == null ? 1 : payload)
   })

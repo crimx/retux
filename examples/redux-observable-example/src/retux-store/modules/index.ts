@@ -12,8 +12,8 @@ export type StoreAction<T extends StoreActionType = StoreActionType> = Action<
 
 export type StoreState = PingPong.State
 
-export const storeInitState = PingPong.initState
-
 export const storeActionHandlers = PingPong.actionHandlers
+
+const storeInitState = PingPong.initialState
 
 export const rootReducer = createReducer(storeInitState, storeActionHandlers)

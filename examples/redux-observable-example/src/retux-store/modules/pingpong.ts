@@ -1,10 +1,10 @@
 import { CreateActionCatalog, ActionHandlers } from 'retux'
 
-export const initState = {
+export const initialState = {
   isPinging: false
 }
 
-export type State = Readonly<typeof initState>
+export type State = Readonly<typeof initialState>
 
 export type ActionCatalog = CreateActionCatalog<{
   PINGPONG$PING: {

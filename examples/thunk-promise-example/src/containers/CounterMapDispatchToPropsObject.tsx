@@ -5,7 +5,11 @@ import {
   MapStateToProps,
   MapDispatchToPropsObject
 } from 'react-retux'
-import { StoreAction, StoreState, ThunkActionWithPromise } from '../retux-store'
+import {
+  StoreAction,
+  StoreState,
+  ThunkActionWithPromise
+} from '../retux-store/modules'
 import * as action from '../retux-store/actions'
 
 type Dispatchers = ExtractDispatchers<CounterProps, 'onClick'>

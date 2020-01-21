@@ -1,16 +1,16 @@
 import { CreateActionCatalog, ActionHandlers } from 'retux'
 import { VisibilityFilter } from '../../utilities/visibility'
 
-export const state = 'SHOW_ALL' as VisibilityFilter
+export const initialState = 'SHOW_ALL' as VisibilityFilter
 
-export type State = typeof state
+export type State = Readonly<typeof initialState>
 
 export type ActionCatalog = CreateActionCatalog<{
-  VisibilityFilterSet: {
+  VISIBILITY_FILTER$SET: {
     payload: State
   }
 }>
 
 export const actionHandlers: ActionHandlers<State, ActionCatalog> = {
-  VisibilityFilterSet: (state, { payload }) => payload
+  VISIBILITY_FILTER$SET: (state, { payload }) => payload
 }
