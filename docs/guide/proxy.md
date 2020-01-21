@@ -2,9 +2,9 @@
 
 If you have read the [core concepts][core-concepts] of Retux, you may notice the flexibility of Retux relies heavily on manipulations on simple objects. See `combineObjects`, `combineUniqueObjects` and `createActionCreators`. To boost init performance Retux offers Proxy version of these functions.
 
-- `combineObjects` -> `proxyCombineObjects`
-- `combineUniqueObjects` -> `proxyCombineUniqueObjects`
-- `createActionCreators` -> `proxyActionCreators`
+- [`combineObjects`](../api/retux.md#combineobjects) -> [`proxyCombineObjects`](../api/retux.md#proxycombineobjects)
+- [`combineUniqueObjects`](../api/retux.md#combineuniqueobjects) -> [`proxyCombineUniqueObjects`](../api/retux.md#proxycombineuniqueobjects)
+- [`createActionCreators`](../api/retux.md#createactioncreators) -> [`proxyActionCreators`](../api/retux.md#proxyactioncreators)
 
 Features:
 
