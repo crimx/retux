@@ -1,6 +1,6 @@
 ---
 home: true
-heroImage: /ms-icon-310x310.png
+heroImage: /icons/ms-icon-310x310.png
 heroText: 
 tagline: Minimalist declarative type-safe(strongly-typed) scalable Redux architecture.
 actionText: Get Started →
