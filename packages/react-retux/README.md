@@ -34,4 +34,4 @@ See [docs](https://retux.js.org/api/react-retux.html).
 
 ## Examples
 
-See [Tests](https://github.com/crimx/retux/tree/master/packages/react-retux/__tests__) and [Retux Examples](https://github.com/crimx/retux/tree/master/examples), especially [thunk-promise-example](https://github.com/crimx/retux/tree/master/examplesthunk-promise-example).
+See [Tests](https://github.com/crimx/retux/tree/master/packages/react-retux/__tests__) and [Retux Examples](https://github.com/crimx/retux/tree/master/examples), especially [thunk-promise-example](https://github.com/crimx/retux/tree/master/examples/thunk-promise-example).
