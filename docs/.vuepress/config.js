@@ -19,8 +19,22 @@ module.exports = {
             buttonText: 'Refresh'
           }
         },
-        nav: [{ text: 'Guide', link: '/guide/' }],
+        nav: [
+          { text: 'Guide', link: '/guide/' },
+          { text: 'API', link: '/api/retux' }
+        ],
         sidebar: {
+          '/api/': [
+            {
+              title: 'API Reference', // required
+              collapsable: false, // optional, defaults to true
+              sidebarDepth: 2, // optional, defaults to 1
+              children: [
+                ['/api/retux', 'Retux'],
+                ['/api/react-retux', 'React Retux']
+              ]
+            }
+          ],
           '/': [
             {
               title: 'Guide', // required
