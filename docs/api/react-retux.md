@@ -2,7 +2,9 @@
 
 ## ExtractDispatchers
 
-Ƭ `ExtractDispatchers<TTargetProps, TDispatchers>: TDispatchers`
+```typescript
+Ƭ ExtractDispatchers<TTargetProps, TDispatchers>: TDispatchers
+```
 
 Specify dispatchers of the connected Component props.
 
@@ -16,7 +18,10 @@ This helper is for typo prevention.
 
 ## MapStateToProps
 
-Ƭ `MapStateToProps<TState, TTargetProps, TDispatchers, TOwnProps>: (state: TState, ownProps: TOwnProps) => Omit<TTargetProps, TDispatchers>`
+```typescript
+Ƭ MapStateToProps<TState, TTargetProps, TDispatchers, TOwnProps>:
+    (state: TState, ownProps: TOwnProps) => Omit<TTargetProps, TDispatchers>
+```
 
 Specify dispatchers of the connected Component props.
 
@@ -31,7 +36,10 @@ This helper is for preventing typos.
 
 ## MapDispatchToPropsFunction
 
-Ƭ `MapDispatchToPropsFunction<TDispatch, TTargetProps, TDispatchers, TOwnProps>: (dispatch: TDispatch, ownProps: TOwnProps) => Pick<TTargetProps, TDispatchers>`
+```typescript
+Ƭ MapDispatchToPropsFunction<TDispatch, TTargetProps, TDispatchers, TOwnProps>:
+    (dispatch: TDispatch, ownProps: TOwnProps) => Pick<TTargetProps, TDispatchers>
+```
 
 Function form of the `mapDispatchToProps`.
 
@@ -47,7 +55,10 @@ e.g. Redux Thunk and Redux Promise.
 
 ## MapDispatchToPropsObject
 
-Ƭ `MapDispatchToPropsObject<TAction, TTargetProps, TDispatchers>: { [TKey in TDispatchers]: [Action Creators] }`
+```typescript
+Ƭ MapDispatchToPropsObject<TAction, TTargetProps, TDispatchers>:
+    { [TKey in TDispatchers]: [Action Creators] }
+```
 
 Object form of the `mapDispatchToProps`.
 
@@ -62,7 +73,10 @@ e.g. Redux Thunk and Redux Promise.
 
 ## MapDispatchToProps
 
-Ƭ `MapDispatchToProps<TAction, TTargetProps, TDispatchers, TOwnProps>: MapDispatchToPropsFunction | MapDispatchToPropsObject`
+```typescript
+Ƭ MapDispatchToProps<TAction, TTargetProps, TDispatchers, TOwnProps>: 
+    MapDispatchToPropsFunction | MapDispatchToPropsObject
+```
 
 This is for Actions are all of type `{ type: string, ... }`.
 
