@@ -4,6 +4,10 @@ module.exports = {
     // edit footer
     docsDir: 'docs',
     editLinks: true,
+    algolia: {
+      apiKey: '841b36cb7411017a86eaf8f3e2f53ac6',
+      indexName: 'crimx_retux'
+    },
     locales: {
       '/': {
         // label for this locale in the language dropdown
