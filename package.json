@@ -8,7 +8,7 @@
     "docs:build": "vuepress build docs",
     "lint": "eslint --no-eslintrc -c .eslintrc.js ./*.js ./packages/**/*.ts",
     "test": "jest --coverage",
-    "build": "lerna run build && lerna bootstrap",
+    "build": "lerna run build --scope=\"*retux*\" && lerna bootstrap",
     "create-translator": "node scripts/create-translator",
     "commit": "git-cz",
     "release": "lerna version --conventional-commits",
