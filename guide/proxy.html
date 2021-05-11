@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Lazy Load With Proxy | Retux</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="Minimalist declarative type-safe(strongly-typed) scalable Redux architecture.">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#007acc">
+    
+    <link rel="preload" href="/assets/css/0.styles.1367dafe.css" as="style"><link rel="preload" href="/assets/js/app.38911598.js" as="script"><link rel="preload" href="/assets/js/3.998c2031.js" as="script"><link rel="preload" href="/assets/js/18.8e64c1e3.js" as="script"><link rel="preload" href="/assets/js/4.7b9d4212.js" as="script"><link rel="prefetch" href="/assets/js/10.5708ddbc.js"><link rel="prefetch" href="/assets/js/11.b922ccd1.js"><link rel="prefetch" href="/assets/js/12.b21f5739.js"><link rel="prefetch" href="/assets/js/13.9bbdc26c.js"><link rel="prefetch" href="/assets/js/14.9a823252.js"><link rel="prefetch" href="/assets/js/15.4c643f4e.js"><link rel="prefetch" href="/assets/js/16.6d62ded2.js"><link rel="prefetch" href="/assets/js/17.9b3ca326.js"><link rel="prefetch" href="/assets/js/19.5291bb00.js"><link rel="prefetch" href="/assets/js/20.9733dc85.js"><link rel="prefetch" href="/assets/js/21.27ffa224.js"><link rel="prefetch" href="/assets/js/22.c71d0686.js"><link rel="prefetch" href="/assets/js/23.7ea157d0.js"><link rel="prefetch" href="/assets/js/24.94f10ea6.js"><link rel="prefetch" href="/assets/js/25.43db54fc.js"><link rel="prefetch" href="/assets/js/26.979a4e80.js"><link rel="prefetch" href="/assets/js/27.bc8d16d2.js"><link rel="prefetch" href="/assets/js/28.d5824d50.js"><link rel="prefetch" href="/assets/js/5.70937d20.js"><link rel="prefetch" href="/assets/js/6.27ba7b73.js"><link rel="prefetch" href="/assets/js/7.424853fc.js"><link rel="prefetch" href="/assets/js/8.36ba2b53.js"><link rel="prefetch" href="/assets/js/9.b3861150.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.883d461f.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1367dafe.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Retux</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><a href="/guide/" class="nav-link router-link-active">
+  Guide
+</a></div><div class="nav-item"><a href="/api/retux.html" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/examples/" class="nav-link">
+  Examples
+</a></div> <a href="https://github.com/crimx/retux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/guide/" class="nav-link router-link-active">
+  Guide
+</a></div><div class="nav-item"><a href="/api/retux.html" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/examples/" class="nav-link">
+  Examples
+</a></div> <a href="https://github.com/crimx/retux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Guide</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/" aria-current="page" class="sidebar-link">Introduction</a></li><li><a href="/guide/motivation.html" class="sidebar-link">Motivation</a></li><li><a href="/guide/core-concepts.html" class="sidebar-link">Core Concepts</a></li><li><a href="/guide/directory-structure.html" class="sidebar-link">Directory Structure</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Advanced</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/react-retux.html" class="sidebar-link">React Retux</a></li><li><a href="/guide/proxy.html" aria-current="page" class="active sidebar-link">Lazy Load With Proxy</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/middlewares/" class="sidebar-heading clickable"><span>Middlewares</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/middlewares/redux-thunk.html" class="sidebar-link">Redux Thunk</a></li><li><a href="/middlewares/redux-promise.html" class="sidebar-link">Redux Promise</a></li><li><a href="/middlewares/redux-thunk-and-redux-promise.html" class="sidebar-link">Redux Thunk and Redux Promise</a></li><li><a href="/middlewares/redux-observable.html" class="sidebar-link">Retux Observable</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="lazy-load-with-proxy"><a href="#lazy-load-with-proxy" class="header-anchor">#</a> Lazy Load With Proxy</h1> <p>If you have read the <a href="/guide/core-concepts.html">core concepts</a> of Retux, you may notice the flexibility of Retux relies heavily on manipulations on simple objects. See <code>combineObjects</code>, <code>combineUniqueObjects</code> and <code>createActionCreators</code>. To boost init performance Retux offers Proxy version of these functions.</p> <ul><li><a href="/api/retux.html#combineobjects"><code>combineObjects</code></a> -&gt; <a href="/api/retux.html#proxycombineobjects"><code>proxyCombineObjects</code></a></li> <li><a href="/api/retux.html#combineuniqueobjects"><code>combineUniqueObjects</code></a> -&gt; <a href="/api/retux.html#proxycombineuniqueobjects"><code>proxyCombineUniqueObjects</code></a></li> <li><a href="/api/retux.html#createactioncreators"><code>createActionCreators</code></a> -&gt; <a href="/api/retux.html#proxyactioncreators"><code>proxyActionCreators</code></a></li></ul> <p>Features:</p> <ol><li>Same signature. Can be swapped directly.</li> <li>Object properties are only created and cached on first visit.</li> <li><code>Object.keys</code>, <code>Object.prototype.hasOwnProperty</code> and other property descriptor related methods work as usual.</li> <li>Fallback to the simple counterparts when Proxy is not supported.</li></ol></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/crimx/retux/edit/master/docs/guide/proxy.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/guide/react-retux.html" class="prev">
+        React Retux
+      </a></span> <span class="next"><a href="/middlewares/redux-thunk.html">
+        Redux Thunk
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.38911598.js" defer></script><script src="/assets/js/3.998c2031.js" defer></script><script src="/assets/js/18.8e64c1e3.js" defer></script><script src="/assets/js/4.7b9d4212.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Redux Thunk | Retux</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="Minimalist declarative type-safe(strongly-typed) scalable Redux architecture.">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#007acc">
+    
+    <link rel="preload" href="/assets/css/0.styles.1367dafe.css" as="style"><link rel="preload" href="/assets/js/app.38911598.js" as="script"><link rel="preload" href="/assets/js/3.998c2031.js" as="script"><link rel="preload" href="/assets/js/24.94f10ea6.js" as="script"><link rel="preload" href="/assets/js/4.7b9d4212.js" as="script"><link rel="prefetch" href="/assets/js/10.5708ddbc.js"><link rel="prefetch" href="/assets/js/11.b922ccd1.js"><link rel="prefetch" href="/assets/js/12.b21f5739.js"><link rel="prefetch" href="/assets/js/13.9bbdc26c.js"><link rel="prefetch" href="/assets/js/14.9a823252.js"><link rel="prefetch" href="/assets/js/15.4c643f4e.js"><link rel="prefetch" href="/assets/js/16.6d62ded2.js"><link rel="prefetch" href="/assets/js/17.9b3ca326.js"><link rel="prefetch" href="/assets/js/18.8e64c1e3.js"><link rel="prefetch" href="/assets/js/19.5291bb00.js"><link rel="prefetch" href="/assets/js/20.9733dc85.js"><link rel="prefetch" href="/assets/js/21.27ffa224.js"><link rel="prefetch" href="/assets/js/22.c71d0686.js"><link rel="prefetch" href="/assets/js/23.7ea157d0.js"><link rel="prefetch" href="/assets/js/25.43db54fc.js"><link rel="prefetch" href="/assets/js/26.979a4e80.js"><link rel="prefetch" href="/assets/js/27.bc8d16d2.js"><link rel="prefetch" href="/assets/js/28.d5824d50.js"><link rel="prefetch" href="/assets/js/5.70937d20.js"><link rel="prefetch" href="/assets/js/6.27ba7b73.js"><link rel="prefetch" href="/assets/js/7.424853fc.js"><link rel="prefetch" href="/assets/js/8.36ba2b53.js"><link rel="prefetch" href="/assets/js/9.b3861150.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.883d461f.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1367dafe.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Retux</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/api/retux.html" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/examples/" class="nav-link">
+  Examples
+</a></div> <a href="https://github.com/crimx/retux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/api/retux.html" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/examples/" class="nav-link">
+  Examples
+</a></div> <a href="https://github.com/crimx/retux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Guide</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/" class="sidebar-link">Introduction</a></li><li><a href="/guide/motivation.html" class="sidebar-link">Motivation</a></li><li><a href="/guide/core-concepts.html" class="sidebar-link">Core Concepts</a></li><li><a href="/guide/directory-structure.html" class="sidebar-link">Directory Structure</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Advanced</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/react-retux.html" class="sidebar-link">React Retux</a></li><li><a href="/guide/proxy.html" class="sidebar-link">Lazy Load With Proxy</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/middlewares/" class="sidebar-heading clickable router-link-active open"><span>Middlewares</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/middlewares/redux-thunk.html" aria-current="page" class="active sidebar-link">Redux Thunk</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/middlewares/redux-thunk.html#prerequisites" class="sidebar-link">Prerequisites</a></li><li class="sidebar-sub-header"><a href="/middlewares/redux-thunk.html#define-action-and-dispatch-with-thunk" class="sidebar-link">Define Action and Dispatch with Thunk</a></li><li class="sidebar-sub-header"><a href="/middlewares/redux-thunk.html#containers" class="sidebar-link">Containers</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/middlewares/redux-thunk.html#function-form" class="sidebar-link">Function Form</a></li><li class="sidebar-sub-header"><a href="/middlewares/redux-thunk.html#object-form" class="sidebar-link">Object Form</a></li></ul></li></ul></li><li><a href="/middlewares/redux-promise.html" class="sidebar-link">Redux Promise</a></li><li><a href="/middlewares/redux-thunk-and-redux-promise.html" class="sidebar-link">Redux Thunk and Redux Promise</a></li><li><a href="/middlewares/redux-observable.html" class="sidebar-link">Retux Observable</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="redux-thunk"><a href="#redux-thunk" class="header-anchor">#</a> Redux Thunk</h1> <p>This is a guide on how to strongly type <a href="https://github.com/reduxjs/redux-thunk" target="_blank" rel="noopener noreferrer">Redux Thunk<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> in Retux architecture.</p> <h2 id="prerequisites"><a href="#prerequisites" class="header-anchor">#</a> Prerequisites</h2> <ul><li><a href="/guide/core-concepts.html">Core Concenpts</a></li> <li><a href="/guide/directory-structure.html">Directory Structure</a></li> <li><a href="/guide/react-retux.html">React Retux</a></li></ul> <h2 id="define-action-and-dispatch-with-thunk"><a href="#define-action-and-dispatch-with-thunk" class="header-anchor">#</a> Define Action and Dispatch with Thunk</h2> <p>First we define Action and Dispatch types specifically for Redux Thunk.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token comment">// src/retux-store/modules/index.ts</span>
+<span class="token keyword">import</span> thunk<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  ThunkAction <span class="token keyword">as</span> CreateThunkAction<span class="token punctuation">,</span>
+  ThunkDispatch <span class="token keyword">as</span> CreateThunkDispatch
+<span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'redux-thunk'</span>
+
+<span class="token comment">// Optionally extra args</span>
+<span class="token keyword">export</span> <span class="token keyword">const</span> thunkExtraArgs <span class="token operator">=</span> <span class="token punctuation">{</span>
+  env<span class="token operator">:</span> <span class="token string">'xxxx'</span>
+<span class="token punctuation">}</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">ThunkExtraArgs</span> <span class="token operator">=</span> <span class="token keyword">typeof</span> thunkExtraArgs
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">ThunkAction<span class="token operator">&lt;</span>
+  Type <span class="token keyword">extends</span> StoreActionType <span class="token operator">=</span> StoreActionType<span class="token punctuation">,</span>
+  Result <span class="token operator">=</span> <span class="token keyword">void</span>
+<span class="token operator">&gt;</span></span> <span class="token operator">=</span> CreateThunkAction<span class="token operator">&lt;</span>
+  Result<span class="token punctuation">,</span>
+  StoreState<span class="token punctuation">,</span>
+  ThunkExtraArgs<span class="token punctuation">,</span>
+  Action<span class="token operator">&lt;</span>StoreActionCatalog<span class="token punctuation">,</span> Type<span class="token operator">&gt;</span>
+<span class="token operator">&gt;</span>
+
+<span class="token keyword">export</span> <span class="token keyword">type</span> <span class="token class-name">StoreDispatch<span class="token operator">&lt;</span>
+  Type <span class="token keyword">extends</span> StoreActionType <span class="token operator">=</span> StoreActionType
+<span class="token operator">&gt;</span></span> <span class="token operator">=</span> CreateThunkDispatch<span class="token operator">&lt;</span>StoreState<span class="token punctuation">,</span> ThunkExtraArgs<span class="token punctuation">,</span> StoreAction<span class="token operator">&lt;</span>Type<span class="token operator">&gt;&gt;</span>
+</code></pre></div><p>Now we can pass <code>ThunkAction</code> around to define custom action creators.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">const</span> incrementDelay <span class="token operator">=</span> <span class="token punctuation">(</span>
+  step<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  delay<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ThunkAction <span class="token operator">=&gt;</span> dispatch <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token keyword">type</span><span class="token operator">:</span> <span class="token string">'INCREMENT'</span><span class="token punctuation">,</span> payload<span class="token operator">:</span> step <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> delay<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>We can also restrict the dispatchable action types.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">export</span> <span class="token keyword">const</span> incrementDelayRestrict <span class="token operator">=</span> <span class="token punctuation">(</span>
+  step<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">,</span>
+  delay<span class="token operator">:</span> <span class="token builtin">number</span>
+<span class="token punctuation">)</span><span class="token operator">:</span> ThunkAction<span class="token operator">&lt;</span><span class="token string">'INCREMENT'</span><span class="token operator">&gt;</span> <span class="token operator">=&gt;</span> dispatch <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token comment">// can only dispatch 'INCREMENT' type.</span>
+  <span class="token function">setTimeout</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token keyword">type</span><span class="token operator">:</span> <span class="token string">'INCREMENT'</span><span class="token punctuation">,</span> payload<span class="token operator">:</span> step <span class="token punctuation">}</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">,</span> delay<span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="containers"><a href="#containers" class="header-anchor">#</a> Containers</h2> <p>Since we have mixed action types we won't use the default <code>MapDispatchToProps</code> in <a href="/guide/react-retux.html">React Retux</a> which is meant for the default actions. Here we use the more primitive <code>MapDispatchToPropsFunction</code> or <code>MapDispatchToPropsObject</code> and feed our own action types.</p> <h3 id="function-form"><a href="#function-form" class="header-anchor">#</a> Function Form</h3> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> MapDispatchToPropsFunction <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-retux'</span>
+
+<span class="token keyword">const</span> mapDispatchToProps <span class="token operator">=</span> MapDispatchToPropsFunction<span class="token operator">&lt;</span>
+  StoreDispatch<span class="token punctuation">,</span>
+  CounterProps<span class="token punctuation">,</span>
+  Dispatchers
+<span class="token operator">&gt;</span> <span class="token operator">=</span> dispatch <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+  <span class="token function-variable function">onClick</span><span class="token operator">:</span> event <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+    <span class="token function">dispatch</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span><span class="token constant">COUNTER</span>$<span class="token constant">NEW_VAL</span><span class="token punctuation">(</span>event<span class="token punctuation">.</span>currentTarget<span class="token punctuation">.</span>value<span class="token punctuation">)</span><span class="token punctuation">)</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><h3 id="object-form"><a href="#object-form" class="header-anchor">#</a> Object Form</h3> <p>Note that you can also just feed Action types that are needed by the Component.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> MapDispatchToPropsObject <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'react-retux'</span>
+
+<span class="token keyword">const</span> mapDispatchToProps <span class="token operator">=</span> MapDispatchToPropsObject<span class="token operator">&lt;</span>
+  StoreAction <span class="token operator">|</span> ThunkAction<span class="token punctuation">,</span>
+  CounterProps<span class="token punctuation">,</span>
+  Dispatchers
+<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  onClick<span class="token operator">:</span> anActionCreator
+<span class="token punctuation">}</span>
+</code></pre></div></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/crimx/retux/edit/master/docs/middlewares/redux-thunk.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/guide/proxy.html" class="prev">
+        Lazy Load With Proxy
+      </a></span> <span class="next"><a href="/middlewares/redux-promise.html">
+        Redux Promise
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.38911598.js" defer></script><script src="/assets/js/3.998c2031.js" defer></script><script src="/assets/js/24.94f10ea6.js" defer></script><script src="/assets/js/4.7b9d4212.js" defer></script>
+  </body>
+</html>

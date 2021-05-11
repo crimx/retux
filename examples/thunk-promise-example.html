@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Retux Redux-Thunk and Redux-Promise Example | Retux</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="Minimalist declarative type-safe(strongly-typed) scalable Redux architecture.">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#007acc">
+    
+    <link rel="preload" href="/assets/css/0.styles.1367dafe.css" as="style"><link rel="preload" href="/assets/js/app.38911598.js" as="script"><link rel="preload" href="/assets/js/3.998c2031.js" as="script"><link rel="preload" href="/assets/js/26.979a4e80.js" as="script"><link rel="preload" href="/assets/js/4.7b9d4212.js" as="script"><link rel="prefetch" href="/assets/js/10.5708ddbc.js"><link rel="prefetch" href="/assets/js/11.b922ccd1.js"><link rel="prefetch" href="/assets/js/12.b21f5739.js"><link rel="prefetch" href="/assets/js/13.9bbdc26c.js"><link rel="prefetch" href="/assets/js/14.9a823252.js"><link rel="prefetch" href="/assets/js/15.4c643f4e.js"><link rel="prefetch" href="/assets/js/16.6d62ded2.js"><link rel="prefetch" href="/assets/js/17.9b3ca326.js"><link rel="prefetch" href="/assets/js/18.8e64c1e3.js"><link rel="prefetch" href="/assets/js/19.5291bb00.js"><link rel="prefetch" href="/assets/js/20.9733dc85.js"><link rel="prefetch" href="/assets/js/21.27ffa224.js"><link rel="prefetch" href="/assets/js/22.c71d0686.js"><link rel="prefetch" href="/assets/js/23.7ea157d0.js"><link rel="prefetch" href="/assets/js/24.94f10ea6.js"><link rel="prefetch" href="/assets/js/25.43db54fc.js"><link rel="prefetch" href="/assets/js/27.bc8d16d2.js"><link rel="prefetch" href="/assets/js/28.d5824d50.js"><link rel="prefetch" href="/assets/js/5.70937d20.js"><link rel="prefetch" href="/assets/js/6.27ba7b73.js"><link rel="prefetch" href="/assets/js/7.424853fc.js"><link rel="prefetch" href="/assets/js/8.36ba2b53.js"><link rel="prefetch" href="/assets/js/9.b3861150.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.883d461f.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1367dafe.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Retux</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/api/retux.html" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/examples/" class="nav-link router-link-active">
+  Examples
+</a></div> <a href="https://github.com/crimx/retux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/guide/" class="nav-link">
+  Guide
+</a></div><div class="nav-item"><a href="/api/retux.html" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/examples/" class="nav-link router-link-active">
+  Examples
+</a></div> <a href="https://github.com/crimx/retux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Examples</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/examples/todos.html" class="sidebar-link">Todo List</a></li><li><a href="/examples/todomvc.html" class="sidebar-link">Todo MVC</a></li><li><a href="/examples/thunk-promise-example.html" aria-current="page" class="active sidebar-link">Redux Thunk and Redux Promsie</a></li><li><a href="/examples/redux-observable-example.html" class="sidebar-link">Redux Observable</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="retux-redux-thunk-and-redux-promise-example"><a href="#retux-redux-thunk-and-redux-promise-example" class="header-anchor">#</a> <a href="https://github.com/crimx/retux/tree/master/examples/thunk-promise-example" target="_blank" rel="noopener noreferrer">Retux Redux-Thunk and Redux-Promise Example<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></h1> <p>This example shows the ability of mixing other action types in Retux while still maintaining strongly-typed.</p> <p>This project template was built with <a href="https://github.com/facebookincubator/create-react-app" target="_blank" rel="noopener noreferrer">Create React App<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a>, which provides a simple way to start React projects with no build configuration needed.</p> <iframe title="vigorous-mirzakhani-684bw" allow="geolocation; microphone; camera; midi; vr; accelerometer; gyroscope; payment; ambient-light-sensor; encrypted-media; usb" sandbox="allow-modals allow-forms allow-popups allow-scripts allow-same-origin" src="https://codesandbox.io/embed/github/crimx/retux/tree/master/examples/thunk-promise-example?autoresize=1&amp;fontsize=14&amp;hidenavigation=1&amp;theme=dark" style="width:100%;height:500px;border:1px solid #ebedf0;background-color:#ebedf0;border-radius:4px;overflow:hidden;"></iframe></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/crimx/retux/edit/master/docs/../examples/thunk-promise-example/README.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/examples/todomvc.html" class="prev">
+        Todo MVC
+      </a></span> <span class="next"><a href="/examples/redux-observable-example.html">
+        Redux Observable
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.38911598.js" defer></script><script src="/assets/js/3.998c2031.js" defer></script><script src="/assets/js/26.979a4e80.js" defer></script><script src="/assets/js/4.7b9d4212.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Core Concepts | Retux</title>
+    <meta name="generator" content="VuePress 1.8.0">
+    <link rel="apple-touch-icon" sizes="57x57" href="/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/icons/favicon-16x16.png">
+    <link rel="manifest" href="/manifest.json">
+    <meta name="description" content="Minimalist declarative type-safe(strongly-typed) scalable Redux architecture.">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/icons/ms-icon-144x144.png">
+    <meta name="theme-color" content="#007acc">
+    
+    <link rel="preload" href="/assets/css/0.styles.1367dafe.css" as="style"><link rel="preload" href="/assets/js/app.38911598.js" as="script"><link rel="preload" href="/assets/js/3.998c2031.js" as="script"><link rel="preload" href="/assets/js/9.b3861150.js" as="script"><link rel="preload" href="/assets/js/4.7b9d4212.js" as="script"><link rel="prefetch" href="/assets/js/10.5708ddbc.js"><link rel="prefetch" href="/assets/js/11.b922ccd1.js"><link rel="prefetch" href="/assets/js/12.b21f5739.js"><link rel="prefetch" href="/assets/js/13.9bbdc26c.js"><link rel="prefetch" href="/assets/js/14.9a823252.js"><link rel="prefetch" href="/assets/js/15.4c643f4e.js"><link rel="prefetch" href="/assets/js/16.6d62ded2.js"><link rel="prefetch" href="/assets/js/17.9b3ca326.js"><link rel="prefetch" href="/assets/js/18.8e64c1e3.js"><link rel="prefetch" href="/assets/js/19.5291bb00.js"><link rel="prefetch" href="/assets/js/20.9733dc85.js"><link rel="prefetch" href="/assets/js/21.27ffa224.js"><link rel="prefetch" href="/assets/js/22.c71d0686.js"><link rel="prefetch" href="/assets/js/23.7ea157d0.js"><link rel="prefetch" href="/assets/js/24.94f10ea6.js"><link rel="prefetch" href="/assets/js/25.43db54fc.js"><link rel="prefetch" href="/assets/js/26.979a4e80.js"><link rel="prefetch" href="/assets/js/27.bc8d16d2.js"><link rel="prefetch" href="/assets/js/28.d5824d50.js"><link rel="prefetch" href="/assets/js/5.70937d20.js"><link rel="prefetch" href="/assets/js/6.27ba7b73.js"><link rel="prefetch" href="/assets/js/7.424853fc.js"><link rel="prefetch" href="/assets/js/8.36ba2b53.js"><link rel="prefetch" href="/assets/js/vendors~docsearch.883d461f.js">
+    <link rel="stylesheet" href="/assets/css/0.styles.1367dafe.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/" class="home-link router-link-active"><!----> <span class="site-name">Retux</span></a> <div class="links"><form id="search-form" role="search" class="algolia-search-wrapper search-box"><input id="algolia-search-input" class="search-query"></form> <nav class="nav-links can-hide"><div class="nav-item"><a href="/guide/" class="nav-link router-link-active">
+  Guide
+</a></div><div class="nav-item"><a href="/api/retux.html" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/examples/" class="nav-link">
+  Examples
+</a></div> <a href="https://github.com/crimx/retux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/guide/" class="nav-link router-link-active">
+  Guide
+</a></div><div class="nav-item"><a href="/api/retux.html" class="nav-link">
+  API
+</a></div><div class="nav-item"><a href="/examples/" class="nav-link">
+  Examples
+</a></div> <a href="https://github.com/crimx/retux" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>Guide</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/" aria-current="page" class="sidebar-link">Introduction</a></li><li><a href="/guide/motivation.html" class="sidebar-link">Motivation</a></li><li><a href="/guide/core-concepts.html" aria-current="page" class="active sidebar-link">Core Concepts</a><ul class="sidebar-sub-headers"><li class="sidebar-sub-header"><a href="/guide/core-concepts.html#action-catalog" class="sidebar-link">Action Catalog</a></li><li class="sidebar-sub-header"><a href="/guide/core-concepts.html#action-type" class="sidebar-link">Action Type</a></li><li class="sidebar-sub-header"><a href="/guide/core-concepts.html#action" class="sidebar-link">Action</a></li><li class="sidebar-sub-header"><a href="/guide/core-concepts.html#action-handlers" class="sidebar-link">Action Handlers</a></li><li class="sidebar-sub-header"><a href="/guide/core-concepts.html#combine-action-handlers" class="sidebar-link">Combine Action Handlers</a></li><li class="sidebar-sub-header"><a href="/guide/core-concepts.html#create-action-creators" class="sidebar-link">Create Action Creators</a></li></ul></li><li><a href="/guide/directory-structure.html" class="sidebar-link">Directory Structure</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>Advanced</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/guide/react-retux.html" class="sidebar-link">React Retux</a></li><li><a href="/guide/proxy.html" class="sidebar-link">Lazy Load With Proxy</a></li></ul></section></li><li><section class="sidebar-group depth-0"><a href="/middlewares/" class="sidebar-heading clickable"><span>Middlewares</span> <!----></a> <ul class="sidebar-links sidebar-group-items"><li><a href="/middlewares/redux-thunk.html" class="sidebar-link">Redux Thunk</a></li><li><a href="/middlewares/redux-promise.html" class="sidebar-link">Redux Promise</a></li><li><a href="/middlewares/redux-thunk-and-redux-promise.html" class="sidebar-link">Redux Thunk and Redux Promise</a></li><li><a href="/middlewares/redux-observable.html" class="sidebar-link">Retux Observable</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="core-concepts"><a href="#core-concepts" class="header-anchor">#</a> Core Concepts</h1> <p>Before we begin, let's take a look again at the Redux data flow(<em>source unknown</em>):</p> <p><img src="/assets/img/redux-data-flow.ab0c08be.gif" alt="redux data flow"></p> <p>The bubbles that move around(except state) are all actions. It's not hard to tell that the design of Redux is &quot;action centric&quot;. So to reduce boilerplate code the design of Retux is all about reusing action types.</p> <p>Introducing...</p> <h2 id="action-catalog"><a href="#action-catalog" class="header-anchor">#</a> Action Catalog</h2> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> CreateActionCatalog <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'retux'</span>
+
+<span class="token keyword">type</span> <span class="token class-name">ActionCatalog</span> <span class="token operator">=</span> CreateActionCatalog<span class="token operator">&lt;</span><span class="token punctuation">{</span>
+  <span class="token constant">ACTION0</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token constant">ACTION1</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    payload<span class="token operator">:</span> <span class="token builtin">boolean</span>
+  <span class="token punctuation">}</span>
+  <span class="token constant">ANOTHER_ACTION</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    payload<span class="token operator">:</span> <span class="token punctuation">{</span>
+      amount<span class="token operator">:</span> <span class="token builtin">number</span>
+    <span class="token punctuation">}</span>
+    meta<span class="token operator">:</span> <span class="token builtin">string</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+</code></pre></div><p>ActionCatalog defines all the actions of a module. Since it is a basic object type, it can be split and merged which offers great flexibility.</p> <p>ActionCatalog is the core of Retux. All other facilities are built surrounding ActionCatalog.</p> <p>It is recommended to prefix Action names with module id. Retux exmaples use <code>$</code> as separator as it is easy to be recognized between uppercase characters but you can pick whatever you like.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> CreateActionCatalog <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'retux'</span>
+
+<span class="token keyword">type</span> <span class="token class-name">ActionCatalog</span> <span class="token operator">=</span> CreateActionCatalog<span class="token operator">&lt;</span><span class="token punctuation">{</span>
+  <span class="token constant">MODULE</span>$<span class="token constant">ACTION0</span><span class="token operator">:</span> <span class="token punctuation">{</span><span class="token punctuation">}</span>
+  <span class="token constant">MODULE</span>$<span class="token constant">ACTION1</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    payload<span class="token operator">:</span> <span class="token builtin">boolean</span>
+  <span class="token punctuation">}</span>
+  <span class="token constant">MODULE</span>$<span class="token constant">ANOTHER_ACTION</span><span class="token operator">:</span> <span class="token punctuation">{</span>
+    payload<span class="token operator">:</span> <span class="token punctuation">{</span>
+      amount<span class="token operator">:</span> <span class="token builtin">number</span>
+    <span class="token punctuation">}</span>
+    meta<span class="token operator">:</span> <span class="token builtin">string</span>
+  <span class="token punctuation">}</span>
+<span class="token punctuation">}</span><span class="token operator">&gt;</span>
+</code></pre></div><h2 id="action-type"><a href="#action-type" class="header-anchor">#</a> Action Type</h2> <p>Retux offers <code>ActionType</code> for extracting action type names from ActionCatalog. As one may easily figure out, they are just keys of ActionCatalog.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> ActionType <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'retux'</span>
+
+<span class="token keyword">type</span> <span class="token class-name">ModuleActionTypeNames</span> <span class="token operator">=</span> ActionType<span class="token operator">&lt;</span>ActionCatalog<span class="token operator">&gt;</span>
+</code></pre></div><h2 id="action"><a href="#action" class="header-anchor">#</a> Action</h2> <p>Here comes the interesting part, how can we extract actions from ActionCatalog?</p> <p>It is easy to get something like:</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">type</span> <span class="token class-name">Actions</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token keyword">type</span><span class="token operator">:</span> <span class="token string">'ACTION1'</span> <span class="token operator">|</span> <span class="token string">'ACTION2'</span> <span class="token operator">|</span> <span class="token operator">...</span>
+  payload<span class="token operator">:</span> <span class="token string">&quot;action1's payload&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;action2's payload&quot;</span> <span class="token operator">|</span> <span class="token operator">...</span>
+  meta<span class="token operator">:</span> <span class="token string">&quot;action1's meta&quot;</span> <span class="token operator">|</span> <span class="token string">&quot;action2's meta&quot;</span> <span class="token operator">|</span> <span class="token operator">...</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>which is not useful because we want:</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">if</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span><span class="token keyword">type</span> <span class="token operator">===</span> <span class="token string">'ACTION1'</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  action<span class="token punctuation">.</span>payload <span class="token comment">// -&gt; Will narrow down to ACTION1's payload type</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>which means we need:</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">type</span> <span class="token class-name">Actions</span> <span class="token operator">=</span>
+  <span class="token operator">|</span> <span class="token punctuation">{</span>
+      <span class="token keyword">type</span><span class="token operator">:</span> <span class="token string">'ACTION1'</span>
+      payload<span class="token operator">:</span> <span class="token string">&quot;action1's payload&quot;</span>
+      meta<span class="token operator">:</span> <span class="token string">&quot;action1's meta&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token operator">|</span> <span class="token punctuation">{</span>
+      <span class="token keyword">type</span><span class="token operator">:</span> <span class="token string">'ACTION2'</span>
+      payload<span class="token operator">:</span> <span class="token string">&quot;action2's payload&quot;</span>
+      meta<span class="token operator">:</span> <span class="token string">&quot;action2's meta&quot;</span>
+    <span class="token punctuation">}</span>
+  <span class="token operator">|</span> <span class="token operator">...</span>
+</code></pre></div><p>Retux offers <code>Action</code> type to deal with just that. It makes use of the &quot;<code>extend</code> on union&quot; feature of TypeScript(&gt;= 2.8).</p> <p>You can choose basic action type <code>{ type, payload, meta }</code></p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> Action <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'retux'</span>
+<span class="token comment">// or</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Action <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'retux/lib/basic'</span>
+
+<span class="token keyword">type</span> <span class="token class-name">AllActions</span> <span class="token operator">=</span> Action<span class="token operator">&lt;</span>ActionCatalog<span class="token operator">&gt;</span>
+<span class="token keyword">type</span> <span class="token class-name">Action1</span> <span class="token operator">=</span> Action<span class="token operator">&lt;</span>ActionCatalog<span class="token punctuation">,</span> <span class="token string">'ACTION1'</span><span class="token operator">&gt;</span>
+</code></pre></div><p>Or <a href="https://github.com/redux-utilities/flux-standard-action" target="_blank" rel="noopener noreferrer">FSA compliant<span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a> action type <code>{ type, error, payload, meta }</code></p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">import</span> <span class="token punctuation">{</span> <span class="token constant">FSA</span> <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'retux'</span>
+<span class="token comment">// or</span>
+<span class="token keyword">import</span> <span class="token punctuation">{</span> Action <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'retux/lib/fsa'</span>
+
+<span class="token keyword">type</span> <span class="token class-name">AllActions</span> <span class="token operator">=</span> Action<span class="token operator">&lt;</span>ActionCatalog<span class="token operator">&gt;</span>
+<span class="token keyword">type</span> <span class="token class-name">Action1</span> <span class="token operator">=</span> Action<span class="token operator">&lt;</span>ActionCatalog<span class="token punctuation">,</span> <span class="token string">'ACTION1'</span><span class="token operator">&gt;</span>
+</code></pre></div><p>Note that FSA is also strongly typed. Each action can either be</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token punctuation">{</span>
+  type<span class="token operator">:</span> <span class="token comment">// as in ActionCatalog</span>
+  error<span class="token operator">?</span><span class="token operator">:</span> <span class="token boolean">false</span>
+  payload<span class="token operator">:</span> <span class="token comment">// as in ActionCatalog, default none</span>
+  meta<span class="token operator">:</span> <span class="token comment">// as in ActionCatalog, default none</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>or</p> <div class="language-javascript extra-class"><pre class="language-javascript"><code><span class="token punctuation">{</span>
+  type<span class="token operator">:</span> <span class="token comment">// as in ActionCatalog</span>
+  error<span class="token operator">:</span> <span class="token boolean">true</span>
+  payload<span class="token operator">:</span> <span class="token comment">// as in ActionCatalog, default Error</span>
+  meta<span class="token operator">:</span> <span class="token comment">// as in ActionCatalog, default none</span>
+<span class="token punctuation">}</span>
+</code></pre></div><h2 id="action-handlers"><a href="#action-handlers" class="header-anchor">#</a> Action Handlers</h2> <p>The default Redux architecture uses <code>switch</code> in reducer which is hard for code splitting. In Retux we use simple <code>object</code> instead.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">const</span> counterActionHandlers<span class="token operator">:</span> ActionHandlers<span class="token operator">&lt;</span>
+  CounterState<span class="token punctuation">,</span>
+  CounterActionCatalog
+<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">INCREMENT</span><span class="token operator">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token punctuation">{</span> payload <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    count<span class="token operator">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token punctuation">(</span>payload <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> payload<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">DECREMENT</span><span class="token operator">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> <span class="token punctuation">{</span> payload <span class="token punctuation">}</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">(</span><span class="token punctuation">{</span>
+    count<span class="token operator">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> <span class="token punctuation">(</span>payload <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> payload<span class="token punctuation">)</span>
+  <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Or with FSA:</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">const</span> counterActionHandlers<span class="token operator">:</span> ActionHandlers<span class="token operator">&lt;</span>
+  CounterState<span class="token punctuation">,</span>
+  CounterActionCatalog
+<span class="token operator">&gt;</span> <span class="token operator">=</span> <span class="token punctuation">{</span>
+  <span class="token function-variable function">INCREMENT</span><span class="token operator">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+    action<span class="token punctuation">.</span>error
+      <span class="token operator">?</span> state <span class="token comment">// error handling</span>
+      <span class="token operator">:</span> <span class="token punctuation">{</span>
+          count<span class="token operator">:</span> state<span class="token punctuation">.</span>count <span class="token operator">+</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>payload <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token function-variable function">DECREMENT</span><span class="token operator">:</span> <span class="token punctuation">(</span>state<span class="token punctuation">,</span> action<span class="token punctuation">)</span> <span class="token operator">=&gt;</span>
+    action<span class="token punctuation">.</span>error
+      <span class="token operator">?</span> state <span class="token comment">// error handling</span>
+      <span class="token operator">:</span> <span class="token punctuation">{</span>
+          count<span class="token operator">:</span> state<span class="token punctuation">.</span>count <span class="token operator">-</span> <span class="token punctuation">(</span>action<span class="token punctuation">.</span>payload <span class="token operator">==</span> <span class="token keyword">null</span> <span class="token operator">?</span> <span class="token number">1</span> <span class="token operator">:</span> action<span class="token punctuation">.</span>payload<span class="token punctuation">)</span>
+        <span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+</code></pre></div><p>Notice with FSA we do not destructure the <code>action</code> argument so that we can separate action types with and without <code>error</code>.</p> <p>Since <code>ActionHandlers</code> is strongly typed, any missing or misspelled action handler will fail TypeScript compiling.</p> <p>You can also get a single Action Handler type with <code>ActionHandler</code>. This is useful for defining large Action Handlers outside of <code>ActionHandlers</code>.</p> <h2 id="combine-action-handlers"><a href="#combine-action-handlers" class="header-anchor">#</a> Combine Action Handlers</h2> <p>There are patterns in Retux where multiple Action Handlers share the same state. In this case one may want to combine Action Handlers together.</p> <p>Use <code>combineUniqueObjects</code> to combine Action Handlers. It will check duplicated keys statically(yes, type checking duplicated keys) and also throw error on non-production mode.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">const</span> combinedActionHandlers <span class="token operator">=</span> <span class="token function">combineUniqueObjects</span><span class="token punctuation">(</span>
+  actionHandlers1<span class="token punctuation">,</span>
+  actionHandlers2<span class="token punctuation">,</span>
+  <span class="token operator">...</span>
+<span class="token punctuation">)</span>
+</code></pre></div><p>If you want to skip checking duplicated keys, use <code>combineObjects</code>.</p> <p>Both of them uses <code>Object.assign</code> under the hood but with type enhancement which preserves index signature of the combined Action Handlers. Do not use <code>Object.assign</code> directly to join Action Handlers.</p> <p>Note that there are also <code>proxyCombineUniqueObjects</code> and <code>proxyCombineObjects</code> which offers same API except everything is lazy loaded and cached with es6 <code>Proxy</code>(fallback to <code>combineUniqueObjects</code> and <code>combineObjects</code> when not supported).</p> <h2 id="create-action-creators"><a href="#create-action-creators" class="header-anchor">#</a> Create Action Creators</h2> <p>Boilerplate Action Creators are generated by <code>createActionCreators</code> in Retux.</p> <div class="language-typescript extra-class"><pre class="language-typescript"><code><span class="token keyword">const</span> action <span class="token operator">=</span> <span class="token function">createActionCreators</span><span class="token punctuation">(</span>actionHandlers<span class="token punctuation">)</span>
+
+<span class="token function">dispatch</span><span class="token punctuation">(</span>action<span class="token punctuation">.</span><span class="token constant">MODULE1</span>$<span class="token constant">ACTION1</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+
+<span class="token keyword">const</span> action <span class="token operator">=</span> <span class="token function">createActionCreators</span><span class="token punctuation">(</span>actionHandlers<span class="token punctuation">,</span> <span class="token punctuation">{</span>
+  <span class="token comment">// overwrite or extends the generated Action Creators</span>
+  <span class="token constant">INCREMENT</span><span class="token operator">:</span> <span class="token punctuation">(</span>step<span class="token operator">:</span> <span class="token builtin">number</span><span class="token punctuation">)</span><span class="token operator">:</span> StoreActionWithThunk<span class="token operator">&lt;</span><span class="token string">'INCREMENT'</span><span class="token operator">&gt;</span> <span class="token operator">=&gt;</span>
+    dispatch <span class="token operator">=&gt;</span> <span class="token function">dispatch</span><span class="token punctuation">(</span><span class="token punctuation">{</span> <span class="token keyword">type</span><span class="token operator">:</span> <span class="token string">'INCREMENT'</span><span class="token punctuation">,</span> payload<span class="token operator">:</span> <span class="token punctuation">{</span> step <span class="token punctuation">}</span> <span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre></div><p>The <code>actionHandlers</code> has to be of type <code>ActionHandlers</code> so that <code>createActionCreators</code> can infer <code>ActionCatalog</code> from it and learn the types of all Actions.</p> <p>Note that <code>createActionCreators</code> will actually create N Action Creator functions. Retux also offers <code>proxyActionCreators</code> with the same API but lazy create Action Creators on their first visits. It will fallback to <code>createActionCreators</code> when es6 <code>Proxy</code> is not supported.</p></div> <footer class="page-edit"><div class="edit-link"><a href="https://github.com/crimx/retux/edit/master/docs/guide/core-concepts.md" target="_blank" rel="noopener noreferrer">Edit this page on GitHub</a> <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></div> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/guide/motivation.html" class="prev">
+        Motivation
+      </a></span> <span class="next"><a href="/guide/directory-structure.html">
+        Directory Structure
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"><!----></div></div>
+    <script src="/assets/js/app.38911598.js" defer></script><script src="/assets/js/3.998c2031.js" defer></script><script src="/assets/js/9.b3861150.js" defer></script><script src="/assets/js/4.7b9d4212.js" defer></script>
+  </body>
+</html>
